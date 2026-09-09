@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>실물책 주문 · 북끼끼</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .order{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+  .order .card{margin-bottom:18px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:700;color:var(--navy);margin-bottom:6px;font-size:.95rem}
+  .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:var(--white);color:var(--text)}
+  .field input:focus,.field select:focus{outline:2px solid var(--lav-deep);border-color:var(--lav-deep)}
+  .choice{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .choice label{display:block;border:1.5px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;background:var(--white);font-weight:500}
+  .choice input{margin-right:8px}
+  .choice label:has(input:checked){border-color:var(--navy);background:var(--lav)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .summary{width:100%;border-collapse:collapse;margin:6px 0 4px}
+  .summary td{padding:9px 4px;border-bottom:1px solid var(--line)}
+  .summary td:last-child{text-align:right;font-weight:700;color:var(--navy);white-space:nowrap}
+  .summary tr.total td{border-bottom:0;font-size:1.15rem;padding-top:14px}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:var(--text-2);margin:14px 0 18px}
+  .agree input{margin-top:5px}
+  .btn-pay{width:100%;justify-content:center;font-size:1.05rem;padding:16px}
+  .btn-pay[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  .notice{background:var(--gold-soft);border-radius:12px;padding:12px 16px;font-size:.9rem;margin-bottom:18px}
+  .result{display:none;border-radius:12px;padding:14px 16px;font-size:.95rem;margin-top:16px;word-break:break-all}
+  .result.ok{display:block;background:var(--mint)}
+  .result.err{display:block;background:var(--pink)}
+  @media (max-width:560px){.choice,.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2C3E6B"/><path d="M13 22c6.5-3.5 13-3.5 19 1v24c-6-4.5-12.5-4.5-19-1z" fill="#E8DCF4"/><path d="M51 22c-6.5-3.5-13-3.5-19 1v24c6-4.5 12.5-4.5 19-1z" fill="#C4A8E0"/><path d="M32 23v24" stroke="#2C3E6B" stroke-width="2.5" stroke-linecap="round"/><path d="M45 8l2 4.6 4.6 2-4.6 2L45 21.2l-2-4.6-4.6-2 4.6-2z" fill="#F5D76E"/></svg>북끼끼</a>
+    <nav class="nav" aria-label="정책 문서"><a href="terms.html">이용약관</a><a href="privacy.html">개인정보처리방침</a><a href="refund.html">취소·환불·배송 정책</a></nav>
+    <a class="btn btn-secondary btn-sm" href="./">홈으로</a>
+  </div>
+</header>
+
+<main class="order">
+  <h1>실물책 주문</h1>
+  <p class="muted">동화를 스퀘어북으로 인쇄해 배송합니다. 실제 서비스에서는 앱의 책장에서 동화를 골라 이 화면으로 이어집니다.</p>
+
+  <div class="notice" id="notice">이 페이지는 결제 연동 확인용입니다. KG이니시스 테스트 결제창이 열리며, 테스트 결제는 당일 자동 취소됩니다.</div>
+
+  <form id="order-form" class="card" novalidate>
+    <div class="field">
+      <label>표지 선택</label>
+      <div class="choice">
+        <label><input type="radio" name="cover" value="SC" checked> 스퀘어북 소프트커버 · 16,000원</label>
+        <label><input type="radio" name="cover" value="HC"> 스퀘어북 하드커버 · 18,000원</label>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label for="pages">페이지 수 (24쪽 기준가, 2쪽당 500원 추가)</label>
+        <select id="pages"></select>
+      </div>
+      <div class="field">
+        <label for="qty">수량</label>
+        <select id="qty"><option>1</option><option>2</option><option>3</option></select>
+      </div>
+    </div>
+
+    <table class="summary" aria-label="주문 금액">
+      <tbody>
+        <tr><td>상품 금액</td><td id="sum-item">16,000원</td></tr>
+        <tr><td>배송비 (박스 1개)</td><td>3,000원</td></tr>
+        <tr class="total"><td>총 결제 금액 (VAT 포함)</td><td id="sum-total">19,000원</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:22px">구매자 정보</h3>
+    <div class="field"><label for="name">이름</label><input id="name" type="text" autocomplete="name" required placeholder="홍길동"></div>
+    <div class="row2">
+      <div class="field"><label for="phone">휴대전화</label><input id="phone" type="tel" autocomplete="tel" required placeholder="01012345678"></div>
+      <div class="field"><label for="email">이메일</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+    </div>
+
+    <label class="agree"><input id="agree" type="checkbox" required> 실물책은 주문 후 개별 제작되는 맞춤 상품으로, 제작 착수 후에는 단순 변심에 의한 취소·청약철회가 제한된다는 점을 확인했습니다. <a href="refund.html" target="_blank" rel="noopener">취소·환불·배송 정책</a></label>
+
+    <button type="submit" class="btn btn-primary btn-pay" id="pay-btn">결제하기</button>
+    <div class="result" id="result" role="status"></div>
+  </form>
+
+  <p class="muted" style="font-size:.85rem">결제는 KG이니시스 전자결제 시스템에서 처리되며 카드 정보는 북끼끼 서버에 저장되지 않습니다.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="links"><a href="./">홈</a><a href="terms.html">이용약관</a><a href="privacy.html"><strong>개인정보처리방침</strong></a><a href="refund.html">취소·환불·배송 정책</a></div>
+    <ul class="biz">
+      <li><span>상호</span>북끼끼(BOOKKIKI)</li>
+      <li><span>대표자</span>황채원</li>
+      <li><span>사업자등록번호</span>525-43-01349</li>
+      <li><span>통신판매업신고번호</span>신고 진행 중</li>
+    </ul>
+    <div class="copy">© 2026 북끼끼. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script>
+  // ---- 설정: PortOne 콘솔 값 ----
+  const STORE_ID = "store-cda4cb09-1ebf-4896-9087-46c9dc08b086";
+  const CHANNEL_KEY = ""; // 콘솔 > 결제 연동 > 채널 관리에서 KG이니시스 테스트 채널의 채널 키를 넣는다
+
+  const PRICE = { SC: 16000, HC: 18000 };
+  const SHIPPING = 3000;
+  const won = n => n.toLocaleString("ko-KR") + "원";
+
+  const pagesEl = document.getElementById("pages");
+  for (let p = 24; p <= 130; p += 2) pagesEl.add(new Option(p + "쪽", p));
+  const qtyEl = document.getElementById("qty");
+  const form = document.getElementById("order-form");
+  const payBtn = document.getElementById("pay-btn");
+  const result = document.getElementById("result");
+
+  function calc() {
+    const cover = form.cover.value;
+    const pages = Number(pagesEl.value);
+    const qty = Number(qtyEl.value);
+    const unit = PRICE[cover] + (pages - 24) / 2 * 500;
+    const item = unit * qty;
+    return { cover, pages, qty, unit, item, total: item + SHIPPING };
+  }
+  function render() {
+    const c = calc();
+    document.getElementById("sum-item").textContent = won(c.item) + (c.qty > 1 ? ` (${won(c.unit)} × ${c.qty})` : "");
+    document.getElementById("sum-total").textContent = won(c.total);
+  }
+  form.addEventListener("change", render); render();
+
+  function show(kind, msg) { result.className = "result " + kind; result.textContent = msg; }
+
+  if (!CHANNEL_KEY) {
+    payBtn.disabled = true;
+    document.getElementById("notice").textContent = "결제 채널 키가 아직 설정되지 않았습니다. order.html의 CHANNEL_KEY를 채우면 결제창이 열립니다.";
+  }
+
+  // 모바일 리다이렉트 복귀 처리
+  const q = new URLSearchParams(location.search);
+  if (q.has("paymentId")) {
+    if (q.get("code")) show("err", `결제 실패: ${q.get("message") || q.get("code")}`);
+    else show("ok", `결제창 호출이 완료되었습니다. 결제 ID: ${q.get("paymentId")}`);
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const c = calc();
+    const paymentId = `bk-order-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    payBtn.disabled = true; show("", "");
+    try {
+      const res = await PortOne.requestPayment({
+        storeId: STORE_ID,
+        channelKey: CHANNEL_KEY,
+        paymentId,
+        orderName: `북끼끼 스퀘어북 ${c.cover} ${c.pages}쪽 x${c.qty}`,
+        totalAmount: c.total,
+        currency: "CURRENCY_KRW",
+        payMethod: "CARD",
+        customer: {
+          fullName: document.getElementById("name").value.trim(),
+          phoneNumber: document.getElementById("phone").value.replace(/\D/g, ""),
+          email: document.getElementById("email").value.trim(),
+        },
+        customData: { cover: c.cover, pages: c.pages, qty: c.qty, review: true },
+        redirectUrl: location.origin + location.pathname,
+      });
+      if (res && res.code !== undefined) show("err", `결제 실패: ${res.message || res.code}`);
+      else show("ok", `결제창 호출이 완료되었습니다. 결제 ID: ${paymentId}`);
+    } catch (err) {
+      show("err", `오류: ${err && err.message ? err.message : err}`);
+    } finally {
+      payBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
