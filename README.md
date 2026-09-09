@@ -30,7 +30,7 @@
    ```
 
    전부 0이어야 한다.
-2. `hello@bookkiki.com` 메일이 실제로 수신되게 만든다(Google Workspace 또는 포워딩). 다른 주소를 쓰면 index 3곳, privacy 1곳, refund 1곳을 바꾼다.
+2. `contact@bookkiki.com` 메일이 실제로 수신되게 만든다(Google Workspace 또는 포워딩). 다른 주소를 쓰면 index 3곳, privacy 1곳, refund 1곳을 바꾼다.
 3. `order.html`의 `CHANNEL_KEY`에 PortOne 콘솔의 KG이니시스 **테스트** 채널 키를 넣는다. 비어 있으면 결제 버튼이 비활성화된다. 운영 채널 키는 넣지 않는다. 심사 통과 후 이 페이지는 내리거나 앱 딥링크로 바꾼다.
 4. 통신판매업신고번호는 신고증이 나온 뒤 "신고 진행 중"을 번호로 바꾼다(index 푸터, order 푸터).
 5. 약관·개인정보처리방침·환불정책은 초안이다. 공개 전에 법률 검토를 받는다.
