@@ -6,7 +6,7 @@ on:
       - ".github/workflows/policy-documents.yml"
       - "ko-KR/**"
       - "policies/**"
-      - "scripts/check-policy-documents.sh"
+      - "scripts/**"
   push:
     branches:
       - main
@@ -14,7 +14,7 @@ on:
       - ".github/workflows/policy-documents.yml"
       - "ko-KR/**"
       - "policies/**"
-      - "scripts/check-policy-documents.sh"
+      - "scripts/**"
   schedule:
     - cron: "17 0 * * *"
   workflow_dispatch:
@@ -27,8 +27,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Verify immutable policy snapshots
         run: ./scripts/check-policy-documents.sh
+      - name: Prevent historical policy changes
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/check-policy-history.py "${{ github.event.pull_request.base.sha }}"
 
   public-links:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
