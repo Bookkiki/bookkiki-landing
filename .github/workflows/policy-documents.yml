@@ -31,6 +31,13 @@ jobs:
           fetch-depth: 0
       - name: Verify immutable policy snapshots
         run: ./scripts/check-policy-documents.sh
+      - name: Verify BK-892 revision generator
+        run: >-
+          python3 scripts/publish-bk892-policy-version.py
+          --version 2099-12-31
+          --announced-at 2099-12-01
+          --effective-at 2099-12-31
+          --check
       - name: Prevent historical policy changes
         if: github.event_name == 'pull_request'
         run: python3 scripts/check-policy-history.py "${{ github.event.pull_request.base.sha }}"

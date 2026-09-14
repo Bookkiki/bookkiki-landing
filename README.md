@@ -28,7 +28,7 @@
 
 `policies/manifest.json`은 문서별 `termsCode`, version, locale, 공고일, 시행일, SHA-256, 원본 파일과 공개 경로를 연결한다. `policies/SHA256SUMS`는 manifest와 같은 해시를 담으며 검증 과정에서 서로 일치해야 한다. 현재 이용약관과 개인정보처리방침의 무버전 경로는 새 정책이 승인되기 전까지 2026-09-03 원문과 같은 파일을 제공한다.
 
-기존 version의 원문과 manifest 항목은 수정하거나 삭제할 수 없다. 개정 문서는 새 version으로 추가한다. 검증·장애 복구 절차는 [`docs/policy-document-recovery.md`](docs/policy-document-recovery.md)에 기록한다.
+기존 version의 원문과 manifest 항목은 수정하거나 삭제할 수 없다. 다만 무버전 최신 문서 경로를 새 원문으로 전환하기 위해 manifest 항목의 `aliases`만 이전 version에서 새 version으로 이동할 수 있다. 개정 문서는 새 version으로 추가한다. 검증·장애 복구 절차는 [`docs/policy-document-recovery.md`](docs/policy-document-recovery.md)에 기록한다.
 
 로컬 원문 무결성은 다음 명령으로 확인한다.
 

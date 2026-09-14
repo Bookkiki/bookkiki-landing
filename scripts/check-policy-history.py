@@ -26,6 +26,11 @@ def identity(document: dict) -> tuple[str, str, str]:
     return document["termsCode"], document["version"], document["locale"]
 
 
+def immutable_document_fields(document: dict) -> dict:
+    """Exclude mutable latest-route aliases from immutable policy metadata."""
+    return {key: value for key, value in document.items() if key != "aliases"}
+
+
 def legacy_checksums(content: bytes) -> dict[str, str]:
     checksums: dict[str, str] = {}
     for line in content.decode("utf-8").splitlines():
@@ -53,7 +58,10 @@ def main() -> int:
         previous = json.loads(previous_manifest)
         for document in previous["documents"]:
             key = identity(document)
-            if current_by_id.get(key) != document:
+            current_document = current_by_id.get(key)
+            if current_document is None or immutable_document_fields(
+                current_document
+            ) != immutable_document_fields(document):
                 fail(f"existing manifest entry was changed or removed: {key}")
             previous_source = git_show(base_ref, document["sourcePath"])
             current_source = (REPO_ROOT / document["sourcePath"]).read_bytes()
