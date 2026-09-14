@@ -14,6 +14,34 @@
 | `assets/style.css` | 공통 스타일. 색상은 앱 `BookkikiColors.light` 팔레트를 그대로 쓴다 |
 | `assets/logo.svg` | 임시 로고. 정식 로고가 나오면 교체한다 |
 
+## 버전 고정 정책 문서
+
+회원이 동의한 2026-09-03 원문은 아래 경로에 원본 HTML 그대로 보존한다. 기존 버전 파일은 수정하거나 새 약관 본문으로 덮어쓰지 않는다.
+
+| 문서 | 공개 경로 |
+|---|---|
+| 서비스 이용약관 | `/ko-KR/policies/terms-of-use/2026-09-03` |
+| 개인정보 수집·이용 동의 | `/ko-KR/consents/personal-information-collection/2026-09-03` |
+| 마케팅 정보 수신 동의 | `/ko-KR/consents/marketing-information/2026-09-03` |
+| 개인정보처리방침 | `/ko-KR/policies/privacy-policy` |
+| 개인정보처리방침 2026-09-03 보존본 | `/ko-KR/policies/privacy-policy/2026-09-03` |
+
+`policies/SHA256SUMS`는 이전 호스팅에서 회수한 원문의 SHA-256이다. 현재 이용약관과 개인정보처리방침의 무버전 경로는 새 정책이 승인되기 전까지 2026-09-03 원문과 같은 파일을 제공한다.
+
+로컬 원문 무결성은 다음 명령으로 확인한다.
+
+```bash
+./scripts/check-policy-documents.sh
+```
+
+배포 후 공개 URL의 응답과 원문 일치 여부는 다음 명령으로 확인한다.
+
+```bash
+./scripts/check-policy-documents.sh https://www.bookkiki.com
+```
+
+GitHub Actions의 `Policy documents` workflow는 pull request에서 원문 해시를 검사하고, 매일 공개 URL 4종의 응답과 원문 일치를 점검한다.
+
 ## 확정된 값과 임시 값
 
 - 사업자 정보는 사업자등록증(2026-09-08 발급, 개업일 2026-09-16) 기준. 약관·방침 시행일도 개업일로 맞췄다.
