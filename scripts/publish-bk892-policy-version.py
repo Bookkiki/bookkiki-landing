@@ -291,16 +291,15 @@ def write_outputs(manifest: dict, outputs: dict[str, bytes]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Prepare and publish the BK-892 social-login policy revision."
+        description="Check the BK-892 social-login draft; publication is blocked until the full BK-876 policy copy is integrated."
     )
     parser.add_argument("--version", required=True)
     parser.add_argument("--announced-at", required=True)
     parser.add_argument("--effective-at", required=True)
-    parser.add_argument("--confirm-apple-ready", action="store_true")
     parser.add_argument(
         "--check",
         action="store_true",
-        help="validate the transformation without writing files or requiring Apple readiness",
+        help="validate the draft transformation without writing files",
     )
     args = parser.parse_args()
 
@@ -318,14 +317,14 @@ def main() -> int:
                         f'{document["termsCode"]}\t{document["sourcePath"]}\t{document["sha256"]}'
                     )
             return 0
-        if not args.confirm_apple_ready:
-            fail("publishing requires --confirm-apple-ready after BK-857 is Done")
-        write_outputs(manifest, outputs)
+        fail(
+            "publication is blocked: the 2026-09-03 source does not include the full "
+            "BK-876 PR #729 policy copy and release gates; use --check only"
+        )
     except (OSError, json.JSONDecodeError, ValueError) as error:
         print(f"BK-892 policy publication failed: {error}", file=sys.stderr)
         return 1
 
-    print(f"published BK-892 policy version {version}")
     return 0
 
 
