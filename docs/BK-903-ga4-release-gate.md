@@ -78,17 +78,17 @@ age screen과 스토어 신고를 별도로 검증하기 전까지 AAID·IDFA와
 
 ## 콘솔·스토어 출시 체크리스트
 
-2026-09-16 현재 `hae24923@gmail.com` 계정의 Firebase Console에는 접근 가능한 프로젝트가
-표시되지 않는다. 기존 `bookkiki-dev`와 운영 프로젝트 소유자가 이 계정에 최소 권한을
-부여하거나, 올바른 Google 계정으로 전환하기 전에는 운영 앱 등록값을 확정할 수 없다.
-같은 계정의 Google Analytics에는 `Wel-Bridge PoC` 웹 속성만 보이고 북끼끼 GA4 속성은
-보이지 않는다. Firebase 프로젝트 권한과 함께 북끼끼 GA4 속성의 조회·분석 권한도
-별도로 확인해야 한다.
+2026-09-16 `fetfdsf5@gmail.com` 계정에 Firebase·GA4 운영 프로젝트를 새로 만들었다.
+프로젝트 표시 이름은 `Bookkiki Prod`, 프로젝트 ID는 `bookkiki-prod-cbff3`이며,
+Analytics 위치는 대한민국이다. iOS·Android 모두 운영 앱 식별자 `com.bookkiki.app`으로
+등록했고 production 앱 설정도 이 프로젝트를 가리킨다. Spark 요금제를 유지하며 Gemini,
+Google 제품 데이터 공유, 벤치마킹, 기술 지원, 계정 전문가 데이터 공유는 모두 껐다.
+광고 상품과 Google Play 연결도 하지 않았다.
 
-- [ ] GA4 dev/prod property 또는 stream을 분리한다.
-- [ ] Google Signals, ads personalization, remarketing, 광고 계정 연결을 사용하지 않는다.
+- [x] GA4 dev/prod 프로젝트와 앱 stream을 분리한다.
+- [x] Google Signals, ads personalization, remarketing, 광고 계정 연결을 사용하지 않는다.
 - [ ] GA4 data retention 값을 확정하고 화면 증거를 보존한다.
-- [ ] Firebase/GA4 관리자 권한을 최소 인원으로 제한한다.
+- [x] Firebase/GA4 관리자 계정은 운영 계정 1개로 시작한다. 팀 초대 시 최소 권한을 다시 점검한다.
 - [ ] iOS App Privacy에 실제 수집 항목·목적·추적 여부를 그대로 신고한다.
 - [ ] Google Play Data safety와 Target audience/Families 답변을 실제 SDK 동작과 일치시킨다.
 - [ ] Android release manifest에 `AD_ID` 권한이 합쳐지지 않았는지 검사한다.
