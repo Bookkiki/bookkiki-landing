@@ -213,6 +213,17 @@
       "sourcePath": "ko-KR/consents/personal-information-collection/optional_push_notification_consent/2026-09-15/index.html",
       "publicPath": "/ko-KR/consents/personal-information-collection/optional_push_notification_consent/2026-09-15",
       "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-09-15-1",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "56593862ba92cae17549f1cb57987a5e128feb3fef0ae80795aec84c8b4bdaf2",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-09-15-1/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-09-15-1",
+      "aliases": []
     }
   ]
 }
