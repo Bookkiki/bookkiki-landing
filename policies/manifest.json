@@ -138,6 +138,83 @@
       "aliases": []
     },
     {
+      "termsCode": "optional_photo_character_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "00805d99491e8c63956fb33bb8ce82a04ecf40818311c718d62b687f1152cff0",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_photo_character_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_photo_character_consent/2026-09-15",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_interview_stt_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "cb1abe98e7d0354a8b393a9d37e5ad71bb2c5a75f15eb104f0a644c4a29e2e82",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_interview_stt_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_interview_stt_consent/2026-09-15",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_ai_interview_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "1c905c8861950359efc007f3c568763d5dcae63934691d8e93552a19f536fa1f",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_ai_interview_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_ai_interview_consent/2026-09-15",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_ai_story_generation_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "7cc1b408dc226e8ad3109731c4899800ee41b766a4cf3ecf4d5469f7fde26f86",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_ai_story_generation_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_ai_story_generation_consent/2026-09-15",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_openrouter_story_review_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "b976e934e5e21191122d98e499eba01afa743d52a5d70f446f3c259465f5d75e",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_openrouter_story_review_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_openrouter_story_review_consent/2026-09-15",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_tts_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "655df20f1521d559abf0347975ba952450be6c802351cf63b050e937334d6ad2",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_tts_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_tts_consent/2026-09-15",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_push_notification_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "ea33442c4147b1f169e10b634927eedd17ead63f19983d85b87da8b4e1f39e5e",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_push_notification_consent/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_push_notification_consent/2026-09-15",
+      "aliases": []
+    },
+    {
       "termsCode": "privacy_policy",
       "version": "2026-09-15-1",
       "locale": "ko-KR",
