@@ -1,6 +1,6 @@
 # BK-870 목적·업체별 동의 원문 발행 계획
 
-상태: 초안. 이 파일과 아래 경로는 공개된 동의 URL이나 운영 동의 계약이 아니다.
+상태: 부분 구현. 새 2026-09-15 원문 경로와 manifest 항목은 `feat/BK-870` 브랜치에 추가되었지만, PR merge·Pages 배포 전에는 공개 URL이 아니다. 문서 조회만 구현하며 실제 동의 API와 AI 기능 활성화에는 연결하지 않는다.
 
 ## 검토용 HTML 미리보기
 
@@ -22,11 +22,11 @@ Server의 `DRAFT-2026-09-14` 국외 이전 동의 원문을 목적별 7개 HTML 
 
 이 일곱 code와 `/ko-KR/consents/overseas-transfer/{document-code}/{version}` 경로 규칙은 Server 법률 문안 초안의 README에 적혀 있다. Server 동의 API(BK-871)와 앱 시트(BK-872)가 회원·자녀·목적·수령자별로 동일한 code·version·SHA-256을 사용해야 한다. 한 HTML 페이지의 전체 동의 checkbox로 합치지 않는다.
 
-## 게시 전 순서
+## 운영 연결 전 순서
 
 1. 실제 공급자 계약·계정·운영 설정에서 연락처, 처리 국가, 보유기간, 조기 삭제 조건, OpenAI ZDR 및 OpenRouter 하위 provider를 확인한다. 초기 STT non-ZRM과 질문·동화 TTS의 서로 다른 logging 경로를 따로 검증한다.
 2. 외부 법률 검토와 BK-876 출시 gate를 거쳐 공고일·시행일·원문을 확정한다. OpenRouter가 계속 비활성화되면 이를 출시 지원 기능처럼 고지하지 않는다.
-3. 각 원문을 별도 version 고정 파일로 추가하고 `policies/manifest.json`에 code, version, locale, 날짜, SHA-256, sourcePath, publicPath를 등록한다. `2026-09-03` 기존 파일·hash는 변경하지 않는다.
-4. 공개 URL·Server catalog/API·앱 WebView가 같은 원문과 hash를 가리키는지 인증 없이 검증한다. 그 전에는 최신 alias를 바꾸거나 운영 동의에 사용하지 않는다.
+3. 별도 `2026-09-15` version 파일과 `policies/manifest.json`의 code, version, locale, SHA-256, sourcePath, publicPath를 등록했다. 미확정 문구는 원문에 그대로 남겼다. `2026-09-03` 기존 파일·hash는 변경하지 않았다. 후속 개정은 이 version을 덮어쓰지 않고 새 version을 발급한다.
+4. PR merge·Pages 배포 후 공개 URL과 앱의 문서 조회 화면이 같은 원문을 여는지 인증 없이 검증한다. 공급자 조건 확정 전에는 이 문서를 실제 동의 API·AI 기능 gate에 연결하지 않는다.
 
-현재 manifest에는 2026-09-03 원문 네 개만 있으며 위 일곱 **운영** 경로는 아직 존재하지 않는다. 검토용 페이지는 가입·AI 동의 API 또는 앱 WebView에 연결되지 않는다.
+현재 branch manifest에는 2026-09-03 원문 네 개와 2026-09-15 새 원문 여덟 개가 있다. 목적별 국외 이전 7개와 개인정보처리방침 1개의 새 version 경로가 파일로 존재한다. 공개 도메인의 실제 `200` 응답은 Pages 배포 뒤 확인해야 한다. 기존 무버전 alias와 가입 동의 URL은 변경하지 않는다.
