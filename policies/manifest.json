@@ -37,6 +37,17 @@
       "aliases": []
     },
     {
+      "termsCode": "marketing_consent",
+      "version": "2026-09-15",
+      "locale": "ko-KR",
+      "announcedAt": null,
+      "effectiveAt": "2026-09-15",
+      "sha256": "e0a26efdb96a5520127423583b9d1a646b4b4738bfbaa03776a7c49bca0d2bbf",
+      "sourcePath": "ko-KR/consents/marketing-information/2026-09-15/index.html",
+      "publicPath": "/ko-KR/consents/marketing-information/2026-09-15",
+      "aliases": []
+    },
+    {
       "termsCode": "privacy_policy",
       "version": "2026-09-03",
       "locale": "ko-KR",
