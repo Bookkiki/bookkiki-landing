@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://www.bookkiki.com/ko-KR/consents/personal-information-collection/optional_push_notification_consent/2026-09-15">
+  <title>Push 알림 | Bookkiki</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, sans-serif; color: #353744; background: #f8f9fc; }
+    body { margin: 0; }
+    header, main, footer { max-width: 900px; margin: auto; padding: 24px; }
+    header a { color: #353744; text-decoration: none; font-weight: 700; }
+    main { background: white; border: 1px solid #d9dbe2; border-radius: 16px; margin-top: 16px; margin-bottom: 24px; }
+    h1 { line-height: 1.3; } h2 { margin-top: 32px; } p, li { line-height: 1.8; }
+    .warning { border-left: 5px solid #b94321; background: #fff2ec; padding: 16px; line-height: 1.7; }
+    .table-scroll { overflow-x: auto; } table { border-collapse: collapse; min-width: 800px; width: 100%; }
+    th, td { border: 1px solid #d9dbe2; padding: 12px; text-align: left; vertical-align: top; line-height: 1.6; }
+    th { background: #f2f3f7; } .consent-line { padding: 14px; background: #f2f3f7; }
+    code { overflow-wrap: anywhere; } footer { color: #626676; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header><a href="/">Bookkiki</a></header>
+  <main>
+    <p class="warning" role="status"><strong>구현 검증 중인 내용이 포함된 선택 기능별 개인정보 수집·이용 안내.</strong> 원문에 표시된 [구현 검증 필요] 항목은 실제 운영 동작 확인 후 새 버전으로 정정합니다. 이 원문을 열어보는 것만으로 동의가 기록되지 않습니다. 해당 기능의 동의 화면에서 별도로 선택할 수 있습니다.</p>
+    <h1>Push 알림</h1>
+    <p>문서 code: <code>optional_push_notification_consent</code> · 버전: <code>2026-09-15</code></p>
+    <p>각 선택 기능의 개인정보 수집·이용은 별도로 동의받습니다. 국외 이전 동의는 별도 원문을 확인해 주세요.</p>
+    <ul>
+<li>문서 code: <code>optional_push_notification_consent</code></li>
+<li>수집 항목: Firebase 앱 설치 식별자, 전송할 알림 내용. push token은 알림 공급자의 서비스에서 처리하며 Server의 설치 등록 API에는 전달되지 않습니다.</li>
+<li>이용 목적: 동화 생성·주문 상태와 서비스 알림 전달</li>
+<li>회사 보유기간: 활성 설치 식별자는 알림 해제 또는 회원 탈퇴 시까지 사용합니다. 알림 해제 시 전송 대상에서 즉시 제외하지만 비활성화된 등록 행은 회원 탈퇴 시 물리 삭제합니다.</li>
+<li>거부 시 영향: 앱 안에서 상태를 직접 확인할 수 있습니다.</li>
+</ul>
+<p class="consent-line">동의 문구: Push 알림을 위한 개인정보 수집·이용에 동의합니다.</p>
+<h2>철회와 삭제</h2>
+<p>Server는 각 동의의 개별 철회 API를 제공하며 앱 설정 화면 연결은 BK-872에서 검증 중입니다. 철회 시 해당 목적의 새 요청을 차단합니다. 이미 선점된 대기·재시도 작업의 외부 전송 차단과 payload 파기는 BK-877에서 검증 중입니다. 이미 보관 중인 정보는 회사와 공급자별로 고지된 보유기간과 관계 법령에 따라 삭제합니다. <code>[구현 검증 필요]</code></p>
+  </main>
+  <footer>원본 Markdown SHA-256: <code>b2cf4c7db496aba03223c4e164aef7e3243840ac4031735018d7a7dbf8d9ba2e</code></footer>
+</body>
+</html>
