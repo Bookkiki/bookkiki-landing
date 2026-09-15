@@ -81,6 +81,9 @@ age screen과 스토어 신고를 별도로 검증하기 전까지 AAID·IDFA와
 2026-09-16 현재 `hae24923@gmail.com` 계정의 Firebase Console에는 접근 가능한 프로젝트가
 표시되지 않는다. 기존 `bookkiki-dev`와 운영 프로젝트 소유자가 이 계정에 최소 권한을
 부여하거나, 올바른 Google 계정으로 전환하기 전에는 운영 앱 등록값을 확정할 수 없다.
+같은 계정의 Google Analytics에는 `Wel-Bridge PoC` 웹 속성만 보이고 북끼끼 GA4 속성은
+보이지 않는다. Firebase 프로젝트 권한과 함께 북끼끼 GA4 속성의 조회·분석 권한도
+별도로 확인해야 한다.
 
 - [ ] GA4 dev/prod property 또는 stream을 분리한다.
 - [ ] Google Signals, ads personalization, remarketing, 광고 계정 연결을 사용하지 않는다.
