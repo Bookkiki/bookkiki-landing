@@ -10,9 +10,7 @@
       "sha256": "b12af5e26179751a2c576d24c462f7b74034b9d363c9cff74b94c8de86d43436",
       "sourcePath": "ko-KR/policies/terms-of-use/2026-09-03/index.html",
       "publicPath": "/ko-KR/policies/terms-of-use/2026-09-03",
-      "aliases": [
-        "/ko-KR/policies/terms-of-use"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "personal_information_collection_consent",
@@ -56,9 +54,7 @@
       "sha256": "c3c53dab06bb6cf509d45c6e9b8194ec0acecbd9da876ea3c748e8f1169db68c",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-09-03/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-09-03",
-      "aliases": [
-        "/ko-KR/policies/privacy-policy"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "overseas_openai_photo_character_consent",
@@ -234,6 +230,43 @@
       "sha256": "56593862ba92cae17549f1cb57987a5e128feb3fef0ae80795aec84c8b4bdaf2",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-09-15-1/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-09-15-1",
+      "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-09-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-09-16",
+      "effectiveAt": "2026-09-16",
+      "sha256": "0d1119ff9088bde2bb6bee02867a94b5bd0ea9bae7c7566fda0df7e8be4cfcba",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-09-16/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-09-16",
+      "aliases": [
+        "/ko-KR/policies/privacy-policy"
+      ]
+    },
+    {
+      "termsCode": "terms_of_service",
+      "version": "2026-09-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-09-16",
+      "effectiveAt": "2026-09-16",
+      "sha256": "83bcd3df8cb8b103fd18fe02ca4b54b2a91ef48c026cade866049d6e3b83ee4b",
+      "sourcePath": "ko-KR/policies/terms-of-use/2026-09-16/index.html",
+      "publicPath": "/ko-KR/policies/terms-of-use/2026-09-16",
+      "aliases": [
+        "/ko-KR/policies/terms-of-use"
+      ]
+    },
+    {
+      "termsCode": "personal_information_collection_consent",
+      "version": "2026-09-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-09-16",
+      "effectiveAt": "2026-09-16",
+      "sha256": "65bdb582501659a210b146b96390a27fc409e66e6dc21d94d7a91cd9d39b032f",
+      "sourcePath": "ko-KR/consents/personal-information-collection/2026-09-16/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/2026-09-16",
       "aliases": []
     }
   ]

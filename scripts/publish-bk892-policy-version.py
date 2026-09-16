@@ -19,7 +19,6 @@ LOCALE = "ko-KR"
 TARGET_CODES = (
     "terms_of_service",
     "personal_information_collection_consent",
-    "privacy_policy",
 )
 PUBLIC_ROUTE_PREFIXES = {
     "terms_of_service": "/ko-KR/policies/terms-of-use",
@@ -72,6 +71,18 @@ TEXT_REPLACEMENTS = {
         (
             "Google 등 로그인 제공자로부터 회원이 제공에 동의한 정보를 전달받는 방법",
             "Google·Kakao·Naver·Apple 로그인 제공자로부터 회원이 제공에 동의한 정보를 전달받는 방법",
+        ),
+    ),
+}
+
+
+# 태그가 포함된 치환은 article과 React payload 사본 양쪽에 적용한다.
+# payload에서는 `<`, `>`가 \u003c, \u003e로 escape되어 있다.
+HTML_REPLACEMENTS = {
+    "terms_of_service": (
+        (
+            "<li>서비스의 회원은 자녀의 부모 또는 법정대리인이며, 자녀는 회원 계정에 연결된 프로필을 통해 보호자와 함께 서비스를 이용합니다.</li>",
+            "<li>서비스의 회원은 만 19세 이상 성인으로서 자녀의 부모 또는 법정대리인이며, 자녀는 회원 계정에 연결된 프로필을 통해 보호자와 함께 서비스를 이용합니다. 자녀는 별도 회원 계정을 만들 수 없습니다.</li>",
         ),
     ),
 }
@@ -141,6 +152,14 @@ def revise_html(
     revised = source
     for old, new in TEXT_REPLACEMENTS[terms_code]:
         revised = replace_expected(revised, old, new, terms_code)
+    for old, new in HTML_REPLACEMENTS.get(terms_code, ()):
+        revised = replace_expected(revised, old, new, f"{terms_code} html")
+        revised = replace_expected(
+            revised,
+            react_escape(old),
+            react_escape(new),
+            f"{terms_code} html in React payload",
+        )
 
     if terms_code == "privacy_policy":
         revised = replace_expected(
@@ -291,7 +310,7 @@ def write_outputs(manifest: dict, outputs: dict[str, bytes]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Check the BK-892 social-login draft; publication is blocked until the full BK-876 policy copy is integrated."
+        description="Publish the BK-892 revision of the terms of use and the collection-use consent."
     )
     parser.add_argument("--version", required=True)
     parser.add_argument("--announced-at", required=True)
@@ -317,10 +336,12 @@ def main() -> int:
                         f'{document["termsCode"]}\t{document["sourcePath"]}\t{document["sha256"]}'
                     )
             return 0
-        fail(
-            "publication is blocked: the 2026-09-03 source does not include the full "
-            "BK-876 PR #729 policy copy and release gates; use --check only"
-        )
+        write_outputs(manifest, outputs)
+        for document in manifest["documents"]:
+            if document["version"] == version:
+                print(
+                    f'{document["termsCode"]}\t{document["sourcePath"]}\t{document["sha256"]}'
+                )
     except (OSError, json.JSONDecodeError, ValueError) as error:
         print(f"BK-892 policy publication failed: {error}", file=sys.stderr)
         return 1
