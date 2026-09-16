@@ -23,6 +23,7 @@
 | 서비스 이용약관 | `/ko-KR/policies/terms-of-use/2026-09-03` |
 | 개인정보 수집·이용 동의 | `/ko-KR/consents/personal-information-collection/2026-09-03` |
 | 마케팅 정보 수신 동의 | `/ko-KR/consents/marketing-information/2026-09-03` |
+| 광고성 정보 수신동의 신규 원문 | `/ko-KR/consents/marketing-information/2026-09-15` |
 | 개인정보처리방침 | `/ko-KR/policies/privacy-policy` |
 | 개인정보처리방침 2026-09-03 보존본 | `/ko-KR/policies/privacy-policy/2026-09-03` |
 
