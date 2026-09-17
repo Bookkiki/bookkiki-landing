@@ -27,7 +27,7 @@
 | 개인정보처리방침 | `/ko-KR/policies/privacy-policy` |
 | 개인정보처리방침 2026-09-03 보존본 | `/ko-KR/policies/privacy-policy/2026-09-03` |
 
-`policies/manifest.json`은 문서별 `termsCode`, version, locale, 공고일, 시행일, SHA-256, 원본 파일과 공개 경로를 연결한다. `policies/SHA256SUMS`는 manifest와 같은 해시를 담으며 검증 과정에서 서로 일치해야 한다. 현재 이용약관과 개인정보처리방침의 무버전 경로는 새 정책이 승인되기 전까지 2026-09-03 원문과 같은 파일을 제공한다.
+`policies/manifest.json`은 문서별 `termsCode`, version, locale, 공고일, 시행일, SHA-256, 원본 파일과 공개 경로를 연결한다. `policies/SHA256SUMS`는 manifest와 같은 해시를 담으며 검증 과정에서 서로 일치해야 한다. 무버전 경로(`aliases`)는 현재 시행 중인 version의 원문 사본을 제공하며, 시행일이 아직 오지 않은 version으로는 옮기지 않는다.
 
 기존 version의 원문과 manifest 항목은 수정하거나 삭제할 수 없다. 개정 문서는 새 version으로 추가한다. 검증·장애 복구 절차는 [`docs/policy-document-recovery.md`](docs/policy-document-recovery.md)에 기록한다.
 
