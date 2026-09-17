@@ -56,9 +56,7 @@
       "sha256": "c3c53dab06bb6cf509d45c6e9b8194ec0acecbd9da876ea3c748e8f1169db68c",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-09-03/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-09-03",
-      "aliases": [
-        "/ko-KR/policies/privacy-policy"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "overseas_openai_photo_character_consent",
@@ -278,7 +276,9 @@
       "sha256": "59698ebc91025fd76e34917a4b5eb65378a52ea7b899400c91e9fd2196b330fa",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-09-17-1/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-09-17-1",
-      "aliases": []
+      "aliases": [
+        "/ko-KR/policies/privacy-policy"
+      ]
     }
   ]
 }
