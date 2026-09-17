@@ -5,6 +5,8 @@
 `policies/manifest.json`의 `(termsCode, version, locale)`가 문서 버전을 식별한다. 동의
 증빙의 `document_sha256`은 같은 항목의 `sha256`과 일치해야 한다. `sourcePath`의 파일이
 복구 기준 원본이며 `publicPath`와 `aliases`는 GitHub Pages에서 제공하는 경로다.
+`aliases`는 현재 버전을 가리키는 라우팅이므로 새 version을 발행할 때 옮길 수 있고(alias 파일은
+해당 version 원문의 복사본이어야 한다), 나머지 필드와 원문은 불변이다.
 
 ## 정기 검증
 

@@ -26,6 +26,12 @@ def identity(document: dict) -> tuple[str, str, str]:
     return document["termsCode"], document["version"], document["locale"]
 
 
+def immutable_fields(document: dict) -> dict:
+    # aliases는 현재 버전을 가리키는 라우팅이라 새 version 발행 시 옮길 수 있다.
+    # 원문·sha256·publicPath 등 증빙 필드는 그대로 불변이다.
+    return {key: value for key, value in document.items() if key != "aliases"}
+
+
 def legacy_checksums(content: bytes) -> dict[str, str]:
     checksums: dict[str, str] = {}
     for line in content.decode("utf-8").splitlines():
@@ -53,7 +59,8 @@ def main() -> int:
         previous = json.loads(previous_manifest)
         for document in previous["documents"]:
             key = identity(document)
-            if current_by_id.get(key) != document:
+            current_document = current_by_id.get(key)
+            if current_document is None or immutable_fields(current_document) != immutable_fields(document):
                 fail(f"existing manifest entry was changed or removed: {key}")
             previous_source = git_show(base_ref, document["sourcePath"])
             current_source = (REPO_ROOT / document["sourcePath"]).read_bytes()
