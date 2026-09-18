@@ -54,6 +54,9 @@ GitHub Actions의 `Policy documents` workflow는 pull request에서 원문 해�
 
 ## 배포 전 체크리스트
 
+GA4 도입 전 별도 개인정보 최소화·스토어 신고 게이트는
+[`docs/BK-903-ga4-release-gate.md`](docs/BK-903-ga4-release-gate.md)를 따른다.
+
 1. **남은 노란 표시(`mark.todo`)는 전화번호뿐이다.** 고객센터 전화번호를 정해 4곳(index 2, privacy 1, refund 1)에 넣는다.
 
    ```bash
