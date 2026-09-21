@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>구독 플랜 카드 등록 · 북끼끼</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .subscription{max-width:820px;margin:0 auto;padding:48px 24px 80px}
+  .subscription .card{margin-bottom:18px}
+  .review-notice{background:var(--gold-soft);border-radius:12px;padding:14px 16px;margin:18px 0}
+  .plan-choice{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 20px}
+  .plan-choice label{display:block;border:2px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;background:var(--white)}
+  .plan-choice label:has(input:checked){border-color:var(--navy);background:var(--lav)}
+  .plan-choice input{margin-right:8px}
+  .plan-name{font-weight:700;color:var(--navy);font-size:1.08rem}
+  .plan-price{display:block;font-weight:700;color:var(--navy);font-size:1.25rem;margin:8px 0 4px}
+  .plan-desc{display:block;color:var(--text-2);font-size:.9rem}
+  .summary{width:100%;border-collapse:collapse;margin:8px 0}
+  .summary td{padding:10px 4px;border-bottom:1px solid var(--line)}
+  .summary td:last-child{text-align:right;font-weight:700;color:var(--navy)}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:700;color:var(--navy);margin-bottom:6px;font-size:.95rem}
+  .field input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:var(--white);color:var(--text)}
+  .field input:focus{outline:2px solid var(--lav-deep);border-color:var(--lav-deep)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .agreements{border:1px solid var(--line);border-radius:14px;padding:8px 16px;margin:20px 0 18px;background:var(--paper)}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:var(--text-2);margin:10px 0}
+  .agree input{margin-top:5px;flex:none}
+  .agree-all{padding-bottom:10px;border-bottom:1px solid var(--line);font-weight:700;color:var(--navy)}
+  .btn-submit{width:100%;justify-content:center;font-size:1.05rem;padding:16px}
+  .btn-submit[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  .result{display:none;border-radius:12px;padding:14px 16px;font-size:.95rem;margin-top:16px}
+  .result.ok{display:block;background:var(--mint)}
+  .result.err{display:block;background:var(--pink)}
+  .fine-print{font-size:.86rem;color:var(--text-2)}
+  @media (max-width:620px){.plan-choice,.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2C3E6B"/><path d="M13 22c6.5-3.5 13-3.5 19 1v24c-6-4.5-12.5-4.5-19-1z" fill="#E8DCF4"/><path d="M51 22c-6.5-3.5-13-3.5-19 1v24c6-4.5 12.5-4.5 19-1z" fill="#C4A8E0"/><path d="M32 23v24" stroke="#2C3E6B" stroke-width="2.5" stroke-linecap="round"/><path d="M45 8l2 4.6 4.6 2-4.6 2L45 21.2l-2-4.6-4.6-2 4.6-2z" fill="#F5D76E"/></svg>북끼끼</a>
+    <nav class="nav" aria-label="정책 문서"><a href="terms.html">이용약관</a><a href="privacy.html">개인정보처리방침</a><a href="refund.html">취소·환불 정책</a></nav>
+    <a class="btn btn-secondary btn-sm" href="./">홈으로</a>
+  </div>
+</header>
+
+<main class="subscription">
+  <h1>구독 플랜 카드 등록</h1>
+  <p class="muted">매달 새로운 영어 동화를 만드는 월 구독 플랜입니다. 등록한 카드로 매월 같은 날 자동결제됩니다.</p>
+
+  <div class="review-notice" id="notice"><strong>카드사 심사용 테스트 화면</strong><br>KG이니시스 테스트 정기결제창이 열립니다. 이 화면에서는 실제 요금이 청구되지 않으며, 운영 전환 후에도 이용자가 직접 동의하고 카드를 등록한 경우에만 자동결제가 시작됩니다.</div>
+
+  <form id="subscription-form" class="card" novalidate>
+    <h3>플랜 선택</h3>
+    <div class="plan-choice">
+      <label><input type="radio" name="plan" value="basic" checked><span class="plan-name">Basic</span><span class="plan-price">월 9,900원</span><span class="plan-desc">매달 동화 4권 생성 · 낭독과 책장 포함</span></label>
+      <label><input type="radio" name="plan" value="premium"><span class="plan-name">Premium</span><span class="plan-price">월 19,900원</span><span class="plan-desc">매달 동화 12권 생성 · 낭독과 책장 포함 · 새 기능 우선 제공</span></label>
+    </div>
+
+    <table class="summary" aria-label="정기결제 조건">
+      <tbody>
+        <tr><td>이용요금 (VAT 포함)</td><td id="summary-price">월 9,900원</td></tr>
+        <tr><td>결제 주기</td><td>매월</td></tr>
+        <tr><td>다음 결제</td><td>최초 결제일과 같은 날짜</td></tr>
+        <tr><td>해지</td><td>앱 설정 &gt; 플랜 관리</td></tr>
+      </tbody>
+    </table>
+    <p class="fine-print">해지하면 다음 결제일부터 청구가 중단되며 이미 결제한 기간까지 이용할 수 있습니다. 결제일이 없는 달에는 그 달의 마지막 날에 결제됩니다.</p>
+
+    <h3 style="margin-top:24px">결제자 정보</h3>
+    <div class="field"><label for="name">이름</label><input id="name" type="text" autocomplete="name" maxlength="30" required placeholder="홍길동"></div>
+    <div class="row2">
+      <div class="field"><label for="phone">휴대전화</label><input id="phone" type="tel" autocomplete="tel" inputmode="numeric" required placeholder="01012345678"></div>
+      <div class="field"><label for="email">이메일</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+    </div>
+
+    <div class="agreements" aria-labelledby="agreement-title">
+      <strong id="agreement-title">정기결제 필수 동의</strong>
+      <label class="agree agree-all"><input id="agree-all" type="checkbox"> 아래 필수 항목에 모두 동의합니다.</label>
+      <label class="agree"><input class="required-agreement" type="checkbox" required> [필수] <a href="terms.html#a17" target="_blank" rel="noopener">이용약관의 플랜 및 정기결제 조건</a>에 동의합니다.</label>
+      <label class="agree"><input class="required-agreement" type="checkbox" required> [필수] 선택한 플랜 요금이 매월 자동결제되며, 해지 전까지 정기결제가 계속되는 것에 동의합니다.</label>
+      <label class="agree"><input class="required-agreement" type="checkbox" required> [필수] 결제 처리를 위해 이름·휴대전화·이메일과 결제 정보가 KG이니시스 및 포트원에 전달되는 내용을 <a href="privacy.html#p6" target="_blank" rel="noopener">개인정보처리방침</a>에서 확인했습니다.</label>
+      <label class="agree"><input class="required-agreement" type="checkbox" required> [필수] 해지 시점과 환불 기준을 포함한 <a href="refund.html" target="_blank" rel="noopener">취소·환불 정책</a>을 확인했습니다.</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-submit" id="register-btn">정기결제 카드 등록하기</button>
+    <div class="result" id="result" role="status" aria-live="polite"></div>
+  </form>
+
+  <p class="fine-print">카드 정보는 KG이니시스 결제창에서 직접 입력하며 북끼끼 웹사이트에 저장되지 않습니다. 운영 서비스에서는 발급된 결제수단 식별값을 서버에 안전하게 보관하고, 결제·해지 이력을 확인할 수 있도록 제공합니다.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="links"><a href="./">홈</a><a href="terms.html">이용약관</a><a href="privacy.html"><strong>개인정보처리방침</strong></a><a href="refund.html">취소·환불·배송 정책</a></div>
+    <ul class="biz">
+      <li><span>상호</span>북끼끼(BOOKKIKI)</li>
+      <li><span>대표자</span>황채원</li>
+      <li><span>사업자등록번호</span>525-43-01349</li>
+      <li><span>통신판매업신고번호</span>신고 진행 중</li>
+      <li><span>주소</span>경기도 안산시 단원구 원선1로 10, 101동 1004호 (원곡동, 초지역메이저타운푸르지오에코단지아파트)</li>
+      <li><span>전화</span>010-2497-1267</li>
+      <li><span>이메일</span>contact@bookkiki.com</li>
+      <li><span>개인정보보호책임자</span>황채원</li>
+    </ul>
+    <div class="copy">© 2026 북끼끼. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script>
+  const STORE_ID = "store-cda4cb09-1ebf-4896-9087-46c9dc08b086";
+  const BILLING_CHANNEL_KEY = "channel-key-fd0e3786-fcde-42ec-afec-bb5dc2de42b3";
+  const PLANS = {
+    basic: { name: "Basic", price: 9900 },
+    premium: { name: "Premium", price: 19900 },
+  };
+
+  const form = document.getElementById("subscription-form");
+  const registerBtn = document.getElementById("register-btn");
+  const result = document.getElementById("result");
+  const agreeAll = document.getElementById("agree-all");
+  const requiredAgreements = [...document.querySelectorAll(".required-agreement")];
+
+  function selectedPlan() { return PLANS[form.plan.value]; }
+  function show(kind, message) { result.className = "result " + kind; result.textContent = message; }
+  function renderPlan() { document.getElementById("summary-price").textContent = `월 ${selectedPlan().price.toLocaleString("ko-KR")}원`; }
+
+  form.addEventListener("change", renderPlan);
+  agreeAll.addEventListener("change", () => requiredAgreements.forEach(el => { el.checked = agreeAll.checked; }));
+  requiredAgreements.forEach(el => el.addEventListener("change", () => {
+    agreeAll.checked = requiredAgreements.every(item => item.checked);
+    agreeAll.indeterminate = !agreeAll.checked && requiredAgreements.some(item => item.checked);
+  }));
+  renderPlan();
+
+  if (!BILLING_CHANNEL_KEY) {
+    registerBtn.disabled = true;
+    document.getElementById("notice").textContent = "정기결제 테스트 채널이 아직 설정되지 않았습니다.";
+  }
+
+  const redirectParams = new URLSearchParams(location.search);
+  if (redirectParams.has("billingKey") || redirectParams.has("issueId") || redirectParams.has("code")) {
+    const failed = redirectParams.has("code");
+    history.replaceState(null, "", location.pathname);
+    show(failed ? "err" : "ok", failed ? "카드 등록을 완료하지 못했습니다. 입력 내용을 확인하고 다시 시도해 주세요." : "테스트 정기결제 카드 등록이 완료되었습니다. 실제 요금은 청구되지 않습니다.");
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const plan = selectedPlan();
+    const issueId = `bk-sub-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    registerBtn.disabled = true;
+    result.className = "result";
+    result.textContent = "";
+    try {
+      const response = await PortOne.requestIssueBillingKey({
+        storeId: STORE_ID,
+        channelKey: BILLING_CHANNEL_KEY,
+        billingKeyMethod: "CARD",
+        issueId,
+        issueName: `북끼끼 ${plan.name} 월 구독 카드 등록`,
+        displayAmount: plan.price,
+        currency: "CURRENCY_KRW",
+        customer: {
+          fullName: document.getElementById("name").value.trim(),
+          phoneNumber: document.getElementById("phone").value.replace(/\D/g, ""),
+          email: document.getElementById("email").value.trim(),
+        },
+        offerPeriod: { interval: "1m" },
+        productType: "DIGITAL",
+        customData: { plan: form.plan.value, review: true },
+        redirectUrl: location.origin + location.pathname,
+      });
+      if (response && response.code !== undefined) {
+        show("err", "카드 등록을 완료하지 못했습니다. 입력 내용을 확인하고 다시 시도해 주세요.");
+      } else {
+        show("ok", "테스트 정기결제 카드 등록이 완료되었습니다. 실제 요금은 청구되지 않습니다.");
+      }
+    } catch (_) {
+      show("err", "결제창을 열지 못했습니다. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      registerBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
