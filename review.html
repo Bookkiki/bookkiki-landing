@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>결제 심사 페이지 · 북끼끼</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  html{scroll-behavior:smooth}
+  .review{max-width:900px;margin:0 auto;padding:48px 24px 80px}
+  .review-intro{margin-bottom:28px}
+  .review-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+  .review-nav a{display:block;border:1.5px solid var(--line);border-radius:14px;padding:16px;background:var(--white);font-weight:700;color:var(--navy);text-decoration:none}
+  .review-nav span{display:block;margin-top:4px;font-size:.88rem;font-weight:400;color:var(--text-2)}
+  .review-section{scroll-margin-top:90px;margin:28px 0 40px}
+  .review-section>h2{margin-bottom:6px}
+  .review-section>.muted{margin-bottom:16px}
+  .review-notice{background:var(--gold-soft);border-radius:12px;padding:14px 16px;margin:16px 0}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:700;color:var(--navy);margin-bottom:6px;font-size:.95rem}
+  .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:var(--white);color:var(--text)}
+  .field input:focus,.field select:focus{outline:2px solid var(--lav-deep);border-color:var(--lav-deep)}
+  .row2,.choice,.plan-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .choice label,.plan-choice label{display:block;border:1.5px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;background:var(--white)}
+  .choice label:has(input:checked),.plan-choice label:has(input:checked){border-color:var(--navy);background:var(--lav)}
+  .choice input,.plan-choice input{margin-right:8px}
+  .plan-name{font-weight:700;color:var(--navy)}
+  .plan-price{display:block;font-weight:700;color:var(--navy);font-size:1.18rem;margin:7px 0 3px}
+  .plan-desc{display:block;color:var(--text-2);font-size:.88rem}
+  .summary{width:100%;border-collapse:collapse;margin:10px 0 6px}
+  .summary td{padding:9px 4px;border-bottom:1px solid var(--line)}
+  .summary td:last-child{text-align:right;font-weight:700;color:var(--navy);white-space:nowrap}
+  .summary tr.total td{border-bottom:0;font-size:1.12rem;padding-top:13px}
+  .agreements{border:1px solid var(--line);border-radius:14px;padding:8px 16px;margin:20px 0 18px;background:var(--paper)}
+  .agree{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:var(--text-2);margin:10px 0}
+  .agree input{margin-top:5px;flex:none}
+  .agree-all{padding-bottom:10px;border-bottom:1px solid var(--line);font-weight:700;color:var(--navy)}
+  .btn-submit{width:100%;justify-content:center;font-size:1.05rem;padding:16px}
+  .btn-submit[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+  .result{display:none;border-radius:12px;padding:14px 16px;font-size:.95rem;margin-top:16px;word-break:break-word}
+  .result.ok{display:block;background:var(--mint)}
+  .result.err{display:block;background:var(--pink)}
+  .fine-print{font-size:.86rem;color:var(--text-2)}
+  @media (max-width:620px){.review-nav,.row2,.choice,.plan-choice{grid-template-columns:1fr}.review{padding:34px 18px 64px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2C3E6B"/><path d="M13 22c6.5-3.5 13-3.5 19 1v24c-6-4.5-12.5-4.5-19-1z" fill="#E8DCF4"/><path d="M51 22c-6.5-3.5-13-3.5-19 1v24c6-4.5 12.5-4.5 19-1z" fill="#C4A8E0"/><path d="M32 23v24" stroke="#2C3E6B" stroke-width="2.5" stroke-linecap="round"/><path d="M45 8l2 4.6 4.6 2-4.6 2L45 21.2l-2-4.6-4.6-2 4.6-2z" fill="#F5D76E"/></svg>북끼끼</a>
+    <nav class="nav" aria-label="결제 심사"><a href="#general-payment">일반결제</a><a href="#recurring-payment">정기결제</a><a href="terms.html">이용약관</a></nav>
+    <a class="btn btn-secondary btn-sm" href="./">홈으로</a>
+  </div>
+</header>
+
+<main class="review">
+  <div class="review-intro">
+    <h1>결제 심사 페이지</h1>
+    <p class="muted">로그인 없이 일반결제와 정기결제 상품·거래조건·필수 동의 및 KG이니시스 테스트 결제창을 한 페이지에서 확인할 수 있습니다.</p>
+    <div class="review-notice"><strong>카드사 심사용 테스트 화면</strong><br>아래 결제창은 테스트 채널로 열립니다. 카드 정보는 KG이니시스에서 직접 처리하며 북끼끼 웹사이트에 저장되지 않습니다.</div>
+    <div class="review-nav">
+      <a href="#general-payment">1. 실물책 일반결제<span>상품·배송비·배송조건·일반 카드결제</span></a>
+      <a href="#recurring-payment">2. 월 구독 정기결제<span>플랜·월 요금·해지조건·카드 등록</span></a>
+    </div>
+  </div>
+
+  <section class="review-section" id="general-payment">
+    <h2>1. 실물책 일반결제</h2>
+    <p class="muted">동화를 스퀘어북으로 인쇄해 배송하는 맞춤 제작 상품입니다.</p>
+    <form id="order-form" class="card" novalidate>
+      <div class="field">
+        <label>표지 선택</label>
+        <div class="choice">
+          <label><input type="radio" name="cover" value="SC" checked> 스퀘어북 소프트커버 · 16,000원</label>
+          <label><input type="radio" name="cover" value="HC"> 스퀘어북 하드커버 · 18,000원</label>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="order-pages">페이지 수 (24쪽 기준가, 2쪽당 500원 추가)</label><select id="order-pages"></select></div>
+        <div class="field"><label for="order-qty">수량</label><select id="order-qty"><option>1</option><option>2</option><option>3</option></select></div>
+      </div>
+      <table class="summary" aria-label="일반결제 주문 금액"><tbody>
+        <tr><td>상품 금액</td><td id="order-sum-item">16,000원</td></tr>
+        <tr><td>배송비 (박스 1개)</td><td>3,000원</td></tr>
+        <tr class="total"><td>총 결제 금액 (VAT 포함)</td><td id="order-sum-total">19,000원</td></tr>
+      </tbody></table>
+
+      <h3 style="margin-top:22px">구매자 및 배송 정보</h3>
+      <div class="row2">
+        <div class="field"><label for="order-name">이름</label><input id="order-name" type="text" autocomplete="name" required placeholder="홍길동"></div>
+        <div class="field"><label for="order-phone">휴대전화</label><input id="order-phone" type="tel" autocomplete="tel" required placeholder="01012345678"></div>
+      </div>
+      <div class="field"><label for="order-email">이메일</label><input id="order-email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+      <div class="row2">
+        <div class="field"><label for="order-recipient">받는 분</label><input id="order-recipient" type="text" autocomplete="shipping name" required placeholder="홍길동"></div>
+        <div class="field"><label for="order-recipient-phone">받는 분 휴대전화</label><input id="order-recipient-phone" type="tel" autocomplete="shipping tel" required placeholder="01012345678"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="order-postal-code">우편번호</label><input id="order-postal-code" type="text" inputmode="numeric" autocomplete="shipping postal-code" required placeholder="12345"></div>
+        <div class="field"><label for="order-address">주소</label><input id="order-address" type="text" autocomplete="shipping street-address" required placeholder="도로명 주소"></div>
+      </div>
+      <div class="field"><label for="order-address-detail">상세 주소</label><input id="order-address-detail" type="text" required placeholder="동·호수 등 상세 주소"></div>
+      <p class="review-notice">결제 완료 후 제작에 영업일 기준 5일, 배송에 1~3일이 걸립니다. 도서·산간 지역은 추가 배송비 없이 배송되며 기간이 더 걸릴 수 있습니다.</p>
+
+      <div class="agreements" aria-labelledby="order-agreement-title">
+        <strong id="order-agreement-title">주문 전 필수 동의</strong>
+        <label class="agree agree-all"><input id="order-agree-all" type="checkbox"> 아래 필수 항목에 모두 동의합니다.</label>
+        <label class="agree"><input class="order-required-agreement" type="checkbox" required> [필수] 주문 내용과 총 결제 금액, 배송비 3,000원을 확인했습니다.</label>
+        <label class="agree"><input class="order-required-agreement" type="checkbox" required> [필수] <a href="terms.html" target="_blank" rel="noopener">이용약관</a>과 <a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>을 확인하고 결제·제작·배송을 위한 정보 처리에 동의합니다.</label>
+        <label class="agree"><input class="order-required-agreement" type="checkbox" required> [필수] 제작 착수 후 단순 변심에 의한 취소·청약철회가 제한된다는 점과 <a href="refund.html" target="_blank" rel="noopener">취소·환불·배송 정책</a>을 확인했습니다.</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-submit" id="order-pay-btn">일반결제 테스트창 열기</button>
+      <div class="result" id="order-result" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section class="review-section" id="recurring-payment">
+    <h2>2. 월 구독 정기결제</h2>
+    <p class="muted">등록한 카드로 매월 같은 날 자동결제되는 구독 플랜입니다.</p>
+    <form id="subscription-form" class="card" novalidate>
+      <h3>플랜 선택</h3>
+      <div class="plan-choice">
+        <label><input type="radio" name="plan" value="basic" checked><span class="plan-name">Basic</span><span class="plan-price">월 9,900원</span><span class="plan-desc">매달 동화 4권 생성 · 낭독과 책장 포함</span></label>
+        <label><input type="radio" name="plan" value="premium"><span class="plan-name">Premium</span><span class="plan-price">월 19,900원</span><span class="plan-desc">매달 동화 12권 생성 · 낭독과 책장 포함 · 새 기능 우선 제공</span></label>
+      </div>
+      <table class="summary" aria-label="정기결제 조건"><tbody>
+        <tr><td>이용요금 (VAT 포함)</td><td id="subscription-price">월 9,900원</td></tr>
+        <tr><td>결제 주기</td><td>매월</td></tr>
+        <tr><td>다음 결제</td><td>최초 결제일과 같은 날짜</td></tr>
+        <tr><td>해지</td><td>앱 설정 &gt; 플랜 관리</td></tr>
+      </tbody></table>
+      <p class="fine-print">해지하면 다음 결제일부터 청구가 중단되며 이미 결제한 기간까지 이용할 수 있습니다. 결제일이 없는 달에는 그 달의 마지막 날에 결제됩니다.</p>
+
+      <h3 style="margin-top:24px">결제자 정보</h3>
+      <div class="field"><label for="subscription-name">이름</label><input id="subscription-name" type="text" autocomplete="name" maxlength="30" required placeholder="홍길동"></div>
+      <div class="row2">
+        <div class="field"><label for="subscription-phone">휴대전화</label><input id="subscription-phone" type="tel" autocomplete="tel" inputmode="numeric" required placeholder="01012345678"></div>
+        <div class="field"><label for="subscription-email">이메일</label><input id="subscription-email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+      </div>
+      <div class="agreements" aria-labelledby="subscription-agreement-title">
+        <strong id="subscription-agreement-title">정기결제 필수 동의</strong>
+        <label class="agree agree-all"><input id="subscription-agree-all" type="checkbox"> 아래 필수 항목에 모두 동의합니다.</label>
+        <label class="agree"><input class="subscription-required-agreement" type="checkbox" required> [필수] <a href="terms.html#a17" target="_blank" rel="noopener">이용약관의 플랜 및 정기결제 조건</a>에 동의합니다.</label>
+        <label class="agree"><input class="subscription-required-agreement" type="checkbox" required> [필수] 선택한 플랜 요금이 매월 자동결제되며, 해지 전까지 정기결제가 계속되는 것에 동의합니다.</label>
+        <label class="agree"><input class="subscription-required-agreement" type="checkbox" required> [필수] 결제 처리를 위해 이름·휴대전화·이메일과 결제 정보가 KG이니시스 및 포트원에 전달되는 내용을 <a href="privacy.html#p6" target="_blank" rel="noopener">개인정보처리방침</a>에서 확인했습니다.</label>
+        <label class="agree"><input class="subscription-required-agreement" type="checkbox" required> [필수] 해지 시점과 환불 기준을 포함한 <a href="refund.html" target="_blank" rel="noopener">취소·환불 정책</a>을 확인했습니다.</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-submit" id="subscription-register-btn">정기결제 테스트창 열기</button>
+      <div class="result" id="subscription-result" role="status" aria-live="polite"></div>
+    </form>
+    <p class="fine-print">운영 서비스에서는 이용자가 직접 동의하고 카드를 등록한 경우에만 자동결제가 시작됩니다.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="links"><a href="./">홈</a><a href="terms.html">이용약관</a><a href="privacy.html"><strong>개인정보처리방침</strong></a><a href="refund.html">취소·환불·배송 정책</a></div>
+    <ul class="biz">
+      <li><span>상호</span>북끼끼(BOOKKIKI)</li><li><span>대표자</span>황채원</li><li><span>사업자등록번호</span>525-43-01349</li>
+      <li><span>통신판매업신고번호</span>신고 진행 중</li><li><span>주소</span>경기도 안산시 단원구 원선1로 10, 101동 1004호 (원곡동, 초지역메이저타운푸르지오에코단지아파트)</li>
+      <li><span>전화</span>010-2497-1267</li><li><span>이메일</span>contact@bookkiki.com</li><li><span>개인정보보호책임자</span>황채원</li>
+    </ul>
+    <div class="copy">© 2026 북끼끼. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+<script>
+  const STORE_ID = "store-cda4cb09-1ebf-4896-9087-46c9dc08b086";
+  const GENERAL_CHANNEL_KEY = "channel-key-129d5c55-46f5-4f53-a5c2-580206650bdf";
+  const BILLING_CHANNEL_KEY = "channel-key-fd0e3786-fcde-42ec-afec-bb5dc2de42b3";
+  const PRICE = { SC: 16000, HC: 18000 };
+  const SHIPPING = 3000;
+  const PLANS = { basic: { price: 9900 }, premium: { price: 19900 } };
+  const won = value => value.toLocaleString("ko-KR") + "원";
+
+  function bindAgreementGroup(allId, selector) {
+    const all = document.getElementById(allId);
+    const required = [...document.querySelectorAll(selector)];
+    all.addEventListener("change", () => required.forEach(item => { item.checked = all.checked; }));
+    required.forEach(item => item.addEventListener("change", () => {
+      all.checked = required.every(current => current.checked);
+      all.indeterminate = !all.checked && required.some(current => current.checked);
+    }));
+  }
+  function show(id, kind, message) {
+    const element = document.getElementById(id);
+    element.className = "result " + kind;
+    element.textContent = message;
+  }
+
+  const orderForm = document.getElementById("order-form");
+  const orderPages = document.getElementById("order-pages");
+  const orderQty = document.getElementById("order-qty");
+  const orderPayBtn = document.getElementById("order-pay-btn");
+  for (let page = 24; page <= 130; page += 2) orderPages.add(new Option(page + "쪽", page));
+  function orderAmount() {
+    const cover = orderForm.cover.value;
+    const pages = Number(orderPages.value);
+    const qty = Number(orderQty.value);
+    const unit = PRICE[cover] + (pages - 24) / 2 * 500;
+    const item = unit * qty;
+    return { cover, pages, qty, unit, item, total: item + SHIPPING };
+  }
+  function renderOrder() {
+    const amount = orderAmount();
+    document.getElementById("order-sum-item").textContent = won(amount.item) + (amount.qty > 1 ? ` (${won(amount.unit)} × ${amount.qty})` : "");
+    document.getElementById("order-sum-total").textContent = won(amount.total);
+  }
+  orderForm.addEventListener("change", renderOrder);
+  bindAgreementGroup("order-agree-all", ".order-required-agreement");
+  renderOrder();
+
+  orderForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!orderForm.reportValidity()) return;
+    const amount = orderAmount();
+    const paymentId = `bk-order-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    orderPayBtn.disabled = true;
+    show("order-result", "", "");
+    try {
+      const response = await PortOne.requestPayment({
+        storeId: STORE_ID,
+        channelKey: GENERAL_CHANNEL_KEY,
+        paymentId,
+        orderName: `북끼끼 스퀘어북 ${amount.cover} ${amount.pages}쪽 x${amount.qty}`,
+        totalAmount: amount.total,
+        currency: "CURRENCY_KRW",
+        payMethod: "CARD",
+        customer: {
+          fullName: document.getElementById("order-name").value.trim(),
+          phoneNumber: document.getElementById("order-phone").value.replace(/\D/g, ""),
+          email: document.getElementById("order-email").value.trim(),
+        },
+        customData: { cover: amount.cover, pages: amount.pages, qty: amount.qty, review: true },
+        redirectUrl: location.origin + location.pathname,
+      });
+      show("order-result", response && response.code !== undefined ? "err" : "ok", response && response.code !== undefined ? "결제를 완료하지 못했습니다. 입력 내용을 확인해 주세요." : "테스트 결제창 호출이 완료되었습니다.");
+    } catch (_) {
+      show("order-result", "err", "결제창을 열지 못했습니다. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      orderPayBtn.disabled = false;
+    }
+  });
+
+  const subscriptionForm = document.getElementById("subscription-form");
+  const subscriptionBtn = document.getElementById("subscription-register-btn");
+  function selectedPlan() { return PLANS[subscriptionForm.plan.value]; }
+  function renderSubscription() { document.getElementById("subscription-price").textContent = `월 ${selectedPlan().price.toLocaleString("ko-KR")}원`; }
+  subscriptionForm.addEventListener("change", renderSubscription);
+  bindAgreementGroup("subscription-agree-all", ".subscription-required-agreement");
+  renderSubscription();
+
+  subscriptionForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!subscriptionForm.reportValidity()) return;
+    const plan = selectedPlan();
+    const issueId = `bk-sub-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    subscriptionBtn.disabled = true;
+    show("subscription-result", "", "");
+    try {
+      const response = await PortOne.requestIssueBillingKey({
+        storeId: STORE_ID,
+        channelKey: BILLING_CHANNEL_KEY,
+        billingKeyMethod: "CARD",
+        issueId,
+        issueName: `북끼끼 매월 ${plan.price.toLocaleString("ko-KR")}원 정기결제`,
+        displayAmount: plan.price,
+        currency: "CURRENCY_KRW",
+        customer: {
+          fullName: document.getElementById("subscription-name").value.trim(),
+          phoneNumber: document.getElementById("subscription-phone").value.replace(/\D/g, ""),
+          email: document.getElementById("subscription-email").value.trim(),
+        },
+        offerPeriod: { interval: "1m" },
+        productType: "DIGITAL",
+        customData: { plan: subscriptionForm.plan.value, review: true },
+        redirectUrl: location.origin + location.pathname,
+      });
+      show("subscription-result", response && response.code !== undefined ? "err" : "ok", response && response.code !== undefined ? "카드 등록을 완료하지 못했습니다. 입력 내용을 확인해 주세요." : "테스트 정기결제 카드 등록이 완료되었습니다.");
+    } catch (_) {
+      show("subscription-result", "err", "정기결제창을 열지 못했습니다. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      subscriptionBtn.disabled = false;
+    }
+  });
+
+  const redirectParams = new URLSearchParams(location.search);
+  if (redirectParams.has("billingKey") || redirectParams.has("issueId")) {
+    const failed = redirectParams.has("code");
+    history.replaceState(null, "", location.pathname + "#recurring-payment");
+    show("subscription-result", failed ? "err" : "ok", failed ? "카드 등록을 완료하지 못했습니다. 입력 내용을 확인해 주세요." : "테스트 정기결제 카드 등록이 완료되었습니다.");
+  } else if (redirectParams.has("paymentId")) {
+    const failed = redirectParams.has("code");
+    history.replaceState(null, "", location.pathname + "#general-payment");
+    show("order-result", failed ? "err" : "ok", failed ? "결제를 완료하지 못했습니다. 입력 내용을 확인해 주세요." : "테스트 결제창 호출이 완료되었습니다.");
+  }
+</script>
+</body>
+</html>
