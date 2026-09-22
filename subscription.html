@@ -167,7 +167,7 @@
         channelKey: BILLING_CHANNEL_KEY,
         billingKeyMethod: "CARD",
         issueId,
-        issueName: `북끼끼 ${plan.name} 월 구독 카드 등록`,
+        issueName: `북끼끼 매월 ${plan.price.toLocaleString("ko-KR")}원 정기결제`,
         displayAmount: plan.price,
         currency: "CURRENCY_KRW",
         customer: {

@@ -23,8 +23,12 @@ require_text order.html '영업일 기준 5일'
 require_text order.html 'id="address"'
 require_text subscription.html 'PortOne.requestIssueBillingKey'
 require_text subscription.html 'offerPeriod: { interval: "1m" }'
+require_text subscription.html 'issueName: `북끼끼 매월 ${plan.price.toLocaleString("ko-KR")}원 정기결제`'
 require_text subscription.html 'BILLING_CHANNEL_KEY'
 require_text index.html 'href="subscription.html"'
+
+# KG이니시스는 빌링키 발급 상품명을 UTF-8 기준 최대 40바이트까지 표시한다.
+test "$(printf %s '북끼끼 매월 19,900원 정기결제' | wc -c | tr -d ' ')" -le 40
 
 for page in index.html order.html subscription.html; do
   require_text "$page" '525-43-01349'
