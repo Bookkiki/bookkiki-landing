@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://www.bookkiki.com/ko-KR/consents/overseas-transfer/overseas_elevenlabs_stt_consent/2026-09-26">
+  <title>ElevenLabs 음성 답변 변환 | Bookkiki</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, sans-serif; color: #353744; background: #f8f9fc; }
+    body { margin: 0; }
+    header, main, footer { max-width: 900px; margin: auto; padding: 24px; }
+    header a { color: #353744; text-decoration: none; font-weight: 700; }
+    main { background: white; border: 1px solid #d9dbe2; border-radius: 16px; margin-top: 16px; margin-bottom: 24px; }
+    h1 { line-height: 1.3; } h2 { margin-top: 32px; } p, li { line-height: 1.8; }
+    .warning { border-left: 5px solid #b94321; background: #fff2ec; padding: 16px; line-height: 1.7; }
+    .table-scroll { overflow-x: auto; } table { border-collapse: collapse; min-width: 800px; width: 100%; }
+    th, td { border: 1px solid #d9dbe2; padding: 12px; text-align: left; vertical-align: top; line-height: 1.6; }
+    th { background: #f2f3f7; } .consent-line { padding: 14px; background: #f2f3f7; }
+    code { overflow-wrap: anywhere; } footer { color: #626676; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header><a href="/">Bookkiki</a></header>
+  <main>
+    <h1>ElevenLabs 음성 답변 변환</h1>
+    <p>문서 code: <code>overseas_elevenlabs_stt_consent</code> · 버전: <code>2026-09-26</code></p>
+    <p>각 기능의 국외 이전은 별도로 동의받아야 합니다. 회사 저장소의 삭제기한과 공급자 보유기간은 다릅니다.</p>
+    <ul>
+<li>문서 code: <code>overseas_elevenlabs_stt_consent</code></li>
+</ul>
+<div class="table-scroll"><table><thead><tr>
+<th scope="col">이전받는 자·연락처</th>
+<th scope="col">국가</th>
+<th scope="col">이전 항목</th>
+<th scope="col">목적</th>
+<th scope="col">시점·방법</th>
+<th scope="col">공급자 보유기간</th>
+</tr></thead><tbody>
+<tr>
+<td>Eleven Labs Inc. (legal@elevenlabs.io)</td>
+<td>미국(보관). 호스팅·서버는 미국·네덜란드·싱가포르</td>
+<td>자녀 음성(요청 입력), 변환된 text(공급자 처리·응답)</td>
+<td>음성을 text로 변환</td>
+<td>보호자가 녹음 전송을 확정한 뒤 변환 요청 시 암호화 전송</td>
+<td>초기 운영 STT는 non-ZRM(<code>enable_logging=true</code>) 방식으로 요청 이력에 입력·결과가 보관된다. 계정에서 이력을 삭제하면 해당 음성·text는 공급자 DB에서 즉시 제거되지만 debugging·moderation log는 남을 수 있고 backup에는 최대 30일 남을 수 있다. 공급자는 음성에 관해 생성한 데이터를 마지막 상호작용 후 3년을 넘겨 보관하지 않는다. Zero Retention Mode는 공급자가 기업 계약 고객에게만 제공하므로 적용되지 않는다.</td>
+</tr>
+</tbody></table></div>
+<p>2026-09-15 운영 계정 시험에서 <code>enable_logging=false</code> 요청은 HTTP 403, <code>true</code> 요청은 HTTP 200이었다. 초기 STT에 ElevenLabs ZRM이 적용된다고 고지하지 않는다. ElevenLabs는 non-ZRM 요청 이력 삭제 API를 제공하지만, 현재 Server는 이 API를 호출하지 않는다. 회사 저장소의 24시간 원본 삭제 정책은 ElevenLabs 사본의 보유기간이 아니다.</p>
+<p>동의를 거부하면 직접 text로 답할 수 있습니다.</p>
+<p class="consent-line">동의 문구: ElevenLabs 음성 답변 변환을 위한 국외 이전에 동의합니다.</p>
+<h2>철회와 삭제</h2>
+<p>각 동의는 앱 설정에서 개별 철회할 수 있습니다. 철회 시 해당 목적의 새 전송과 대기·재시도 작업을 즉시 차단합니다. 회사는 회사 저장소의 관련 정보를 별도로 고지한 기간 안에 삭제하고, 공급자 사본은 공급자별 삭제 요청 방식·기산점·예외와 처리기간에 따라 처리합니다.</p>
+  </main>
+  <footer>원본 Markdown SHA-256: <code>a3e8aabd888f3d157e1d09e0fe34d1378bed940ab00174d627b5016e09882a4c</code></footer>
+</body>
+</html>
