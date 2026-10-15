@@ -840,6 +840,19 @@
       "aliases": [
         "/ko-KR/policies/privacy-policy"
       ]
+    },
+    {
+      "termsCode": "community_rules",
+      "version": "2026-10-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-16",
+      "effectiveAt": "2026-10-16",
+      "sha256": "eca03b8b717b56fbea30fc913b17151a5a82556dceedc3a123a2ef358b0fda06",
+      "sourcePath": "ko-KR/policies/community-rules/2026-10-16/index.html",
+      "publicPath": "/ko-KR/policies/community-rules/2026-10-16",
+      "aliases": [
+        "/ko-KR/policies/community-rules"
+      ]
     }
   ]
 }
