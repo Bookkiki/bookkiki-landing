@@ -853,6 +853,28 @@
       "aliases": [
         "/ko-KR/policies/community-rules"
       ]
+    },
+    {
+      "termsCode": "optional_ai_story_generation_consent",
+      "version": "2026-10-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-16",
+      "effectiveAt": "2026-10-16",
+      "sha256": "fce72803bc33fc661dd64e95a23050f1475c41accde907f2fd8d16bbef393cf2",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_ai_story_generation_consent/2026-10-16/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_ai_story_generation_consent/2026-10-16",
+      "aliases": []
+    },
+    {
+      "termsCode": "overseas_openai_story_generation_consent",
+      "version": "2026-10-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-16",
+      "effectiveAt": "2026-10-16",
+      "sha256": "738271ac71a025bd6374088388d90239270f46fa4caf457bc73eb89f88190bd2",
+      "sourcePath": "ko-KR/consents/overseas-transfer/overseas_openai_story_generation_consent/2026-10-16/index.html",
+      "publicPath": "/ko-KR/consents/overseas-transfer/overseas_openai_story_generation_consent/2026-10-16",
+      "aliases": []
     }
   ]
 }
