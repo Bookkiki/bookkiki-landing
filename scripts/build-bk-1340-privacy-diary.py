@@ -41,6 +41,9 @@ OVERSEAS_LINK = "](overseas-transfer-consent.md)"
 
 # 6항이 가리킬 새 국외 이전 동의서 목록. 문서별 현재 판을 적는다.
 OVERSEAS_INDEX_VERSION = "2026-10-16"
+# 새 원문은 이 목록의 공개 주소를 링크로 적는다(서버 리뷰 제안). 렌더링 전에 직전 판과 같은 상대 링크로 바꿔
+# 공개 페이지 bytes는 그대로 둔다(6항 링크는 아래 render가 같은 목록 주소로 바꾼다).
+PUBLIC_OVERSEAS_LINK = f"](https://www.bookkiki.com/ko-KR/consents/overseas-transfer/{OVERSEAS_INDEX_VERSION})"
 OVERSEAS_DOCUMENTS = (
     ("OpenAI 사진 캐릭터 생성", "overseas_openai_photo_character_consent", "2026-09-26-2"),
     ("Anthropic AI 인터뷰", "overseas_anthropic_interview_consent", "2026-09-26-2"),
@@ -161,6 +164,8 @@ def main() -> None:
     args = parser.parse_args()
     source = args.source.read_text(encoding="utf-8")
     previous = args.previous_source.read_text(encoding="utf-8")
+    if source.count(PUBLIC_OVERSEAS_LINK) == 1 and OVERSEAS_LINK not in source:
+        source = source.replace(PUBLIC_OVERSEAS_LINK, OVERSEAS_LINK)
 
     # 기준 확인: 직전 원문이 공개된 2026-10-16 판과 같은 bytes로 렌더링돼야 한다.
     published = (ROOT / f"ko-KR/policies/privacy-policy/{PREVIOUS_VERSION}/index.html").read_text(encoding="utf-8")
