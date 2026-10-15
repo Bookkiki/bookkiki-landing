@@ -10,9 +10,7 @@
       "sha256": "b12af5e26179751a2c576d24c462f7b74034b9d363c9cff74b94c8de86d43436",
       "sourcePath": "ko-KR/policies/terms-of-use/2026-09-03/index.html",
       "publicPath": "/ko-KR/policies/terms-of-use/2026-09-03",
-      "aliases": [
-        "/ko-KR/policies/terms-of-use"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "personal_information_collection_consent",
@@ -863,6 +861,19 @@
       "publicPath": "/ko-KR/policies/privacy-policy/2026-10-16",
       "aliases": [
         "/ko-KR/policies/privacy-policy"
+      ]
+    },
+    {
+      "termsCode": "terms_of_service",
+      "version": "2026-10-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-16",
+      "effectiveAt": "2026-10-16",
+      "sha256": "ca2ed1eba0debda7ffadb939d2eb4fd2f1ff771ae14632fd7c5840577d0708da",
+      "sourcePath": "ko-KR/policies/terms-of-use/2026-10-16/index.html",
+      "publicPath": "/ko-KR/policies/terms-of-use/2026-10-16",
+      "aliases": [
+        "/ko-KR/policies/terms-of-use"
       ]
     }
   ]
