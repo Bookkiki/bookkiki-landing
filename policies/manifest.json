@@ -837,9 +837,7 @@
       "sha256": "b5df0200c5e02f6d457bd26925f5f211232473d52b7210d7f24b140685b64ab5",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-09-27/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-09-27",
-      "aliases": [
-        "/ko-KR/policies/privacy-policy"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "community_rules",
@@ -852,6 +850,19 @@
       "publicPath": "/ko-KR/policies/community-rules/2026-10-16",
       "aliases": [
         "/ko-KR/policies/community-rules"
+      ]
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-10-16",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-16",
+      "effectiveAt": "2026-10-16",
+      "sha256": "27e401307492b675a4169c70bc9d0b6ada889a30114f83887986247b0657b8d6",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-10-16/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-10-16",
+      "aliases": [
+        "/ko-KR/policies/privacy-policy"
       ]
     }
   ]
