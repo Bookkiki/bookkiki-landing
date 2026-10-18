@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>북끼끼 앱 다운로드</title>
+<meta name="description" content="우리 아이가 주인공인 영어 동화책, 북끼끼 앱을 받아 보세요. 안드로이드는 Google Play, 아이폰은 App Store에서 받을 수 있습니다.">
+<meta property="og:title" content="북끼끼 앱 다운로드">
+<meta property="og:description" content="우리 아이가 주인공인 영어 동화책, 북끼끼 앱을 받아 보세요.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bookkiki.com/download/">
+<meta property="og:image" content="https://bookkiki.com/assets/kiki-reading.png">
+<link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+<script>
+  // 기기에 맞는 스토어로 바로 보낸다. ?stay=1이면 이동하지 않고 안내 화면을 보여 준다.
+  (function () {
+    var PLAY = 'https://play.google.com/store/apps/details?id=com.bookkiki.app';
+    var APP_STORE = 'https://apps.apple.com/kr/app/id6810455009';
+    if (/[?&]stay=1/.test(location.search)) return;
+    var ua = navigator.userAgent || '';
+    var isAndroid = /Android/i.test(ua);
+    // iPadOS 13 이상은 데스크톱 Safari처럼 Mac으로 표시되므로 터치 지원으로 구분한다.
+    var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (isAndroid) location.replace(PLAY);
+    else if (isIOS) location.replace(APP_STORE);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .download{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 20px;background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%);text-align:center}
+  .download-card{max-width:440px;width:100%}
+  .download-card img{width:200px;height:200px;margin:0 auto 12px;display:block}
+  .download-card h1{font-family:'Gaegu',cursive;font-size:2.4rem;color:var(--navy);margin:0 0 8px}
+  .download-card p{color:var(--text-2);margin:0 0 28px;line-height:1.6}
+  .download-buttons{display:flex;flex-direction:column;gap:12px}
+  .download-buttons .btn{justify-content:center;width:100%;padding:14px 22px}
+  .download-home{display:inline-block;margin-top:24px;color:var(--text-2);font-size:.9rem}
+</style>
+</head>
+<body>
+<main class="download">
+  <div class="download-card">
+    <img src="../assets/kiki-reading.png" alt="책을 읽는 북끼끼 캐릭터 키키">
+    <h1>북끼끼 앱 받기</h1>
+    <p>우리 아이가 주인공인 영어 동화책을<br>지금 바로 만들어 보세요.</p>
+    <div class="download-buttons">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.bookkiki.app">Google Play에서 받기 (안드로이드)</a>
+      <a class="btn btn-secondary" href="https://apps.apple.com/kr/app/id6810455009">App Store에서 받기 (아이폰·아이패드)</a>
+    </div>
+    <a class="download-home" href="../">북끼끼 홈페이지 보기</a>
+  </div>
+</main>
+</body>
+</html>
