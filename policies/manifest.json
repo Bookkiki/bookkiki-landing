@@ -846,9 +846,7 @@
       "sha256": "eca03b8b717b56fbea30fc913b17151a5a82556dceedc3a123a2ef358b0fda06",
       "sourcePath": "ko-KR/policies/community-rules/2026-10-16/index.html",
       "publicPath": "/ko-KR/policies/community-rules/2026-10-16",
-      "aliases": [
-        "/ko-KR/policies/community-rules"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "optional_ai_story_generation_consent",
@@ -896,6 +894,19 @@
       "publicPath": "/ko-KR/policies/terms-of-use/2026-10-16",
       "aliases": [
         "/ko-KR/policies/terms-of-use"
+      ]
+    },
+    {
+      "termsCode": "community_rules",
+      "version": "2026-10-19",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-19",
+      "effectiveAt": "2026-10-19",
+      "sha256": "171f445af14451806d47c862d105e77aaf3028c74e19d047bf318856872b7ab6",
+      "sourcePath": "ko-KR/policies/community-rules/2026-10-19/index.html",
+      "publicPath": "/ko-KR/policies/community-rules/2026-10-19",
+      "aliases": [
+        "/ko-KR/policies/community-rules"
       ]
     }
   ]
