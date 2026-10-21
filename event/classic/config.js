@@ -5,7 +5,7 @@
  */
 window.EVENT_CONFIG = {
   // 구글폼 응답 링크 (예: https://forms.gle/xxxx 또는 https://docs.google.com/forms/d/e/.../viewform)
-  formUrl: "",
+  formUrl: "https://forms.gle/E6M2LTdFZdXUWuTX6",
 
   // 기존 고전 소개 릴스
   reelUrl: "https://www.instagram.com/p/DehQbUPP6es/",
