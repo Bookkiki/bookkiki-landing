@@ -121,7 +121,7 @@
     <button type="button" class="util back" id="backBtn">설문으로 돌아가기</button>
     <a class="util join-link" href="#join">참여 방법</a>
   </div>
-  <p class="hint" id="backHint">이 탭을 닫으면 작성하던 설문 탭이 그대로 있어요.</p>
+  <p class="hint" id="backHint" role="status">작성하던 설문 탭으로 돌아가 이어서 작성해주세요. 같은 탭에서 이동했다면 브라우저의 뒤로 가기를 이용해주세요.</p>
 </header>
 
 <main>
@@ -231,17 +231,29 @@
   var bq = document.querySelector('.instagram-media');
   if (bq && C.reelUrl) bq.setAttribute('data-instgrm-permalink', C.reelUrl);
 
-  // 구글폼 '자세히 보기'(?from=form)로 들어온 방문자: 헤더에 '설문으로 돌아가기'
+  // 답변·섹션을 유지하려면 폼 주소를 새로 열지 않고 작성하던 탭/방문 기록으로 돌아간다.
   if (params.get('from') === 'form') {
     document.body.classList.add('from-form');
     var btn = document.getElementById('backBtn'), hint = document.getElementById('backHint');
+    var fromGoogleForm = false;
+    try {
+      var referrer = new URL(document.referrer);
+      fromGoogleForm = referrer.protocol === 'https:' && (
+        (referrer.hostname === 'docs.google.com' && (referrer.pathname === '/' || referrer.pathname.indexOf('/forms/') === 0)) ||
+        referrer.hostname === 'forms.gle'
+      );
+    } catch (e) { /* 유입 경로가 없으면 원래 탭으로 돌아가도록 안내한다. */ }
+    var showReturnHint = function(){ hint.style.display = 'block'; };
     btn.addEventListener('click', function(){
-      if (history.length > 1 && document.referrer) { history.back(); return; }
-      window.close(); // 새 탭으로 열렸다면 닫기를 시도해요. 브라우저가 막으면 안내로 바꿔요.
-      setTimeout(function(){
-        hint.style.display = 'block';
-        if (C.formUrl) { btn.textContent = '설문 새로 열기'; btn.onclick = function(){ location.href = C.formUrl; }; }
-      }, 300);
+      if (!fromGoogleForm) { showReturnHint(); return; }
+      if (window.opener && !window.opener.closed) {
+        try { window.opener.focus(); } catch (e) { /* 포커스가 제한돼도 탭 닫기는 시도한다. */ }
+      } else if (history.length > 1) {
+        history.back();
+        return;
+      }
+      try { window.close(); } catch (e) { /* 닫기가 제한되면 원래 설문 탭을 안내한다. */ }
+      setTimeout(showReturnHint, 300);
     });
   }
 
