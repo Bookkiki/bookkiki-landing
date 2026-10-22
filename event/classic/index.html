@@ -245,13 +245,16 @@
     } catch (e) { /* 유입 경로가 없으면 원래 탭으로 돌아가도록 안내한다. */ }
     var showReturnHint = function(){ hint.style.display = 'block'; };
     btn.addEventListener('click', function(){
-      if (!fromGoogleForm) { showReturnHint(); return; }
       if (window.opener && !window.opener.closed) {
         try { window.opener.focus(); } catch (e) { /* 포커스가 제한돼도 탭 닫기는 시도한다. */ }
-      } else if (history.length > 1) {
+      } else if (fromGoogleForm && history.length > 1) {
         history.back();
         return;
+      } else if (history.length > 1) {
+        showReturnHint();
+        return;
       }
+      // noreferrer로 열린 새 탭은 유입 정보와 opener가 없어도 닫기를 시도할 수 있다.
       try { window.close(); } catch (e) { /* 닫기가 제한되면 원래 설문 탭을 안내한다. */ }
       setTimeout(showReturnHint, 300);
     });
