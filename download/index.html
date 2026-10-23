@@ -78,6 +78,15 @@
   .hero-media .mini{position:absolute;right:0;bottom:-18px;width:44%;background:#1E1E22;padding:5px;border-radius:24px;box-shadow:0 20px 40px -18px rgba(44,62,107,.6);transform:rotate(3deg)}
   .hero-media .mini .scr{border-radius:19px;overflow:hidden;background:var(--app);padding-top:4px}
 
+  .shelf{margin:58px 0 0;text-align:center}
+  .shelf .fan{position:relative;width:100%;max-width:400px;aspect-ratio:1/0.92;margin:0 auto}
+  .shelf .fan img{position:absolute;width:47%;height:auto;border-radius:16px;border:5px solid #fff;box-shadow:0 18px 34px -16px rgba(60,35,20,.45);background:#fff}
+  .shelf .c1{left:2%;top:0;transform:rotate(-5deg);z-index:1}
+  .shelf .c2{right:2%;top:16%;transform:rotate(4deg);z-index:2}
+  .shelf .c3{left:24%;bottom:0;transform:rotate(-1.5deg);z-index:3}
+  .shelf figcaption{margin-top:14px;font-size:.98rem;color:var(--muted);line-height:1.5}
+  .shelf figcaption b{color:var(--navy);font-weight:900}
+  .shelf + .facts{margin-top:36px}
   .facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .facts div{padding:16px 6px;text-align:center}
   .facts div+div{border-left:1px solid var(--line)}
@@ -159,6 +168,10 @@
     .sub{font-size:1.1rem}
     .hero-media{margin-top:0}
     .facts{grid-column:1/-1;margin-top:40px}
+    .shelf{grid-column:1/-1;margin-top:46px}
+    .shelf .fan{max-width:440px}
+    .shelf .m-br{display:none}
+    .shelf figcaption b::after{content:" · "}
     section.blk{padding:96px 0}
     .h2{font-size:2.4rem}
     .ways{grid-template-columns:repeat(3,1fr)}
@@ -206,6 +219,14 @@
       <div class="photo"><img src="../assets/download/review-book.webp" width="732" height="825" alt="고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream" fetchpriority="high"><span class="tag">실제 고객님 실물책 후기</span></div>
       <div class="mini"><div class="scr"><img src="../assets/download/reader.webp" width="800" height="1156" alt="앱에서 완성된 동화책을 읽는 화면: 아이가 주인공인 그림과 영어 문장 Seoyun made a blanket forest."></div></div>
     </div>
+    <figure class="shelf">
+      <div class="fan">
+        <img class="c1" src="../assets/download/shelf-oz.webp" width="720" height="720" alt="옛날 동화 표지: The Wonderful Wizard of Oz" decoding="async">
+        <img class="c2" src="../assets/download/shelf-cinderella.webp" width="720" height="720" alt="옛날 동화 표지: Cinderella" decoding="async">
+        <img class="c3" src="../assets/download/shelf-sunmoon.webp" width="720" height="720" alt="옛날 동화 표지: The Sun and the Moon" decoding="async">
+      </div>
+      <figcaption><b>옛날 동화 30권</b><br class="m-br"> 고른 이야기 속 주인공이 우리 아이가 돼요</figcaption>
+    </figure>
     <div class="facts">
       <div><b>3가지</b><span>만드는 방법</span></div>
       <div><b>30권</b><span>옛날 동화·고전</span></div>
@@ -221,7 +242,7 @@
     <p class="lead">앱에서 고르기만 하면 영어 동화책이 만들어져요.</p>
     <div class="ways">
       <div class="way w1"><img class="ic" src="../assets/download/icon-story.webp" width="200" height="200" alt="" loading="lazy"><span class="no">01</span><h3>아이 이야기</h3><p>키키와 이야기 나누고, 아이가 직접 만든 이야기로 동화책을 만들어요.</p><figure class="shot"><div class="card"><img src="../assets/download/interview.webp" width="800" height="594" loading="lazy" decoding="async" alt="키키 인터뷰 실제 앱 화면: 키키가 돌고래가 어떻게 생겼는지 묻고, 아이가 회색이고 웃는 얼굴이라 방울이라고 이름 지었다고 답하는 대화"></div><figcaption>실제 앱 화면 · 키키가 묻고 아이가 답해요</figcaption></figure></div>
-      <div class="way w2"><img class="ic" src="../assets/download/icon-classic.webp" width="200" height="200" alt="" loading="lazy"><span class="no">02</span><h3>옛날 동화·고전</h3><p>흥부와 놀부부터 세계 명작까지, 아이가 명작 동화 속 주인공이 돼요.</p><div class="covers" aria-hidden="true"><img src="../assets/download-cover-cinderella.jpg" width="480" height="480" loading="lazy" decoding="async" alt=""><img src="../assets/download-cover-oz.jpg" width="480" height="480" loading="lazy" decoding="async" alt=""><img src="../assets/download-cover-sunmoon.jpg" width="480" height="480" loading="lazy" decoding="async" alt=""></div>
+      <div class="way w2"><img class="ic" src="../assets/download/icon-classic.webp" width="200" height="200" alt="" loading="lazy"><span class="no">02</span><h3>옛날 동화·고전</h3><p>흥부와 놀부부터 세계 명작까지, 아이가 명작 동화 속 주인공이 돼요.</p><div class="covers" aria-hidden="true"><img src="../assets/download/w2-kongjwi-and-patjwi.webp" width="480" height="480" loading="lazy" decoding="async" alt=""><img src="../assets/download/w2-little-red-riding-hood.webp" width="480" height="480" loading="lazy" decoding="async" alt=""><img src="../assets/download/w2-tortoise-and-hare.webp" width="480" height="480" loading="lazy" decoding="async" alt=""></div>
       </div>
       <div class="way w3"><img class="ic" src="../assets/download/icon-diary.webp" width="200" height="200" alt="" loading="lazy"><span class="no">03</span><h3>아이의 일기·글</h3><p>일기를 사진으로 찍거나 직접 입력하면, 아이의 하루를 영어 동화책으로 간직해요.</p><figure class="shot"><div class="card fade"><img src="../assets/download/diary.webp" width="800" height="740" loading="lazy" decoding="async" alt="아이의 일기 실제 앱 화면: 손글씨 일기 사진을 읽어 맞춤법을 다듬은 글로 보여 주고, 이름과 날짜에 밑줄을 쳐 확인을 돕는 화면"></div><figcaption>실제 앱 화면 · 손글씨 일기를 읽어 글로 옮겨요</figcaption></figure></div>
     </div>
