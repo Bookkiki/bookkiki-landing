@@ -23,6 +23,9 @@
     var APP_STORE = 'https://apps.apple.com/kr/app/id6810455009';
     if (/[?&]stay=1/.test(location.search)) return;
     var ua = navigator.userAgent || '';
+    // 인스타·페북·카톡 등 앱 안 브라우저에서는 스토어 주소로 넘기면 빈 흰 화면이 된다.
+    // 그래서 이동하지 않고 이 페이지(스토어 버튼)를 보여 주고, 버튼을 누르면 스토어 앱이 열린다.
+    if (/Instagram|FBAN|FBAV|FB_IAB|FBIOS|KAKAOTALK|NAVER\(inapp|Line\/|Threads|Barcelona/i.test(ua)) return;
     var isAndroid = /Android/i.test(ua);
     // iPadOS 13 이상은 데스크톱 Safari처럼 Mac으로 표시되므로 터치 지원으로 구분한다.
     var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
