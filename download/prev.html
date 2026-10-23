@@ -71,13 +71,23 @@
   .store svg{width:19px;height:19px;flex:none}
 
   /* nav */
-  .nav{position:relative;z-index:2;max-width:1080px;margin:0 auto;height:60px;padding-inline:20px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;letter-spacing:-.2px}
-  .brand img{width:30px;height:30px}
-  .util{display:inline-flex;align-items:center;min-height:34px;padding:4px 14px;border:1px solid rgba(0,0,0,.08);border-radius:9999px;font-size:14px;font-weight:600;color:var(--ink2);background:rgba(255,255,255,.7)}
+  .nav-wrap{position:relative;z-index:40;padding:10px 12px 0}
+  .nav{position:relative;max-width:820px;margin:0 auto;height:54px;padding:0 7px 0 14px;display:flex;align-items:center;gap:8px;border-radius:9999px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);box-shadow:0 6px 24px -12px rgba(60,40,70,.25)}
+  .brand{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;letter-spacing:-.2px;margin-right:auto}
+  .brand img{width:28px;height:28px}
+  .nav-links{display:none}
+  .nav-links a{display:block;padding:8px 14px;border-radius:9999px;font-size:15px;font-weight:600;color:var(--ink2)}
+  .nav-links a:hover{background:rgba(0,0,0,.05)}
+  .nav-cta{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:9999px;background:#1d1b19;color:#fff;font-size:14px;font-weight:600;white-space:nowrap}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ink2)}
+  .menu-btn svg{width:22px;height:22px}
+  .nav.open .nav-links{display:block;position:absolute;left:0;right:0;top:62px;padding:8px;border-radius:20px;background:#fff;border:1px solid var(--hairline);box-shadow:0 18px 40px -20px rgba(60,40,70,.35)}
+  .nav.open .nav-links a{padding:12px 14px;font-size:16px}
+  .top{margin-top:-64px;padding-top:64px}
+  #how,#compare,#reviews,#benefit,#get{scroll-margin-top:20px}
 
   /* hero */
-  .top{position:relative;overflow:hidden;background:
+  .top{position:relative;background:
     radial-gradient(60% 55% at 18% 8%,rgba(255,206,222,.75),rgba(255,206,222,0) 70%),
     radial-gradient(55% 50% at 86% 14%,rgba(222,212,255,.8),rgba(222,212,255,0) 70%),
     radial-gradient(70% 60% at 50% 62%,rgba(255,226,204,.65),rgba(255,226,204,0) 72%),
@@ -126,8 +136,8 @@
   .rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(8%,calc((100% - 460px)/2)) 12px;scrollbar-width:none;max-width:980px;margin:0 auto}
   .rail::-webkit-scrollbar{display:none}
   .rail figure{flex:0 0 84%;max-width:460px;margin:0;scroll-snap-align:center;background:var(--surface);border:1px solid var(--hairline);border-radius:12px;overflow:hidden}
-  .rail .pic{aspect-ratio:4/5;background:var(--app);display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .rail .pic img{width:100%;height:100%;object-fit:contain}
+  .rail .pic{aspect-ratio:4/5;background:var(--app);overflow:hidden}
+  .rail .pic img{width:100%;height:100%;object-fit:cover}
   .rail figcaption{padding:12px 16px 14px;font-size:15px;font-weight:600;color:var(--ink)}
   .dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
   .dots i{width:6px;height:6px;border-radius:9999px;background:#d6d3cf;transition:width .25s,background .25s}
@@ -135,7 +145,7 @@
 
   /* 고객님 후기 (clipspray #how 형태) */
   .rv-box{display:grid;gap:24px;max-width:880px;margin:0 auto}
-  .rv-media{position:relative;display:block;width:min(100%,340px);margin:0 auto;aspect-ratio:9/13;border-radius:24px;overflow:hidden;background:#222;box-shadow:0 30px 60px -30px rgba(30,20,10,.55)}
+  .rv-media{position:relative;display:block;width:min(100%,340px);margin:0 auto;aspect-ratio:732/825;border-radius:24px;overflow:hidden;background:#222;box-shadow:0 30px 60px -30px rgba(30,20,10,.55)}
   .rv-media img,.rv-media video{width:100%;height:100%;object-fit:cover;display:block}
   .rv-media::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.35));pointer-events:none}
   .rv-media .play{position:absolute;left:50%;top:50%;z-index:1;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:9999px;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45)}
@@ -151,7 +161,7 @@
   .rv-thumbs{max-width:880px;margin:36px auto 0}
   .rv-thumbs p{font-size:14px;color:var(--muted)}
   .rv-thumbs ul{display:flex;gap:10px;overflow-x:auto;margin-top:10px;padding-bottom:4px;scrollbar-width:none}
-  .rv-thumbs button{flex:none;width:76px;aspect-ratio:9/13;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:none;cursor:pointer;opacity:.7}
+  .rv-thumbs button{flex:none;width:76px;aspect-ratio:732/825;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:none;cursor:pointer;opacity:.7}
   .rv-thumbs button[aria-current="true"]{border-color:var(--coral);opacity:1}
   .rv-thumbs img{width:100%;height:100%;object-fit:cover}
 
@@ -169,7 +179,14 @@
   .bar .store svg{width:17px;height:17px}
 
   @media (min-width:900px){
-    .nav{height:72px}
+    .nav-wrap{position:sticky;top:0;padding-top:14px}
+    .nav{height:58px;padding-left:18px}
+    .brand{margin-right:0;flex:1}
+    .nav-links{display:flex;gap:2px;flex:none}
+    .nav-cta-wrap{flex:1;display:flex;justify-content:flex-end}
+    .menu-btn{display:none}
+    .top{margin-top:-72px;padding-top:72px}
+    #how,#compare,#reviews,#benefit,#get{scroll-margin-top:90px}
     section{padding-block:104px}
     .hero{padding-top:56px;padding-bottom:64px}
     .hero .sub{font-size:18px}
@@ -188,17 +205,23 @@
 </style>
 </head>
 <body>
-<div class="top">
-  <header class="nav">
+<header class="nav-wrap">
+  <nav class="nav" id="nav" aria-label="페이지 메뉴">
     <a class="brand" href="../"><img src="../assets/logo.svg" alt="">북끼끼</a>
-    <a class="util" href="#reviews">고객님 후기</a>
-  </header>
+    <div class="nav-links" id="navLinks">
+      <a href="#how">기능</a><a href="#compare">차별점</a><a href="#reviews">후기</a><a href="#benefit">혜택</a>
+    </div>
+    <div class="nav-cta-wrap"><a class="nav-cta" id="navCta" href="#get">앱 받기</a></div>
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </nav>
+</header>
+<div class="top">
   <section class="hero">
     <div class="wrap">
       <h1><em>우리 아이가<br>주인공</em>인<br>영어 동화책</h1>
       <p class="sub">아이 수준에 맞춘 영어로, <br>아이가 주인공인 동화책을 만들어요</p>
       <div class="stores" id="heroStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></div>
-      <aside class="promo" aria-label="진행 중인 혜택">
+      <aside class="promo" id="benefit" aria-label="진행 중인 혜택">
         <p class="promo-h"><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span></p>
         <ul>
           <li><span class="t">동화책 최대 4권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span><span class="free">무료</span></li>
@@ -208,13 +231,13 @@
     </div>
   </section>
   <figure class="pile wrap">
-    <div class="ph"><img src="../assets/download/books-pile.webp" srcset="../assets/download/books-pile-720.webp 720w, ../assets/download/books-pile.webp 1200w" sizes="(min-width:900px) 720px, calc(100vw - 40px)" width="1200" height="900" decoding="async" alt="나무 테이블 위에 펼쳐 놓은 북끼끼 옛날 동화 하드커버 책들: The Sun and the Moon, Heungbu and Nolbu, Cinderella, The Wonderful Wizard of Oz, Kongjwi and Patjwi, Little Red Riding Hood, The Rabbit and the Dragon King, The Tortoise and the Hare, The Ugly Duckling, The Secret Garden, The Golden Axe"></div>
+    <div class="ph"><img src="../assets/download/books-shelf-v2.webp" srcset="../assets/download/books-shelf-v2-720.webp 720w, ../assets/download/books-shelf-v2.webp 1200w" sizes="(min-width:900px) 720px, calc(100vw - 40px)" width="1200" height="800" decoding="async" alt="창가 리넨 테이블 위에 놓인 북끼끼 옛날 동화 하드커버 책들(오즈의 마법사, 빨간 모자, 흥부와 놀부, 해님 달님, 비밀의 화원)과 펼쳐진 오즈의 마법사: 회오리바람에 날아가는 집 그림과 영어 문장 Seoyun lives in Kansas with Toto."></div>
     <figcaption><b>옛날 동화 30권</b> · 고른 이야기 속 주인공이 우리 아이가 돼요</figcaption>
   </figure>
 </div>
 
 <main>
-<section>
+<section id="compare">
   <div class="wrap">
     <div class="head">
       <p class="kicker">차별점</p>
@@ -239,14 +262,14 @@
           <li><i aria-hidden="true">✓</i>그림 속 주인공도 우리 아이 모습, 장면마다 같은 모습으로</li>
           <li><i aria-hidden="true">✓</i>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</li>
           <li><i aria-hidden="true">✓</i>내 이야기라서 영어를 즐겁게 여겨요</li>
-          <li><i aria-hidden="true">✓</i>실물 하드커버로 받아 아이 있는 집 선물로도 좋아요</li>
+          <li><i aria-hidden="true">✓</i>실물 하드커버 책으로 받아 아이 있는 집 선물로도 좋아요</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="canvas">
+<section class="canvas" id="how">
   <div class="wrap">
     <div class="head">
       <p class="kicker">만드는 방법 3가지</p>
@@ -260,29 +283,35 @@
   </div>
   <div class="flow-panel" role="tabpanel" id="p-classic" aria-labelledby="t-classic">
     <div class="rail" aria-label="옛날 동화·고전 순서">
-      <figure><div class="pic"><img src="../assets/download/flow-oz-shelf.webp" width="800" height="1000" loading="lazy" decoding="async" alt="옛날 동화·고전 책장 화면: 전체 30권, 이상한 나라의 앨리스와 오즈의 마법사(추천 나이 5-9세)"></div><figcaption>옛날 동화·고전 30권 중 고르고</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-oz-detail.webp" width="800" height="879" loading="lazy" decoding="async" alt="오즈의 마법사 소개 화면: 추천 5-9세, 우리 아이 나이에 딱, 줄거리"></div><figcaption>줄거리와 추천 나이를 확인하고</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-oz-roles.webp" width="800" height="1000" loading="lazy" decoding="async" alt="오즈의 마법사 등장인물 카드: 도로시, 허수아비, 양철 나무꾼, 겁쟁이 사자, 모두 우리 아이가 될 수 있어요"></div><figcaption>도로시도, 사자도… 아이가 맡을 역할을 정하고</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-oz-change.webp" width="800" height="1273" loading="lazy" decoding="async" alt="바꿔서 만들기 화면: 우리 아이는 누가 될까요? 도로시, 토토, 허수아비, 양철 나무꾼, 겁쟁이 사자, 그리고 바꿀 내용을 1,400자까지 적는 칸"></div><figcaption>‘바꿔서 만들기’로 내용·결말도 원하는 대로</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-oz-level.webp" width="800" height="1000" loading="lazy" decoding="async" alt="이런 영어로 쓰여요 화면: 오즈의 마법사 6단계 영어 Seoyun lives in Kansas with Toto. 더 쉽게·더 어렵게 버튼"></div><figcaption>아이 수준 영어로, 더 쉽게·어렵게도</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-classic-reader.webp" width="800" height="1591" loading="lazy" decoding="async" alt="완성된 고전 동화책 읽기 화면: 동화 읽기 버튼과 한/A 번역 버튼"></div><figcaption>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="옛날 동화·고전 책장 화면: 전체 30권 중 오즈의 마법사(추천 나이 5-9세)"></div><figcaption>옛날 동화·고전 30권 중에 고르고</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="오즈의 마법사 등장인물 카드: 도로시, 허수아비, 양철 나무꾼, 겁쟁이 사자, 모두 우리 아이가 될 수 있어요"></div><figcaption>도로시도, 사자도… 주인공도 조연도 아이가 골라요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="바꿔서 만들기 화면: 역할 고르기와 바꿀 내용을 1,400자까지 적는 칸"></div><figcaption>‘바꿔서 만들기’로 내용·결말도 원하는 대로</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="이런 영어로 쓰여요 화면: 오즈의 마법사 6단계 영어와 더 쉽게·더 어렵게 버튼"></div><figcaption>아이 수준 영어로, 더 쉽게·어렵게도</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 오즈의 마법사 동화책 앞표지 화면: 지은이 서윤"></div><figcaption>우리 아이가 주인공인 오즈의 마법사 완성</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="오즈의 마법사 읽기 화면: Seoyun lives in Kansas with Toto. A big wind comes. Whoosh! Up flies the house! 동화 읽기 버튼"></div><figcaption>‘동화 읽기’를 누르면 영어로 읽어 줘요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-classic-7.webp" width="800" height="1000" loading="lazy" decoding="async" alt="오즈의 마법사 한국어 번역 화면: 서윤이는 캔자스에서 토토랑 살아요. 큰 바람이 불어요. 휘익! 집이 하늘로 날아올라요! 한/A 버튼"></div><figcaption>한/A 버튼 하나로 한국어 번역도 바로 봐요</figcaption></figure>
     </div>
     <div class="dots" aria-hidden="true"></div>
   </div>
   <div class="flow-panel" role="tabpanel" id="p-story" aria-labelledby="t-story" hidden>
     <div class="rail" aria-label="아이 이야기 순서">
-      <figure><div class="pic"><img src="../assets/download/flow-story-interview.webp" width="800" height="1212" loading="lazy" decoding="async" alt="키키와 이야기 화면: 키키가 묻고 아이가 눌러서 말하기로 답하는 화면"></div><figcaption>키키가 묻고, 아이가 말로 답하면</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-shelf.webp" width="800" height="1006" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 영어 동화책들"></div><figcaption>아이 수준 영어로 동화책이 완성돼요</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-reader.webp" width="800" height="1545" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: Seoyun made a blanket forest. 동화 읽기 버튼과 한/A 번역 버튼"></div><figcaption>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-story-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="키키와 이야기 시작 화면: 1단계 키키와 이야기, 2단계 그림체 고르기, 3단계 약 10분 뒤 책 완성"></div><figcaption>키키와 이야기 → 그림체 고르기 → 약 10분 뒤 완성</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-story-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="키키가 묻고 아이가 눌러서 말하기로 답하는 화면"></div><figcaption>키키가 묻고, 아이가 말로 답해요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-story-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="지금까지 나눈 이야기 화면: 말로 하기 어려울 때 글로 써서 보내기"></div><figcaption>말로 하기 어려우면 글로 써도 돼요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-story-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 Seoyun and the Five Crowns"></div><figcaption>아이 수준 영어로 동화책 완성</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-story-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: Seoyun made a blanket forest. 동화 읽기 버튼"></div><figcaption>‘동화 읽기’를 누르면 영어로 읽어 줘요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-story-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="한국어 번역 화면: 서윤은 이불 숲을 만들었어요. 한/A 버튼"></div><figcaption>한/A 버튼 하나로 한국어 번역도 바로 봐요</figcaption></figure>
     </div>
     <div class="dots" aria-hidden="true"></div>
   </div>
   <div class="flow-panel" role="tabpanel" id="p-diary" aria-labelledby="t-diary" hidden>
     <div class="rail" aria-label="아이의 일기·글 순서">
-      <figure><div class="pic"><img src="../assets/download/flow-diary-input.webp" width="800" height="1145" loading="lazy" decoding="async" alt="아이의 일기·글 화면: 사진으로 가져오기와 직접 입력하기"></div><figcaption>일기를 사진으로 찍거나 입력하고</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-diary-edit.webp" width="800" height="1170" loading="lazy" decoding="async" alt="읽은 글 확인하기 화면: 손글씨 일기를 읽어 다듬은 글, 고치거나 덧붙일 수 있는 칸"></div><figcaption>읽어 들인 글을 고치고, 더하고 싶은 내용도</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-shelf.webp" width="800" height="1006" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 영어 동화책들"></div><figcaption>아이 수준 영어로 동화책이 완성돼요</figcaption></figure>
-      <figure><div class="pic"><img src="../assets/download/flow-reader.webp" width="800" height="1545" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: 동화 읽기 버튼과 한/A 번역 버튼"></div><figcaption>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-diary-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="아이의 일기·글 화면: 사진으로 가져오기와 직접 입력하기"></div><figcaption>일기를 사진으로 가져오거나 직접 입력하고</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-diary-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="사진 찍기와 앨범에서 고르기 선택 화면"></div><figcaption>손글씨 일기를 바로 찍어도 돼요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-diary-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="읽은 글 확인하기 화면: 손글씨 일기를 읽어 다듬은 글을 고치거나 덧붙이는 칸"></div><figcaption>읽어 들인 글을 고치고, 더하고 싶은 내용도</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-diary-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 영어 동화책"></div><figcaption>아이 수준 영어로 동화책 완성</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-diary-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: 동화 읽기 버튼"></div><figcaption>‘동화 읽기’를 누르면 영어로 읽어 줘요</figcaption></figure>
+      <figure><div class="pic"><img src="../assets/download/slide-diary-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="한국어 번역 화면: 한/A 버튼"></div><figcaption>한/A 버튼 하나로 한국어 번역도 바로 봐요</figcaption></figure>
     </div>
     <div class="dots" aria-hidden="true"></div>
   </div>
@@ -306,7 +335,7 @@
   </div>
 </section>
 
-<section class="final canvas">
+<section class="final canvas" id="get">
   <div class="wrap">
     <img class="kiki" src="../assets/download/kiki.webp" width="360" height="360" alt="" loading="lazy">
     <h2>우리 아이가 주인공인<br>첫 영어 동화책</h2>
@@ -379,7 +408,7 @@
     }
     if (REVIEWS.length) render(0);
 
-    // 만드는 방법: 탭마다 화면 캐러셀 (event/classic 과 같은 방식 — 1.6초마다 넘김, 손대면 4초 쉼)
+    // 만드는 방법: 탭마다 화면 캐러셀 (event/classic 과 같은 방식 — 3초마다 넘김, 손대면 4초 쉼)
     function carousel(rail, dots){
       var figs = rail.querySelectorAll('figure'), cur = 0, pauseUntil = 0, animating = false, visible = false;
       figs.forEach(function(){ dots.appendChild(document.createElement('i')); });
@@ -411,7 +440,7 @@
       if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) setInterval(function(){
         if (!visible || document.hidden || animating || Date.now() < pauseUntil) return;
         go(cur + 1);
-      }, 1600);
+      }, 3000);
       return { reset: function(){ cur = 0; rail.scrollLeft = 0; pauseUntil = Date.now() + 1200; mark(); } };
     }
     var flows = {};
@@ -432,6 +461,14 @@
         if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus(); }
       });
     });
+
+    // 상단 메뉴: 모바일은 메뉴 버튼으로 열고 닫음, '앱 받기'는 기기에 맞는 스토어로
+    var nav = document.getElementById('nav'), menuBtn = document.getElementById('menuBtn');
+    menuBtn.addEventListener('click', function(){ var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+    [].forEach.call(document.querySelectorAll('#navLinks a'), function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
+    var ua = navigator.userAgent || '', cta = document.getElementById('navCta');
+    if (/Android/i.test(ua)) cta.href = 'https://play.google.com/store/apps/details?id=com.bookkiki.app';
+    else if (/iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) cta.href = 'https://apps.apple.com/kr/app/id6810455009';
 
     // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
     var bar = document.getElementById('bar'), hero = document.getElementById('heroStores'), end = document.getElementById('endStores');
