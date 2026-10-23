@@ -35,300 +35,403 @@
     else if (isIOS) location.replace(APP_STORE);
   })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  :root{--cream:#FFF8EE;--app:#FCF6EF;--navy:#2C3E6B;--coral:#D9614F;--ink:#2A1A12;--muted:#6B5444;--line:#EEE2D2;--soft:#FBF4EA}
+  :root{
+    --canvas:#f6f5f4;--surface:#fff;--hairline:#e7e4e0;--app:#FCF6EF;
+    --ink:#1d1a17;--ink2:#36312c;--muted:#6b655e;--coral:#D9614F;
+    --r:16px;
+    --shadow:rgba(0,0,0,.01) 0 .175px 1.041px,rgba(0,0,0,.02) 0 .8px 2.925px,rgba(0,0,0,.027) 0 2.025px 7.847px,rgba(0,0,0,.04) 0 4px 18px;
+  }
   *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:#fff;color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.6;word-break:keep-all;overflow-x:hidden}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;background:var(--surface);color:var(--ink);font-family:Pretendard,-apple-system,system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
   img{max-width:100%;height:auto;display:block}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-  .kicker{font-size:.85rem;font-weight:900;color:var(--coral);letter-spacing:.3px;margin:0 0 8px}
+  h1,h2,h3,p,ul,figure{margin:0}
+  ul{padding:0;list-style:none}
+  .wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
 
-  header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;max-width:1100px;margin:0 auto}
-  .brand{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--navy)}
+  /* nav */
+  .nav{max-width:1080px;margin:0 auto;height:60px;padding-inline:20px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;letter-spacing:-.2px}
   .brand img{width:30px;height:30px}
-  header a.rv{display:inline-flex;align-items:center;gap:5px;font-size:.92rem;font-weight:700;color:var(--ink)}
-  header a.rv svg{width:17px;height:17px}
+  .util{display:inline-flex;align-items:center;min-height:34px;padding:4px 14px;border:1px solid var(--hairline);border-radius:9999px;font-size:14px;font-weight:600;color:var(--ink2);background:var(--surface)}
+
+  /* type */
+  .kicker{font-size:14px;font-weight:700;color:var(--coral);letter-spacing:.2px}
+  h1{font-size:clamp(36px,9.6vw,56px);font-weight:800;line-height:1.18;letter-spacing:-.04em}
+  h1 em{font-style:normal;color:var(--coral)}
+  h2{font-size:clamp(26px,7vw,38px);font-weight:700;line-height:1.28;letter-spacing:-.035em;margin-top:8px}
+  .lead{font-size:16px;color:var(--muted);margin-top:12px}
+  section{padding-block:64px}
+  .canvas{background:var(--canvas)}
+  .head{margin-bottom:28px}
+
+  /* stores */
+  .stores{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:400px}
+  .store{display:flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 10px;border-radius:12px;background:#111;color:#fff;transition:transform .08s}
+  .store:active{transform:scale(.97)}
+  .store svg{width:24px;height:24px;flex:none}
+  .store small{display:block;font-size:10.5px;font-weight:500;opacity:.85;line-height:1.1}
+  .store b{display:block;font-size:17px;font-weight:600;line-height:1.2;white-space:nowrap}
 
   /* hero */
-  .hero{position:relative;overflow:hidden;padding:8px 0 36px}
-  .hero::before{content:"";position:absolute;inset:-10% -30% auto auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,190,165,.55),rgba(255,190,165,0) 65%);z-index:-1}
-  .hero::after{content:"";position:absolute;left:-200px;top:380px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(205,195,247,.5),rgba(205,195,247,0) 65%);z-index:-1}
-  .hero h1{margin:0;font-size:2.3rem;line-height:1.25;font-weight:900;letter-spacing:-1.2px}
-  .hero h1 em{font-style:normal;color:var(--coral)}
-  .chips{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
-  .chips li{background:var(--navy);color:#fff;font-weight:700;font-size:.88rem;line-height:1.3;padding:7px 12px;border-radius:10px}
-  .sub{margin:14px 0 0;color:var(--muted)}
-  .sub .q{font-weight:700;color:var(--ink)}
-  .sub b{color:var(--coral);font-weight:900;white-space:nowrap}
-  .stores{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px}
-  .store{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:14px;background:#111;color:#fff}
-  .store svg{width:26px;height:26px;flex:0 0 auto}
-  .store span{text-align:left}
-  .store small{display:block;font-size:11px;font-weight:500;opacity:.85;line-height:1.1}
-  .store b{display:block;font-size:18px;font-weight:700;line-height:1.2;white-space:nowrap}
+  .hero{padding-top:12px;padding-bottom:56px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+  .chips li{padding:6px 12px;border:1px solid var(--hairline);border-radius:9999px;font-size:14px;font-weight:600;color:var(--ink2);line-height:1.35}
+  .sub{margin-top:14px;font-size:15px;color:var(--muted)}
+  .sub b{color:var(--ink);font-weight:700}
+  .hero .stores{margin-top:22px}
 
-  .hero-media{position:relative;margin-top:30px;padding-right:22%}
-  .hero-media .photo{border-radius:26px;overflow:hidden;box-shadow:0 24px 50px -26px rgba(60,35,20,.55);position:relative}
-  .hero-media .photo img{width:100%;aspect-ratio:4/4.2;object-fit:cover;object-position:50% 35%}
-  .tag{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.92);font-size:.8rem;font-weight:700;padding:5px 10px;border-radius:999px}
-  .hero-media .mini{position:absolute;right:0;bottom:-18px;width:44%;background:#1E1E22;padding:5px;border-radius:24px;box-shadow:0 20px 40px -18px rgba(44,62,107,.6);transform:rotate(3deg)}
-  .hero-media .mini .scr{border-radius:19px;overflow:hidden;background:var(--app);padding-top:4px}
+  .promo{margin-top:14px;max-width:400px;border:1px solid var(--hairline);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow);padding:16px 18px 6px}
+  .promo-h{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;letter-spacing:-.2px}
+  .promo-h .tag{flex:none;padding:2px 8px;border-radius:9999px;background:var(--coral);color:#fff;font-size:12px;font-weight:700}
+  .promo-h em{font-style:normal;color:var(--coral)}
+  .promo li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--hairline)}
+  .promo li:first-child{margin-top:12px}
+  .promo .n{flex:none;width:22px;height:22px;border-radius:9999px;background:var(--canvas);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink2)}
+  .promo .t{flex:1;min-width:0;font-size:15px;font-weight:600;line-height:1.4}
+  .promo .t small{display:block;font-size:13px;font-weight:400;color:var(--muted)}
+  .promo s{color:var(--muted);font-weight:400;font-size:14px}
+  .promo strong{color:var(--coral);font-weight:700}
+  .promo .off{flex:none;font-size:13px;font-weight:700;color:var(--coral);background:#FCEDEA;border-radius:8px;padding:3px 8px}
 
-  /* 혜택 카드 */
-  .promo{margin-top:18px;max-width:420px;background:radial-gradient(90% 80% at 100% 0%,#40568F,rgba(64,86,143,0) 70%),var(--navy);color:#fff;border-radius:20px;padding:16px 16px 14px;box-shadow:0 16px 30px -18px rgba(44,62,107,.7)}
-  .promo-h{margin:0 0 12px;display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:900;line-height:1.35;letter-spacing:-.3px}
-  .promo-h .tag2{flex:0 0 auto;background:var(--coral);color:#fff;font-size:.74rem;font-weight:900;padding:3px 8px;border-radius:999px;letter-spacing:0}
-  .promo-h b{color:#FFB4A3;font-weight:900}
-  .promo ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-  .promo li{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border-radius:14px;padding:10px 12px}
-  .promo .n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#FFF8EE;color:var(--navy);font-size:.82rem;font-weight:900;display:flex;align-items:center;justify-content:center}
-  .promo .t{flex:1 1 auto;min-width:0;line-height:1.35}
-  .promo .t b{display:block;font-size:1rem;font-weight:900}
-  .promo .t span{display:block;font-size:.82rem;color:rgba(255,255,255,.78)}
-  .promo .t .price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 6px;font-size:1rem;font-weight:900;color:#fff}
-  .promo .price s{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6)}
-  .promo .price strong{font-size:1.2rem;color:#FFB4A3;font-weight:900}
-  .promo .off{flex:0 0 auto;background:var(--coral);color:#fff;font-style:normal;font-size:.8rem;font-weight:900;line-height:1.2;padding:6px 8px;border-radius:10px;text-align:center}
+  .pile{margin-top:40px}
+  .pile .ph{border-radius:var(--r);overflow:hidden;background:var(--canvas)}
+  .pile figcaption{margin-top:12px;font-size:15px;color:var(--muted)}
+  .pile figcaption b{color:var(--ink);font-weight:700}
 
-  .shelf{margin:58px 0 0;text-align:center}
-  .shelf .pile{max-width:760px;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:0 22px 44px -24px rgba(60,35,20,.6)}
-  .shelf .pile img{width:100%}
-  .shelf figcaption{margin-top:14px;font-size:.98rem;color:var(--muted);line-height:1.5}
-  .shelf figcaption b{color:var(--navy);font-weight:900}
-  .shelf + .facts{margin-top:36px}
-  .facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:70px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .facts div{padding:16px 6px;text-align:center}
-  .facts div+div{border-left:1px solid var(--line)}
-  .facts b{display:block;font-size:1.25rem;font-weight:900;color:var(--navy);line-height:1.2}
-  .facts span{font-size:.8rem;color:var(--muted)}
+  /* carousel */
+  .rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px max(20px,calc((100% - 400px)/2)) 10px;max-width:1080px;margin:0 auto}
+  .rail::-webkit-scrollbar{display:none}
+  .rail>*{flex:0 0 min(84%,400px);scroll-snap-align:center}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+  .dots i{width:6px;height:6px;border-radius:9999px;background:#d6d2cd;transition:width .25s,background .25s}
+  .dots i.on{width:18px;background:var(--ink2)}
 
-  section.blk{padding:60px 0}
-  .soft{background:var(--soft)}
-  .h2{margin:0 0 8px;font-size:1.75rem;line-height:1.32;font-weight:900;letter-spacing:-.7px}
-  .lead{margin:0 0 26px;color:var(--muted)}
+  /* 만드는 방법 3가지: 탭 + 단계 캐러셀 */
+  .tabs{display:flex;gap:4px;padding:4px;border-radius:9999px;background:var(--surface);border:1px solid var(--hairline);max-width:400px;margin:0 auto}
+  .tabs button{flex:1;min-height:42px;border:0;border-radius:9999px;background:transparent;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;padding:0 4px;white-space:nowrap}
+  .tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+  .flow-panel{margin-top:22px}
+  .flow-panel[hidden]{display:none}
+  .flow{padding-inline:max(20px,calc((100% - min(72%,280px))/2))}
+  .flow>*{flex-basis:min(72%,280px)}
+  .scr-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r);overflow:hidden}
+  .scr-card .pic{aspect-ratio:4/5;background:var(--app);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .scr-card .pic>img{width:100%;height:100%;object-fit:contain}
+  .scr-card .lv{display:flex;flex-direction:column;justify-content:center;gap:10px;width:100%;height:100%;padding:0 4%}
+  .scr-card .lv .crop{aspect-ratio:800/444;overflow:hidden}
+  .scr-card .lv .crop img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+  .scr-card figcaption{display:flex;gap:10px;align-items:baseline;padding:14px 16px 16px;border-top:1px solid var(--hairline)}
+  .scr-card figcaption small{flex:none;font-size:13px;font-weight:700;color:var(--coral)}
+  .scr-card figcaption b{font-size:15px;font-weight:600;line-height:1.45;letter-spacing:-.01em}
 
-  .ways{display:grid;gap:14px}
-  .way{border-radius:26px;padding:22px 20px;position:relative;overflow:hidden}
-  .way .ic{width:60px;height:60px;border-radius:16px;box-shadow:0 6px 14px -8px rgba(80,45,20,.4)}
-  .way .no{position:absolute;right:20px;top:16px;font-size:2.4rem;font-weight:900;color:rgba(44,62,107,.12);line-height:1}
-  .way h3{margin:14px 0 4px;font-size:1.3rem;font-weight:900}
-  .way p{margin:0;color:var(--muted);font-size:.95rem}
-  .w1{background:#FFF1D6}.w2{background:#EEEAF8}.w3{background:#E8F4EC}
-  .gal{display:grid;grid-auto-flow:column;grid-auto-columns:64%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:18px -20px 0;padding:0 20px 6px;scrollbar-width:none}
-  .gal::-webkit-scrollbar{display:none}
-  .gal figure{margin:0;scroll-snap-align:start}
-  .gal .card{border-radius:18px;overflow:hidden;background:var(--app);box-shadow:0 12px 26px -16px rgba(44,62,107,.5)}
-  .gal figcaption{margin-top:7px;font-size:.82rem;font-weight:700;color:var(--navy)}
-  .shot{margin:16px 0 0}
-  .shot .card{border-radius:16px;overflow:hidden;background:var(--app);box-shadow:0 12px 26px -16px rgba(44,62,107,.5)}
-  .shot figcaption{margin-top:7px;font-size:.82rem;font-weight:700;color:var(--navy)}
-  .covers{display:none}
-  .fade{position:relative}
-  .fade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(rgba(252,246,239,0),var(--app) 95%)}
+  /* 고객님 후기 */
+  .rv-box{display:grid;gap:20px;max-width:400px;margin:0 auto}
+  .rv-main{position:relative;display:block;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:#222;box-shadow:var(--shadow)}
+  .rv-main img,.rv-main video{width:100%;height:100%;object-fit:cover;display:block}
+  .rv-main .play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:9999px;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px -8px rgba(0,0,0,.45)}
+  .rv-main .play svg{width:24px;height:24px;margin-left:3px}
+  .rv-main .lab{position:absolute;left:12px;top:12px;padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,.92);font-size:13px;font-weight:600}
+  .rv-side .label{font-size:14px;font-weight:600;color:var(--muted)}
+  .rv-side h3{margin-top:4px;font-size:22px;font-weight:700;letter-spacing:-.02em}
+  .rv-quotes{margin-top:14px;display:grid;gap:8px}
+  .rv-quotes button{display:flex;align-items:center;gap:12px;width:100%;padding:8px;border:1px solid var(--hairline);border-radius:12px;background:var(--surface);font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+  .rv-quotes button[aria-pressed="true"]{border-color:var(--ink2)}
+  .rv-quotes img{width:48px;height:48px;border-radius:8px;object-fit:cover;flex:none}
+  .rv-quotes span{font-size:15px;font-weight:600}
+  .rv-side .btn-ig{margin:18px 0 0}
+  .rv-thumbs{max-width:880px;margin:28px auto 0}
+  .rv-thumbs p{font-size:14px;color:var(--muted)}
+  .rv-thumbs ul{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px;scrollbar-width:none}
+  .rv-thumbs button{flex:none;width:72px;aspect-ratio:4/5;padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;background:none;cursor:pointer}
+  .rv-thumbs button[aria-current="true"]{border-color:var(--coral)}
+  .rv-thumbs img{width:100%;height:100%;object-fit:cover}
+  .btn-ig{display:flex;align-items:center;justify-content:center;gap:8px;max-width:400px;margin:22px auto 0;min-height:50px;padding:0 18px;border-radius:9999px;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--hairline);font-size:15px;font-weight:600}
+  .btn-ig svg{width:18px;height:18px}
 
-  /* roles */
-  .preview{margin-top:14px;background:#EEEAF8;border-radius:26px;padding:22px 20px 18px;overflow:hidden}
-  .preview h3{margin:0 0 4px;font-size:1.15rem;font-weight:900;line-height:1.4}
-  .preview>p{margin:0;color:var(--muted);font-size:.92rem}
-  .roles{display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 6px;scrollbar-width:none}
-  .roles::-webkit-scrollbar{display:none}
-  .roles figure{margin:0;scroll-snap-align:center}
-  .roles .card{border-radius:18px;overflow:hidden;background:var(--app);border:1px solid #EADCCB}
-  .roles figcaption{margin-top:7px;text-align:center;font-size:.82rem;font-weight:700;color:var(--muted)}
-  .roles-one{border-radius:22px;overflow:hidden;background:var(--app);border:1px solid #EADCCB;box-shadow:0 20px 40px -24px rgba(80,45,20,.45)}
+  /* final */
+  .final{text-align:center}
+  .final img.kiki{width:88px;margin:0 auto 4px}
+  .final .stores{margin:24px auto 0}
+  footer{padding:24px 20px 100px;text-align:center;font-size:14px;color:var(--muted);border-top:1px solid var(--hairline)}
+  footer a{margin:0 8px;text-decoration:underline;text-underline-offset:3px}
 
-  /* level band */
-  .navy{background:radial-gradient(70% 50% at 100% 0%,#3E5590,rgba(62,85,144,0) 70%),var(--navy);color:#FFF8EE}
-  .navy .kicker{color:#FF9B85}
-  .navy .lead{color:rgba(255,248,238,.8)}
-  .levels{display:grid;gap:16px}
-  .lvl .lab{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;font-size:.92rem}
-  .lvl .lab b{background:#FF9B85;color:#2A1A12;border-radius:999px;padding:2px 10px;font-size:.82rem}
-  .lvl .card{border-radius:18px;overflow:hidden;background:var(--app)}
-
-  /* review */
-  .rv-wrap{display:grid;gap:12px}
-  .rv-big{position:relative;border-radius:24px;overflow:hidden}
-  .rv-big img{width:100%;aspect-ratio:1/1;object-fit:cover}
-  .rv-big .cap{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6));color:#fff;font-weight:700}
-  .btn-ig{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;padding:14px 18px;border-radius:16px;background:#fff;border:1.5px solid var(--ink);font-weight:700}
-  .btn-ig svg{width:20px;height:20px}
-
-  .cta{text-align:center;padding:64px 0 56px;background:radial-gradient(60% 60% at 50% 0%,rgba(255,200,180,.55),rgba(255,200,180,0) 70%),var(--cream)}
-  .cta img{width:96px;margin:0 auto 8px}
-  .cta .h2{font-size:1.6rem}
-  .cta .stores{margin:20px auto 0}
-  footer{padding:22px 20px 96px;text-align:center;font-size:.85rem;color:var(--muted);background:#fff;border-top:1px solid var(--line)}
-  footer a{text-decoration:underline;text-underline-offset:3px;margin:0 8px}
-
-  /* sticky store bar (mobile) */
-  .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:8px;transform:translateY(110%);transition:transform .25s ease}
+  /* sticky store bar */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--hairline);transform:translateY(110%);transition:transform .25s ease}
   .bar.on{transform:none}
-  .bar .store{padding:8px 10px}
-  .bar .store b{font-size:16px}
-  .bar .store svg{width:22px;height:22px}
+  .bar .store{height:44px;border-radius:10px}
+  .bar .store svg{width:20px;height:20px}
+  .bar .store small{font-size:9.5px}
+  .bar .store b{font-size:15px}
 
-  @media(min-width:900px){
-    header{padding:22px 20px}
-    .hero{padding:30px 0 40px}
-    .hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-    .hero h1{font-size:3.3rem}
-    .chips li{font-size:1rem;padding:8px 14px}
-    .sub{font-size:1.1rem}
-    .hero-media{margin-top:0}
-    .facts{grid-column:1/-1;margin-top:40px}
-    .shelf{grid-column:1/-1;margin-top:46px}
-    .shelf .m-br{display:none}
-    .shelf figcaption b::after{content:" · "}
-    section.blk{padding:96px 0}
-    .h2{font-size:2.4rem}
-    .ways{grid-template-columns:repeat(3,1fr)}
-    .way{display:flex;flex-direction:column}
-    .covers{display:flex;margin:auto 0 0;padding:24px 0 6px;justify-content:center}
-    .covers img{width:39%;border-radius:14px;box-shadow:0 14px 26px -14px rgba(44,62,107,.55);border:3px solid #fff}
-    .covers img:nth-child(1){transform:rotate(-7deg) translateY(10px);margin-right:-7%}
-    .covers img:nth-child(2){position:relative;z-index:1}
-    .covers img:nth-child(3){transform:rotate(7deg) translateY(10px);margin-left:-7%}
-    .preview{padding:32px}
-    .preview>p{margin-bottom:6px}
-    .gal{margin:18px 0 0;padding:0;grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(4,1fr);gap:16px;overflow:visible;align-items:start}
-    .roles{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:1fr 1fr;margin:0;padding:0;overflow:visible}
-    .levels{max-width:880px}
-    .rv-wrap{max-width:780px}
-    .btn-ig{max-width:780px}
-    .m-only{display:none}
-    .split{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
-    .levels{grid-template-columns:1fr 1fr}
-    .rv-wrap{grid-template-columns:1fr 1fr}
+  @media (min-width:900px){
+    .nav{height:72px}
+    section{padding-block:96px}
+    .hero{padding-top:32px;padding-bottom:88px}
+    .hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center}
+    .pile{margin-top:0}
+    .head{text-align:center;margin-bottom:40px}
+    .flow{padding-inline:20px}
+    .flow>*{flex-basis:280px}
+    .flow>:first-child{margin-left:auto}
+    .flow>:last-child{margin-right:auto}
+    .tabs{max-width:440px}
+    .rv-box{grid-template-columns:340px 1fr;gap:48px;align-items:center;max-width:880px}
     .bar{display:none}
-    footer{padding-bottom:30px}
+    footer{padding-bottom:32px}
   }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar,.dots i{transition:none}}
 </style>
 </head>
 <body>
-<header>
+<header class="nav">
   <a class="brand" href="../"><img src="../assets/logo.svg" alt="">북끼끼</a>
-  <a class="rv" href="https://www.instagram.com/stories/highlights/18095776220444865/"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>고객님 후기</a>
+  <a class="util" href="#reviews">고객님 후기</a>
 </header>
+
 <main>
 <section class="hero">
   <div class="wrap">
-    <div class="txt">
+    <div>
       <h1><em>우리 아이가<br>주인공</em>인<br>영어 동화책</h1>
       <ul class="chips">
         <li>아이 수준에 맞춘 영어</li>
         <li>아이가 원하는 이야기</li>
         <li>그림 속 주인공도 우리 아이 모습</li>
       </ul>
-      <p class="sub"><span class="q">“또 읽어 주세요!”</span> 내 이야기라서 <b>영어가 즐거워요</b></p>
+      <p class="sub"><b>“또 읽어 주세요!”</b> 내 이야기라서 영어가 즐거워요</p>
       <div class="stores" id="heroStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Download on the</small><b>App Store</b></span></a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span><small>GET IT ON</small><b>Google Play</b></span></a></div>
       <aside class="promo" aria-label="진행 중인 혜택">
-        <p class="promo-h"><span class="tag2">혜택</span><span>지금 <b>약 2만 원 상당</b> 혜택 진행 중</span></p>
+        <p class="promo-h"><span class="tag">혜택</span><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span></p>
         <ul>
-          <li><span class="n">1</span><span class="t"><b>동화책 최대 4권 무료</b><span>아무 조건 없이 바로 만들 수 있어요</span></span></li>
-          <li><span class="n">2</span><span class="t"><span class="price">실물책 <s>37,000원</s> <strong>21,000원</strong></span><span>정가에서 할인 중이에요</span></span><em class="off">43%<br>할인</em></li>
+          <li><span class="n">1</span><span class="t">동화책 최대 4권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span></li>
+          <li><span class="n">2</span><span class="t">실물책 <s>37,000원</s> <strong>21,000원</strong><small>정가에서 할인 중이에요</small></span><span class="off">43% 할인</span></li>
         </ul>
       </aside>
     </div>
-    <div class="hero-media">
-      <div class="photo"><img src="../assets/download/review-book.webp" width="732" height="825" alt="고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream" fetchpriority="high"><span class="tag">실제 고객님 실물책 후기</span></div>
-      <div class="mini"><div class="scr"><img src="../assets/download/reader.webp" width="800" height="1156" alt="앱에서 완성된 동화책을 읽는 화면: 아이가 주인공인 그림과 영어 문장 Seoyun made a blanket forest."></div></div>
-    </div>
-    <figure class="shelf">
-      <div class="pile"><img src="../assets/download/books-pile.webp" srcset="../assets/download/books-pile-720.webp 720w, ../assets/download/books-pile.webp 1200w" sizes="(min-width:900px) 760px, calc(100vw - 40px)" width="1200" height="900" decoding="async" alt="나무 테이블 위에 펼쳐 놓은 북끼끼 옛날 동화 하드커버 책들: The Sun and the Moon, Heungbu and Nolbu, Cinderella, The Wonderful Wizard of Oz, Kongjwi and Patjwi, Little Red Riding Hood, The Rabbit and the Dragon King, The Tortoise and the Hare, The Ugly Duckling, The Secret Garden, The Golden Axe"></div>
-      <figcaption><b>옛날 동화 30권</b><br class="m-br"> 고른 이야기 속 주인공이 우리 아이가 돼요</figcaption>
+    <figure class="pile">
+      <div class="ph"><img src="../assets/download/books-pile.webp" srcset="../assets/download/books-pile-720.webp 720w, ../assets/download/books-pile.webp 1200w" sizes="(min-width:900px) 540px, calc(100vw - 40px)" width="1200" height="900" decoding="async" alt="나무 테이블 위에 펼쳐 놓은 북끼끼 옛날 동화 하드커버 책들: The Sun and the Moon, Heungbu and Nolbu, Cinderella, The Wonderful Wizard of Oz, Kongjwi and Patjwi, Little Red Riding Hood, The Rabbit and the Dragon King, The Tortoise and the Hare, The Ugly Duckling, The Secret Garden, The Golden Axe"></div>
+      <figcaption><b>옛날 동화 30권</b> · 고른 이야기 속 주인공이 우리 아이가 돼요</figcaption>
     </figure>
-    <div class="facts">
-      <div><b>3가지</b><span>만드는 방법</span></div>
-      <div><b>30권</b><span>옛날 동화·고전</span></div>
-      <div><b>실물책</b><span>주문 가능</span></div>
-    </div>
   </div>
 </section>
 
-<section class="blk soft">
-  <div class="wrap">
+<section class="canvas">
+  <div class="wrap head">
     <p class="kicker">만드는 방법 3가지</p>
-    <h2 class="h2">어떤 방법이든<br>아이가 주인공이 돼요</h2>
-    <p class="lead">앱에서 고르기만 하면 영어 동화책이 만들어져요.</p>
-    <div class="ways">
-      <div class="way w1"><img class="ic" src="../assets/download/icon-story.webp" width="200" height="200" alt="" loading="lazy"><span class="no">01</span><h3>아이 이야기</h3><p>키키와 이야기 나누고, 아이가 직접 만든 이야기로 동화책을 만들어요.</p><figure class="shot"><div class="card"><img src="../assets/download/interview.webp" width="800" height="594" loading="lazy" decoding="async" alt="키키 인터뷰 실제 앱 화면: 키키가 돌고래가 어떻게 생겼는지 묻고, 아이가 회색이고 웃는 얼굴이라 방울이라고 이름 지었다고 답하는 대화"></div><figcaption>실제 앱 화면 · 키키가 묻고 아이가 답해요</figcaption></figure></div>
-      <div class="way w2"><img class="ic" src="../assets/download/icon-classic.webp" width="200" height="200" alt="" loading="lazy"><span class="no">02</span><h3>옛날 동화·고전</h3><p>흥부와 놀부부터 세계 명작까지, 아이가 명작 동화 속 주인공이 돼요.</p><div class="covers" aria-hidden="true"><img src="../assets/download/w2-kongjwi-and-patjwi.webp" width="480" height="480" loading="lazy" decoding="async" alt=""><img src="../assets/download/w2-little-red-riding-hood.webp" width="480" height="480" loading="lazy" decoding="async" alt=""><img src="../assets/download/w2-tortoise-and-hare.webp" width="480" height="480" loading="lazy" decoding="async" alt=""></div>
+    <h2>어떤 방법이든<br>아이가 주인공이 돼요</h2>
+    <p class="lead">앱 화면으로 순서대로 보여 드릴게요.</p>
+  </div>
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="만드는 방법">
+      <button type="button" role="tab" id="t-classic" aria-controls="p-classic" aria-selected="true">옛날 동화·고전</button>
+      <button type="button" role="tab" id="t-story" aria-controls="p-story" aria-selected="false" tabindex="-1">아이 이야기</button>
+      <button type="button" role="tab" id="t-diary" aria-controls="p-diary" aria-selected="false" tabindex="-1">아이의 일기·글</button>
+    </div>
+  </div>
+  <div class="flow-panel" role="tabpanel" id="p-classic" aria-labelledby="t-classic">
+    <div class="rail flow" aria-label="옛날 동화·고전 순서">
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-classic-shelf.webp" width="800" height="933" loading="lazy" decoding="async" alt="옛날 동화·고전 책장 화면: 전체 30권 중 해님 달님(추천 나이 5-8세), 흥부와 놀부(추천 나이 4-8세)"></div><figcaption><small>01</small><b>옛날 동화·고전 30권 중에 골라요</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-classic-role.webp" width="800" height="612" loading="lazy" decoding="async" alt="역할 고르기 화면: 우리 아이는 누가 될까요? 큰아이, 동생, 어머니, 호랑이"></div><figcaption><small>02</small><b>주인공도, 조연도 아이가 골라요</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-classic-change.webp" width="800" height="1064" loading="lazy" decoding="async" alt="바꿔서 만들기 화면: 어떻게 바꿀까요? 원하는 내용을 최대 1,400자까지 적는 칸"></div><figcaption><small>03</small><b>‘바꿔서 만들기’로 내용·결말을 원하는 대로</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-classic-level.webp" width="800" height="936" loading="lazy" decoding="async" alt="이런 영어로 쓰여요 화면: 6단계 우리 아이 기본 단계, 더 쉽게·더 어렵게 버튼"></div><figcaption><small>04</small><b>영어는 아이 수준에 맞춰, 더 쉽게·어렵게도</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-classic-reader.webp" width="800" height="1591" loading="lazy" decoding="async" alt="완성된 빨간 모자 동화책 읽기 화면: All love Seoyun. 동화 읽기 버튼과 한/A 번역 버튼"></div><figcaption><small>05</small><b>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</b></figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"></div>
+  </div>
+  <div class="flow-panel" role="tabpanel" id="p-story" aria-labelledby="t-story" hidden>
+    <div class="rail flow" aria-label="아이 이야기 순서">
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-story-interview.webp" width="800" height="1212" loading="lazy" decoding="async" alt="키키와 이야기 화면: 키키가 방울이랑 바다에서 만나면 뭘 하고 놀고 싶은지 묻고, 눌러서 말하기 버튼"></div><figcaption><small>01</small><b>키키가 묻고, 아이가 말로 답해요</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-shelf.webp" width="800" height="1006" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 동화책 Seoyun and the Five Crowns와 Little Red Riding Hood"></div><figcaption><small>02</small><b>아이 수준 영어로 동화책이 완성돼요</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-reader.webp" width="800" height="1545" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: Seoyun made a blanket forest. 동화 읽기 버튼과 한/A 번역 버튼"></div><figcaption><small>03</small><b>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</b></figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"></div>
+  </div>
+  <div class="flow-panel" role="tabpanel" id="p-diary" aria-labelledby="t-diary" hidden>
+    <div class="rail flow" aria-label="아이의 일기·글 순서">
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-diary-input.webp" width="800" height="1145" loading="lazy" decoding="async" alt="아이의 일기·글 화면: 사진으로 가져오기와 직접 입력하기"></div><figcaption><small>01</small><b>일기를 사진으로 찍거나 직접 입력해요</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-diary-edit.webp" width="800" height="1170" loading="lazy" decoding="async" alt="읽은 글 확인하기 화면: 손글씨 일기를 읽어 맞춤법을 다듬은 글, 고치거나 덧붙일 수 있는 입력 칸"></div><figcaption><small>02</small><b>읽어 들인 글을 고치고, 더하고 싶은 내용도</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-shelf.webp" width="800" height="1006" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 영어 동화책들"></div><figcaption><small>03</small><b>아이 수준 영어로 동화책이 완성돼요</b></figcaption></figure>
+      <figure class="scr-card"><div class="pic"><img src="../assets/download/flow-reader.webp" width="800" height="1545" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: 동화 읽기 버튼과 한/A 번역 버튼"></div><figcaption><small>04</small><b>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</b></figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">실제 고객님 후기</p>
+      <h2>받아 보신 분들의<br>실물책 후기</h2>
+    </div>
+    <div class="rv-box" id="rvBox">
+      <a class="rv-main" href="https://www.instagram.com/stories/highlights/18095776220444865/" target="_blank" rel="noopener"><img src="../assets/download/review-book.webp" width="732" height="825" alt="고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책" loading="lazy"></a>
+      <div class="rv-side">
+        <p class="label">실제 고객님 후기 영상</p>
+        <h3>북끼끼 후기</h3>
+        <a class="btn-ig" href="https://www.instagram.com/stories/highlights/18095776220444865/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>인스타그램에서 고객님 후기 보기</a>
       </div>
-      <div class="way w3"><img class="ic" src="../assets/download/icon-diary.webp" width="200" height="200" alt="" loading="lazy"><span class="no">03</span><h3>아이의 일기·글</h3><p>일기를 사진으로 찍거나 직접 입력하면, 아이의 하루를 영어 동화책으로 간직해요.</p><figure class="shot"><div class="card fade"><img src="../assets/download/diary.webp" width="800" height="740" loading="lazy" decoding="async" alt="아이의 일기 실제 앱 화면: 손글씨 일기 사진을 읽어 맞춤법을 다듬은 글로 보여 주고, 이름과 날짜에 밑줄을 쳐 확인을 돕는 화면"></div><figcaption>실제 앱 화면 · 손글씨 일기를 읽어 글로 옮겨요</figcaption></figure></div>
     </div>
-    <div class="preview">
-      <h3>만들기 전에 미리 볼 수 있어요</h3>
-      <p>옛날 동화·고전 「오즈의 마법사」 실제 앱 화면이에요.<span class="m-only"> 옆으로 넘겨 보세요.</span></p>
-      <div class="gal">
-        <figure><div class="card"><img src="../assets/download/oz-detail.webp" width="800" height="823" loading="lazy" decoding="async" alt="오즈의 마법사 소개 화면: 추천 5-9세, 우리 아이 나이에 딱, 줄거리"></div><figcaption>줄거리·추천 나이</figcaption></figure>
-        <figure><div class="card"><img src="../assets/download/roles-oz.webp" width="800" height="1004" loading="lazy" decoding="async" alt="등장인물 카드: 도로시, 허수아비, 양철 나무꾼, 겁쟁이 사자, 모두 '우리 아이가 될 수 있어요'"></div><figcaption>우리 아이가 될 인물</figcaption></figure>
-        <figure><div class="card"><img src="../assets/download/oz-draw.webp" width="800" height="670" loading="lazy" decoding="async" alt="이렇게 그려져요: 노란 벽돌 길을 달리는 아이와 강아지 그림"></div><figcaption>이렇게 그려져요</figcaption></figure>
-        <figure><div class="card fade"><img src="../assets/download/oz-english.webp" width="800" height="502" loading="lazy" decoding="async" alt="이런 영어로 쓰여요 6단계: Seoa lives in Kansas with Toto. A big wind comes. Whoosh!"></div><figcaption>이런 영어로 쓰여요</figcaption></figure>
-      </div>
-    </div>
+    <div class="rv-thumbs" id="rvThumbs" hidden><p>다른 후기도 눌러서 보세요</p><ul></ul></div>
   </div>
 </section>
 
-<section class="blk">
-  <div class="wrap split">
-    <div>
-      <p class="kicker">등장인물 고르기</p>
-      <h2 class="h2">주인공도, 조연도<br>우리 아이가 될 수 있어요</h2>
-      <p class="lead">빨간 모자가 될지, 사냥꾼이 될지 아이가 골라요. 카드를 누르면 인물 소개가 나와요.</p>
-    </div>
-    <div class="roles">
-      <figure><div class="card"><img src="../assets/download/roles-red.webp" width="800" height="1013" loading="lazy" decoding="async" alt="빨간 모자 등장인물 카드 앞면: 빨간 모자, 늑대, 할머니, 사냥꾼"></div><figcaption>카드 앞면</figcaption></figure>
-      <figure><div class="card"><img src="../assets/download/roles-red-back.webp" width="800" height="1013" loading="lazy" decoding="async" alt="등장인물 카드 뒷면: 인물 소개 글"></div><figcaption>누르면 인물 소개</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="blk navy">
+<section class="final canvas">
   <div class="wrap">
-    <p class="kicker">아이 수준에 맞춘 영어</p>
-    <h2 class="h2">같은 앱, 아이마다<br>다른 단계의 영어</h2>
-    <p class="lead">그림은 이렇게 그려지고, 영어는 아이 단계에 맞춰 쓰여요.</p>
-    <div class="levels">
-      <div class="lvl"><div class="lab"><b>4단계</b>빨간 모자 · 기본보다 2단계 쉬운 글</div><div class="card fade"><img src="../assets/download/red-draw-english.webp" width="800" height="1219" loading="lazy" decoding="async" alt="빨간 모자 그림 미리보기와 4단계 영어: Seoa loves Grandmother. Bye, Mother!"></div></div>
-      <div class="lvl"><div class="lab"><b>6단계</b>오즈의 마법사 · 우리 아이 기본 단계</div><div class="card fade"><img src="../assets/download/oz-draw-english.webp" width="800" height="1216" loading="lazy" decoding="async" alt="오즈의 마법사 그림 미리보기와 6단계 영어: Seoa lives in Kansas with Toto. A big wind comes. Whoosh!"></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="blk soft">
-  <div class="wrap">
-    <p class="kicker">실제 고객님 후기</p>
-    <h2 class="h2">마음에 드는 동화는<br>실물책으로 간직해요</h2>
-    <p class="lead">고객님이 인스타그램에 올려 주신 후기 사진이에요.</p>
-    <div class="rv-wrap">
-      <div class="rv-big"><img src="../assets/download/review-bed.webp" width="732" height="825" loading="lazy" decoding="async" alt="고객님 후기 사진: 침대에서 실물 동화책을 펼쳐 읽는 모습"><span class="cap">재미난 이야기 세상</span></div>
-      <div class="rv-big"><img src="../assets/download/review-book.webp" width="732" height="825" loading="lazy" decoding="async" alt="고객님 후기 사진: 실물 하드커버 동화책"><span class="cap">실물 동화책 배송</span></div>
-    </div>
-    <a class="btn-ig" href="https://www.instagram.com/stories/highlights/18095776220444865/"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>인스타그램에서 고객님 후기 보기</a>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="wrap">
-    <img src="../assets/download/kiki.webp" width="360" height="360" alt="" loading="lazy">
-    <h2 class="h2">우리 아이가 주인공인<br>첫 영어 동화책</h2>
-    <div class="stores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Download on the</small><b>App Store</b></span></a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span><small>GET IT ON</small><b>Google Play</b></span></a></div>
+    <img class="kiki" src="../assets/download/kiki.webp" width="360" height="360" alt="" loading="lazy">
+    <h2>우리 아이가 주인공인<br>첫 영어 동화책</h2>
+    <div class="stores" id="endStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Download on the</small><b>App Store</b></span></a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span><small>GET IT ON</small><b>Google Play</b></span></a></div>
   </div>
 </section>
 </main>
 <footer><a href="../">북끼끼 홈페이지</a><a href="https://www.instagram.com/bookkiki.official/">인스타그램</a></footer>
 <nav class="bar" id="bar" aria-label="앱 받기"><a class="store" href="https://apps.apple.com/kr/app/id6810455009"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Download on the</small><b>App Store</b></span></a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span><small>GET IT ON</small><b>Google Play</b></span></a></nav>
 <script>
+  // 고객님 후기: 항목을 이 배열에 추가하면 아래 썸네일 줄에 자동으로 들어가요.
+  // video(mp4 주소)가 있으면 화면 안에서 재생하고, 없으면 href(인스타그램)를 새 탭으로 열어요.
+  var REVIEWS = [
+    {
+      title: '북끼끼 후기',
+      label: '실제 고객님 후기 영상',
+      href: 'https://www.instagram.com/stories/highlights/18095776220444865/',
+      video: '',
+      photos: [
+        { src: '../assets/download/review-book.webp', caption: '실물 동화책 배송', alt: '고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream' },
+        { src: '../assets/download/review-bed.webp', caption: '재미난 이야기 세상', alt: '고객님 후기 사진: 침대에서 실물 동화책을 펼쳐 읽는 모습' }
+      ]
+    }
+  ];
+
   (function(){
-    var bar=document.getElementById('bar'),hero=document.getElementById('heroStores');
-    if(!('IntersectionObserver' in window)){bar.classList.add('on');return;}
-    new IntersectionObserver(function(e){bar.classList.toggle('on',!e[0].isIntersecting&&e[0].boundingClientRect.top<0);}).observe(hero);
+    var IG_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+    var PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="#1d1a17"/></svg>';
+    function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+
+    // 고객님 후기 (큰 카드 + 캡션 + 썸네일 줄)
+    var box = document.getElementById('rvBox'), thumbs = document.getElementById('rvThumbs');
+    function render(i){
+      var r = REVIEWS[i], photo = 0;
+      box.innerHTML = '';
+      var main;
+      if (r.video) {
+        main = el('div', 'rv-main');
+        var v = document.createElement('video');
+        v.src = r.video; v.controls = true; v.playsInline = true; v.preload = 'none';
+        v.setAttribute('playsinline', ''); v.poster = r.photos[0].src;
+        v.setAttribute('aria-label', r.label);
+        main.appendChild(v);
+      } else {
+        main = el('a', 'rv-main');
+        main.href = r.href; main.target = '_blank'; main.rel = 'noopener';
+        main.setAttribute('aria-label', r.label + ' 인스타그램에서 보기 (새 탭)');
+        var img = document.createElement('img');
+        img.width = 732; img.height = 825; img.loading = 'lazy'; img.decoding = 'async';
+        main.appendChild(img);
+        var pb = el('span', 'play'); pb.innerHTML = PLAY_ICON; main.appendChild(pb);
+      }
+      var side = el('div', 'rv-side');
+      side.appendChild(el('p', 'label', r.label));
+      side.appendChild(el('h3', '', r.title));
+      var qs = el('div', 'rv-quotes');
+      function show(k){
+        photo = k;
+        var p = r.photos[k], im = main.querySelector('img');
+        if (im) { im.src = p.src; im.alt = p.alt; }
+        else main.querySelector('video').poster = p.src;
+        [].forEach.call(qs.children, function(b, j){ b.setAttribute('aria-pressed', j === k); });
+      }
+      r.photos.forEach(function(p, k){
+        var b = el('button'); b.type = 'button';
+        var t = document.createElement('img'); t.src = p.src; t.alt = ''; t.width = 48; t.height = 48; t.loading = 'lazy';
+        b.appendChild(t); b.appendChild(el('span', '', '“' + p.caption + '”'));
+        b.addEventListener('click', function(){ show(k); });
+        qs.appendChild(b);
+      });
+      side.appendChild(qs);
+      if (r.href) { var a = el('a', 'btn-ig'); a.href = r.href; a.target = '_blank'; a.rel = 'noopener'; a.innerHTML = IG_ICON; a.appendChild(document.createTextNode('인스타그램에서 고객님 후기 보기')); side.appendChild(a); }
+      box.appendChild(main); box.appendChild(side);
+      show(0);
+      [].forEach.call(thumbs.querySelectorAll('button'), function(b, j){ b.setAttribute('aria-current', j === i); });
+    }
+    if (REVIEWS.length > 1) {
+      var ul = thumbs.querySelector('ul');
+      REVIEWS.forEach(function(r, i){
+        var li = el('li'), b = el('button'); b.type = 'button'; b.setAttribute('aria-label', r.title + ' 보기');
+        var t = document.createElement('img'); t.src = r.photos[0].src; t.alt = ''; t.loading = 'lazy';
+        b.appendChild(t); b.addEventListener('click', function(){ render(i); box.scrollIntoView({block: 'nearest', behavior: 'smooth'}); });
+        li.appendChild(b); ul.appendChild(li);
+      });
+      thumbs.hidden = false;
+    }
+    if (REVIEWS.length) render(0);
+
+    // 만드는 방법: 탭마다 단계 캐러셀 (자동으로 넘기고, 손으로 넘기면 잠시 멈춤)
+    function carousel(rail, dots, interval){
+      var items = rail.children, cur = 0, pauseUntil = 0, animating = false, visible = false;
+      for (var k = 0; k < items.length; k++) dots.appendChild(document.createElement('i'));
+      function scrollable(){ return rail.scrollWidth - rail.clientWidth > 4; }
+      function target(i){ var f = items[i]; return f.offsetLeft - (rail.clientWidth - f.clientWidth) / 2; }
+      function mark(){ for (var k = 0; k < dots.children.length; k++) dots.children[k].classList.toggle('on', k === cur); dots.style.visibility = scrollable() ? '' : 'hidden'; }
+      function nearest(){
+        var mid = rail.scrollLeft + rail.clientWidth / 2, best = 0, bd = 1e9;
+        for (var k = 0; k < items.length; k++) { var d = Math.abs(items[k].offsetLeft + items[k].clientWidth / 2 - mid); if (d < bd) { bd = d; best = k; } }
+        return best;
+      }
+      function go(i){
+        cur = (i + items.length) % items.length;
+        var from = rail.scrollLeft, to = Math.max(0, Math.min(target(cur), rail.scrollWidth - rail.clientWidth));
+        var dur = cur === 0 ? 600 : 420, t0 = performance.now();
+        animating = true; rail.style.scrollSnapType = 'none';
+        (function step(now){
+          var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+          rail.scrollLeft = from + (to - from) * e;
+          if (p < 1) requestAnimationFrame(step); else { rail.style.scrollSnapType = ''; animating = false; }
+        })(t0);
+        mark();
+      }
+      var stop = function(){ pauseUntil = Date.now() + 5000; };
+      ['pointerdown', 'touchstart', 'wheel'].forEach(function(e){ rail.addEventListener(e, stop, {passive: true}); });
+      rail.addEventListener('scroll', function(){ if (!animating) { cur = nearest(); mark(); } }, {passive: true});
+      window.addEventListener('resize', mark);
+      if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe(rail);
+      else visible = true;
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) setInterval(function(){
+        if (!visible || document.hidden || animating || Date.now() < pauseUntil || !scrollable()) return;
+        go(cur + 1);
+      }, interval);
+      return { reset: function(){ cur = 0; rail.scrollLeft = 0; pauseUntil = Date.now() + 1500; mark(); } };
+    }
+    var flows = {};
+    [].forEach.call(document.querySelectorAll('.flow-panel'), function(p){ flows[p.id] = carousel(p.querySelector('.rail'), p.querySelector('.dots'), 2800); });
+    flows['p-classic'].reset();
+    var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+    function select(tab){
+      tabs.forEach(function(t){
+        var on = t === tab, id = t.getAttribute('aria-controls');
+        t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+        document.getElementById(id).hidden = !on;
+        if (on) flows[id].reset();
+      });
+    }
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ select(t); });
+      t.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus(); }
+      });
+    });
+
+    // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
+    var bar = document.getElementById('bar'), hero = document.getElementById('heroStores'), end = document.getElementById('endStores');
+    if (!('IntersectionObserver' in window)) { bar.classList.add('on'); return; }
+    var past = false, endIn = false;
+    function upd(){ bar.classList.toggle('on', past && !endIn); }
+    new IntersectionObserver(function(e){ past = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(hero);
+    new IntersectionObserver(function(e){ endIn = e[0].isIntersecting; upd(); }).observe(end);
   })();
 </script>
 </body>
