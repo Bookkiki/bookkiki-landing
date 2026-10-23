@@ -6,7 +6,7 @@
 <title>북끼끼 앱 다운로드</title>
 <meta name="description" content="우리 아이가 주인공인 영어 동화책, 북끼끼 앱을 받아 보세요. 안드로이드는 Google Play, 아이폰은 App Store에서 받을 수 있습니다.">
 <meta property="og:title" content="북끼끼 - 우리 아이가 주인공인 영어 동화책">
-<meta property="og:description" content="아이 수준에 맞춘 영어, 아이가 원하는 이야기, 그림 속 주인공도 우리 아이 모습. App Store · Google Play에서 받아 보세요.">
+<meta property="og:description" content="아이 수준에 맞춘 영어, 아이가 원하는 이야기, 그림 속 주인공도 우리 아이 모습. 지금 동화책 최대 4권 무료, 실물책 할인 중. App Store · Google Play에서 받아 보세요.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bookkiki.com/download/">
 <meta property="og:site_name" content="북끼끼">
@@ -78,12 +78,25 @@
   .hero-media .mini{position:absolute;right:0;bottom:-18px;width:44%;background:#1E1E22;padding:5px;border-radius:24px;box-shadow:0 20px 40px -18px rgba(44,62,107,.6);transform:rotate(3deg)}
   .hero-media .mini .scr{border-radius:19px;overflow:hidden;background:var(--app);padding-top:4px}
 
+  /* 혜택 카드 */
+  .promo{margin-top:18px;max-width:420px;background:radial-gradient(90% 80% at 100% 0%,#40568F,rgba(64,86,143,0) 70%),var(--navy);color:#fff;border-radius:20px;padding:16px 16px 14px;box-shadow:0 16px 30px -18px rgba(44,62,107,.7)}
+  .promo-h{margin:0 0 12px;display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:900;line-height:1.35;letter-spacing:-.3px}
+  .promo-h .tag2{flex:0 0 auto;background:var(--coral);color:#fff;font-size:.74rem;font-weight:900;padding:3px 8px;border-radius:999px;letter-spacing:0}
+  .promo-h b{color:#FFB4A3;font-weight:900}
+  .promo ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .promo li{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border-radius:14px;padding:10px 12px}
+  .promo .n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#FFF8EE;color:var(--navy);font-size:.82rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+  .promo .t{flex:1 1 auto;min-width:0;line-height:1.35}
+  .promo .t b{display:block;font-size:1rem;font-weight:900}
+  .promo .t span{display:block;font-size:.82rem;color:rgba(255,255,255,.78)}
+  .promo .price{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 6px;font-size:1rem;font-weight:900}
+  .promo .price s{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6)}
+  .promo .price strong{font-size:1.2rem;color:#FFB4A3;font-weight:900}
+  .promo .off{flex:0 0 auto;background:var(--coral);color:#fff;font-style:normal;font-size:.8rem;font-weight:900;line-height:1.2;padding:6px 8px;border-radius:10px;text-align:center}
+
   .shelf{margin:58px 0 0;text-align:center}
-  .shelf .fan{position:relative;width:100%;max-width:400px;aspect-ratio:1/0.92;margin:0 auto}
-  .shelf .fan img{position:absolute;width:47%;height:auto;border-radius:16px;border:5px solid #fff;box-shadow:0 18px 34px -16px rgba(60,35,20,.45);background:#fff}
-  .shelf .c1{left:2%;top:0;transform:rotate(-5deg);z-index:1}
-  .shelf .c2{right:2%;top:16%;transform:rotate(4deg);z-index:2}
-  .shelf .c3{left:24%;bottom:0;transform:rotate(-1.5deg);z-index:3}
+  .shelf .pile{max-width:760px;margin:0 auto;border-radius:22px;overflow:hidden;box-shadow:0 22px 44px -24px rgba(60,35,20,.6)}
+  .shelf .pile img{width:100%}
   .shelf figcaption{margin-top:14px;font-size:.98rem;color:var(--muted);line-height:1.5}
   .shelf figcaption b{color:var(--navy);font-weight:900}
   .shelf + .facts{margin-top:36px}
@@ -169,7 +182,6 @@
     .hero-media{margin-top:0}
     .facts{grid-column:1/-1;margin-top:40px}
     .shelf{grid-column:1/-1;margin-top:46px}
-    .shelf .fan{max-width:440px}
     .shelf .m-br{display:none}
     .shelf figcaption b::after{content:" · "}
     section.blk{padding:96px 0}
@@ -214,17 +226,20 @@
       </ul>
       <p class="sub"><span class="q">“또 읽어 주세요!”</span> 내 이야기라서 <b>영어가 즐거워요</b></p>
       <div class="stores" id="heroStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span><small>Download on the</small><b>App Store</b></span></a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span><small>GET IT ON</small><b>Google Play</b></span></a></div>
+      <aside class="promo" aria-label="진행 중인 혜택">
+        <p class="promo-h"><span class="tag2">혜택</span><span>지금 <b>약 2만 원 상당</b> 혜택 진행 중</span></p>
+        <ul>
+          <li><span class="n">1</span><span class="t"><b>동화책 최대 4권 무료</b><span>아무 조건 없이 바로 만들 수 있어요</span></span></li>
+          <li><span class="n">2</span><span class="t"><span class="price">실물책 <s>37,000원</s> <strong>21,000원</strong></span><span>정가에서 할인 중이에요</span></span><em class="off">43%<br>할인</em></li>
+        </ul>
+      </aside>
     </div>
     <div class="hero-media">
       <div class="photo"><img src="../assets/download/review-book.webp" width="732" height="825" alt="고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream" fetchpriority="high"><span class="tag">실제 고객님 실물책 후기</span></div>
       <div class="mini"><div class="scr"><img src="../assets/download/reader.webp" width="800" height="1156" alt="앱에서 완성된 동화책을 읽는 화면: 아이가 주인공인 그림과 영어 문장 Seoyun made a blanket forest."></div></div>
     </div>
     <figure class="shelf">
-      <div class="fan">
-        <img class="c1" src="../assets/download/shelf-oz.webp" width="720" height="720" alt="옛날 동화 표지: The Wonderful Wizard of Oz" decoding="async">
-        <img class="c2" src="../assets/download/shelf-cinderella.webp" width="720" height="720" alt="옛날 동화 표지: Cinderella" decoding="async">
-        <img class="c3" src="../assets/download/shelf-sunmoon.webp" width="720" height="720" alt="옛날 동화 표지: The Sun and the Moon" decoding="async">
-      </div>
+      <div class="pile"><img src="../assets/download/books-pile.webp" srcset="../assets/download/books-pile-720.webp 720w, ../assets/download/books-pile.webp 1200w" sizes="(min-width:900px) 760px, calc(100vw - 40px)" width="1200" height="900" decoding="async" alt="나무 테이블 위에 펼쳐 놓은 북끼끼 옛날 동화 하드커버 책들: The Sun and the Moon, Heungbu and Nolbu, Cinderella, The Wonderful Wizard of Oz, Kongjwi and Patjwi, Little Red Riding Hood, The Rabbit and the Dragon King, The Tortoise and the Hare, The Ugly Duckling, The Secret Garden, The Golden Axe"></div>
       <figcaption><b>옛날 동화 30권</b><br class="m-br"> 고른 이야기 속 주인공이 우리 아이가 돼요</figcaption>
     </figure>
     <div class="facts">
