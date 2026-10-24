@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
 <title>북끼끼 앱 다운로드</title>
 <meta name="description" content="우리 아이가 주인공인 영어 동화책, 북끼끼 앱을 받아 보세요. 안드로이드는 Google Play, 아이폰은 App Store에서 받을 수 있습니다.">
 <meta property="og:title" content="북끼끼 - 우리 아이가 주인공인 영어 동화책">
@@ -19,20 +18,37 @@
 <link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
 <script>
   // 기기에 맞는 스토어로 바로 보낸다. ?stay=1이면 이동하지 않고 안내 화면을 보여 준다.
+  // 스토어 링크에는 유입 구분 값을 붙인다(Play: referrer의 utm_*, App Store: ct).
+  //  - utm_medium / ct 앞부분: redirect(자동 이동) · ig_inapp · fb_inapp · threads_inapp · kakao_inapp · naver_inapp · line_inapp · web(그 밖의 브라우저에서 버튼 클릭)
+  //  - utm_content / ct 끝: ad(광고 클릭으로 들어옴: fbclid·gclid·utm_source가 있을 때) · direct
   (function () {
     var PLAY = 'https://play.google.com/store/apps/details?id=com.bookkiki.app';
     var APP_STORE = 'https://apps.apple.com/kr/app/id6810455009';
-    if (/[?&]stay=1/.test(location.search)) return;
-    var ua = navigator.userAgent || '';
+    var ua = navigator.userAgent || '', q = location.search;
+    var src = /[?&](fbclid|gclid|utm_source)=/.test(q) ? 'ad' : 'direct';
+    var inapp = /Threads|Barcelona/i.test(ua) ? 'threads_inapp' :
+      /Instagram/i.test(ua) ? 'ig_inapp' :
+      /FBAN|FBAV|FB_IAB|FBIOS/i.test(ua) ? 'fb_inapp' :
+      /KAKAOTALK/i.test(ua) ? 'kakao_inapp' :
+      /NAVER\(inapp/i.test(ua) ? 'naver_inapp' :
+      /Line\//i.test(ua) ? 'line_inapp' : '';
+    function play(medium) {
+      var ref = 'utm_source=bookkiki_landing&utm_medium=' + medium + '&utm_campaign=download_page&utm_content=' + src;
+      return PLAY + '&referrer=' + encodeURIComponent(ref);
+    }
+    function ios(medium) { return APP_STORE + '?ct=' + ('landing_' + medium + '_' + src).slice(0, 40) + '&mt=8'; }
+    // 페이지 버튼에서 쓰도록 남겨 둔다(버튼 클릭은 인앱이면 그 앱 이름, 아니면 web).
+    window.BK_STORE = { play: play, ios: ios, medium: inapp || 'web' };
+    if (/[?&]stay=1/.test(q)) return;
     // 인스타·페북·카톡 등 앱 안 브라우저에서는 스토어 주소로 넘기면 빈 흰 화면이 된다.
     // 그래서 이동하지 않고 이 페이지(스토어 버튼)를 보여 주고, 버튼을 누르면 스토어 앱이 열린다.
-    if (/Instagram|FBAN|FBAV|FB_IAB|FBIOS|KAKAOTALK|NAVER\(inapp|Line\/|Threads|Barcelona/i.test(ua)) return;
+    if (inapp) return;
     var isAndroid = /Android/i.test(ua);
     // iPadOS 13 이상은 데스크톱 Safari처럼 Mac으로 표시되므로 터치 지원으로 구분한다.
     var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (isAndroid) location.replace(PLAY);
-    else if (isIOS) location.replace(APP_STORE);
+    if (isAndroid) location.replace(play('redirect'));
+    else if (isIOS) location.replace(ios('redirect'));
   })();
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -470,9 +486,12 @@
     var nav = document.getElementById('nav'), menuBtn = document.getElementById('menuBtn');
     menuBtn.addEventListener('click', function(){ var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
     [].forEach.call(document.querySelectorAll('#navLinks a'), function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
-    var ua = navigator.userAgent || '', cta = document.getElementById('navCta');
-    if (/Android/i.test(ua)) cta.href = 'https://play.google.com/store/apps/details?id=com.bookkiki.app';
-    else if (/iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) cta.href = 'https://apps.apple.com/kr/app/id6810455009';
+    var ua = navigator.userAgent || '', cta = document.getElementById('navCta'), S = window.BK_STORE;
+    // 모든 스토어 버튼에 유입 구분 값을 붙인다(머리 스크립트의 BK_STORE).
+    if (S) [].forEach.call(document.querySelectorAll('a[href*="play.google.com/store/apps/details"]'), function(a){ a.href = S.play(S.medium); });
+    if (S) [].forEach.call(document.querySelectorAll('a[href*="apps.apple.com/kr/app/id6810455009"]'), function(a){ a.href = S.ios(S.medium); });
+    if (/Android/i.test(ua)) cta.href = S ? S.play(S.medium) : 'https://play.google.com/store/apps/details?id=com.bookkiki.app';
+    else if (/iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) cta.href = S ? S.ios(S.medium) : 'https://apps.apple.com/kr/app/id6810455009';
 
     // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
     var bar = document.getElementById('bar'), hero = document.getElementById('heroStores'), end = document.getElementById('endStores');
