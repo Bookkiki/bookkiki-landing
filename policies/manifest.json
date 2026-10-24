@@ -927,6 +927,17 @@
       "sha256": "e3870d2804ac56ee6d11936ce042dca3e3b884002ef168e0eb3fa273448deeae",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-10-19-1/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-10-19-1",
+      "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-10-24",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-24",
+      "effectiveAt": "2026-10-24",
+      "sha256": "84fe519207431f2cb990b4e19527ef1e7cc9398b7706fc198f4d86de76e1a21c",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-10-24/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-10-24",
       "aliases": [
         "/ko-KR/policies/privacy-policy"
       ]
