@@ -209,7 +209,9 @@
     linear-gradient(#fffafc,#fff 92%)}
   .hero{padding-top:28px;padding-bottom:48px;text-align:center}
   .hero .sub{margin:16px auto 0;font-size:16px;color:var(--muted);line-height:1.6}
-  .hero .stores{margin-top:26px}
+  .buy{text-align:center}
+  .buy .promo{margin-top:0}
+  .buy .stores{margin-top:20px}
   .promo{margin:22px auto 0;max-width:360px;text-align:left;border-radius:var(--r);background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow);padding:14px 16px 4px}
   .promo-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 8px;font-size:15px;font-weight:700;letter-spacing:-.2px}
   .promo-h em{font-style:normal;color:var(--coral)}
@@ -325,7 +327,7 @@
   <nav class="nav" id="nav" aria-label="페이지 메뉴">
     <a class="brand" href="../"><img src="../assets/logo.svg" alt="">북끼끼</a>
     <div class="nav-links" id="navLinks">
-      <a href="#how">기능</a><a href="#compare">차별점</a><a href="#reviews">후기</a><a href="#benefit">혜택</a>
+      <a href="#compare">차별점</a><a href="#how">기능</a><a href="#reviews">후기</a><a href="#benefit">혜택</a>
     </div>
     <div class="nav-cta-wrap"><a class="nav-cta" id="navCta" href="#get">앱 받기</a></div>
     <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -336,14 +338,6 @@
     <div class="wrap">
       <h1><em>우리 아이가<br>주인공</em>인<br>영어 동화책</h1>
       <p class="sub">아이 수준에 맞춘 영어로, <br>아이가 주인공인 동화책을 만들어요</p>
-      <div class="stores" id="heroStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></div>
-      <aside class="promo" id="benefit" aria-label="진행 중인 혜택">
-        <p class="promo-h"><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span><span class="until">10월 27일까지</span></p>
-        <ul>
-          <li><span class="t">동화책 최대 4권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span><span class="free">무료</span></li>
-          <li><span class="t">실물책 <s>37,000원</s> <strong>21,000원</strong><small>정가에서 할인 중이에요</small></span><span class="off">43% 할인</span></li>
-        </ul>
-      </aside>
     </div>
   </section>
   <figure class="pile wrap">
@@ -454,7 +448,20 @@
   </div>
 </section>
 
-<section class="final canvas" id="get">
+<section class="buy canvas" id="buy">
+  <div class="wrap">
+    <aside class="promo" id="benefit" aria-label="진행 중인 혜택">
+      <p class="promo-h"><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span><span class="until">10월 27일까지</span></p>
+      <ul>
+        <li><span class="t">동화책 최대 4권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span><span class="free">무료</span></li>
+        <li><span class="t">실물책 <s>37,000원</s> <strong>21,000원</strong><small>정가에서 할인 중이에요</small></span><span class="off">43% 할인</span></li>
+      </ul>
+    </aside>
+    <div class="stores" id="midStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></div>
+  </div>
+</section>
+
+<section class="final" id="get">
   <div class="wrap">
     <img class="kiki" src="../assets/download/kiki.webp" width="360" height="360" alt="" loading="lazy">
     <h2>우리 아이가 주인공인<br>첫 영어 동화책</h2>
@@ -601,7 +608,7 @@
       if (!a) return;
       var store = /play\.google\.com\/store/.test(a.href) ? 'android' : /apps\.apple\.com\//.test(a.href) ? 'ios' : '';
       if (!store) return;
-      var pos = a.closest('#heroStores') ? 'hero' : a.closest('#endStores') ? 'bottom' : a.closest('#bar') ? 'bar' : a.id === 'navCta' ? 'nav' : 'other';
+      var pos = a.closest('#midStores') ? 'mid' : a.closest('#endStores') ? 'bottom' : a.closest('#bar') ? 'bar' : a.id === 'navCta' ? 'nav' : 'other';
       S.track(store, S.medium, pos);
     }, true);
     // 후기 링크·메뉴 클릭
@@ -631,11 +638,13 @@
     }
 
     // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
-    var bar = document.getElementById('bar'), hero = document.getElementById('heroStores'), end = document.getElementById('endStores');
+    // 첫 화면(제목)을 지나면 나타나고, 가운데·마지막 스토어 버튼이 보이는 동안은 숨김
+    var bar = document.getElementById('bar'), hero = document.querySelector('.hero'), mid = document.getElementById('midStores'), end = document.getElementById('endStores');
     if (!('IntersectionObserver' in window)) { bar.classList.add('on'); return; }
-    var past = false, endIn = false;
-    function upd(){ bar.classList.toggle('on', past && !endIn); }
+    var past = false, midIn = false, endIn = false;
+    function upd(){ bar.classList.toggle('on', past && !midIn && !endIn); }
     new IntersectionObserver(function(e){ past = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(hero);
+    new IntersectionObserver(function(e){ midIn = e[0].isIntersecting; upd(); }).observe(mid);
     new IntersectionObserver(function(e){ endIn = e[0].isIntersecting; upd(); }).observe(end);
   })();
 </script>
