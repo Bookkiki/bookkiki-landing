@@ -38,22 +38,24 @@
     }
     function ios(medium) { return APP_STORE + '?ct=' + ('landing_' + medium + '_' + src).slice(0, 40) + '&mt=8'; }
 
-    // Google Analytics 4: 스토어 버튼 클릭·자동 이동을 store_click 이벤트로 센다.
-    //  파라미터 store(ios|android) · src(ad|direct) · medium(위와 같음) · position(hero|bottom|bar|nav|auto)
-    //  store_click은 클릭(또는 자동 이동) 순간 sendBeacon으로 GA 수집 주소에 바로 보낸다.
+    // Google Analytics 4 이벤트 (모두 src·medium을 함께 보냄)
+    //  store_click: store(ios|android) · position(hero|bottom|bar|nav|auto) — 스토어 버튼 클릭·자동 이동
+    //  section_view: section(hero|benefit|books|compare|how|reviews|get) — 화면에 1초 이상 보인 섹션, 섹션마다 1회
+    //  tab_click: tab(classic|story|diary) — 만드는 방법 탭 전환 / review_click: 후기 링크 / nav_click: target(메뉴 대상)
+    //  이벤트는 그 순간 sendBeacon으로 GA 수집 주소에 바로 보낸다.
     //  sendBeacon은 페이지가 떠나도 브라우저가 끝까지 보내 주므로 이동을 늦추거나 막지 않는다.
     //  광고 신호·구글 신호는 끈다(IP 익명화는 GA4 기본). ?ga_debug=1이면 GA4 DebugView에 보인다.
     var GA_ID = 'G-4N1YBK6QTL', gaDebug = /[?&]ga_debug=1/.test(q);
     var now = Math.floor(Date.now() / 1000);
     var ga = { cid: Math.floor(Math.random() * 2147483647) + '.' + now, sid: String(now), first: true, seq: 0 };
-    function track(store, medium, position) {
+    function send(name, params) {
       try {
         var p = {
           v: '2', tid: GA_ID, cid: ga.cid, sid: ga.sid, sct: '1', seg: ga.first ? '0' : '1', _s: String(++ga.seq), npa: '1',
           ul: (navigator.language || '').toLowerCase(), sr: screen.width + 'x' + screen.height,
-          dl: location.href, dt: document.title, en: 'store_click',
-          'ep.store': store, 'ep.src': src, 'ep.medium': medium, 'ep.position': position
+          dl: location.href, dt: document.title, en: name, 'ep.src': src
         };
+        for (var n in params) p['ep.' + n] = params[n];
         if (ga.first) { p._ss = '1'; p._fv = '1'; p._nsi = '1'; }
         if (document.referrer) p.dr = document.referrer;
         if (gaDebug) p._dbg = '1';
@@ -68,7 +70,8 @@
     }
 
     // 페이지 버튼에서 쓰도록 남겨 둔다(버튼 클릭은 인앱이면 그 앱 이름, 아니면 web).
-    window.BK_STORE = { play: play, ios: ios, medium: inapp || 'web', track: track };
+    function track(store, medium, position) { send('store_click', { store: store, medium: medium, position: position }); }
+    window.BK_STORE = { play: play, ios: ios, medium: inapp || 'web', track: track, send: send };
     var stay = /[?&]stay=1/.test(q);
     // 인스타·페북·카톡 등 앱 안 브라우저에서는 스토어 주소로 넘기면 빈 흰 화면이 된다.
     // 그래서 이동하지 않고 이 페이지(스토어 버튼)를 보여 주고, 버튼을 누르면 스토어 앱이 열린다.
@@ -522,7 +525,10 @@
       });
     }
     tabs.forEach(function(t, i){
-      t.addEventListener('click', function(){ select(t); });
+      t.addEventListener('click', function(){
+        if (t.getAttribute('aria-selected') !== 'true' && S && S.send) S.send('tab_click', { medium: S.medium, tab: t.id.replace(/^t-/, '') });
+        select(t);
+      });
       t.addEventListener('keydown', function(e){
         var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
         if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus(); }
@@ -549,6 +555,31 @@
       var pos = a.closest('#heroStores') ? 'hero' : a.closest('#endStores') ? 'bottom' : a.closest('#bar') ? 'bar' : a.id === 'navCta' ? 'nav' : 'other';
       S.track(store, S.medium, pos);
     }, true);
+    // 후기 링크·메뉴 클릭
+    document.addEventListener('click', function(e){
+      if (!S || !S.send) return;
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || /play\.google\.com\/store|apps\.apple\.com\//.test(a.href)) return;
+      if (a.closest('#reviews')) S.send('review_click', { medium: S.medium, link: a.classList.contains('rv-link') ? 'text' : 'media' });
+      else if (a.closest('#nav')) S.send('nav_click', { medium: S.medium, target: (a.getAttribute('href') || '').replace(/^#/, '') === '../' ? 'home' : (a.getAttribute('href') || '').replace(/^#/, '') });
+    }, true);
+    // 섹션 노출: 섹션의 50% 이상(섹션이 화면보다 크면 화면의 50% 이상)이 1초 이상 보이면 1회
+    var SECTIONS = { hero: document.querySelector('.hero'), benefit: document.getElementById('benefit'), books: document.querySelector('.pile'),
+      compare: document.getElementById('compare'), how: document.getElementById('how'), reviews: document.getElementById('reviews'), get: document.getElementById('get') };
+    if (S && S.send && 'IntersectionObserver' in window) {
+      var timers = {}, seen = {};
+      var so = new IntersectionObserver(function(es){
+        es.forEach(function(en){
+          var id = en.target.getAttribute('data-sec'), vh = window.innerHeight || 1;
+          var on = en.isIntersecting && (en.intersectionRatio >= 0.5 || en.intersectionRect.height >= vh * 0.5);
+          if (on && !timers[id] && !seen[id]) timers[id] = setTimeout(function(){
+            seen[id] = true; so.unobserve(en.target); S.send('section_view', { medium: S.medium, section: id });
+          }, 1000);
+          if (!on && timers[id]) { clearTimeout(timers[id]); timers[id] = 0; }
+        });
+      }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+      Object.keys(SECTIONS).forEach(function(k){ var el = SECTIONS[k]; if (el) { el.setAttribute('data-sec', k); so.observe(el); } });
+    }
 
     // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
     var bar = document.getElementById('bar'), hero = document.getElementById('heroStores'), end = document.getElementById('endStores');
