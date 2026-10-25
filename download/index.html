@@ -42,8 +42,9 @@
     // Google Analytics 4 이벤트 (모두 src·ctx를 함께 보냄)
     //  ctx: 들어온 곳(redirect|ig_inapp|fb_inapp|threads_inapp|kakao_inapp|naver_inapp|line_inapp|web)
     //   ※ 이름을 medium·source·campaign 등으로 쓰면 GA가 캠페인 값으로 읽어 세션 소스/매체(utm)를 덮어쓰므로 쓰지 않는다.
-    //  page_view · store_click: store(ios|android) · position(hero|bottom|bar|nav|auto)
-    //  section_view: section(hero|benefit|books|compare|how|reviews|get) — 화면에 1초 이상 보인 섹션, 섹션마다 1회
+    //  page_view · store_click: store(ios|android) · position(books_benefit|bottom|bar|nav|auto)
+    //   books_benefit = 책 사진 바로 아래 혜택 카드 밑 버튼(10-25~). 옛 값: hero(~10-24 #89 전)·mid(#89~#90)
+    //  section_view: section(hero|books|benefit|compare|how|reviews|get, 페이지 순서) — 화면에 1초 이상 보인 섹션, 섹션마다 1회
     //  tab_click: tab(classic|story|diary) / review_click: link / nav_click: target
     //  보통은 gtag.js가 페이지 조회·세션을 맡고, 이벤트는 sendBeacon으로 같은 사용자(cid)·세션(sid)에 붙여 보낸다.
     //  gtag.js가 늦거나 막히면(일부 인앱 브라우저) 이 스크립트가 페이지 조회부터 직접 보내고 gtag는 끈다.
@@ -213,8 +214,9 @@
     linear-gradient(#fffafc,#fff 92%)}
   .hero{padding-top:28px;padding-bottom:48px;text-align:center}
   .hero .sub{margin:16px auto 0;font-size:16px;color:var(--muted);line-height:1.6}
-  .buy{text-align:center;padding-bottom:0}
+  .buy{text-align:center;padding-top:8px;padding-bottom:8px}
   .buy .promo{margin-top:0}
+  .buy .stores{margin-top:16px}
   .promo{margin:22px auto 0;max-width:360px;text-align:left;border-radius:var(--r);background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow);padding:14px 16px 4px}
   .promo-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 8px;font-size:15px;font-weight:700;letter-spacing:-.2px}
   .promo-h em{font-style:normal;color:var(--coral)}
@@ -315,6 +317,7 @@
     .hero .sub{font-size:18px}
     .hero .sub br{display:none}
     .pile{padding-bottom:24px}
+    .buy{padding-top:16px;padding-bottom:16px}
     .cmp{grid-template-columns:1fr 1fr;gap:20px;align-items:start}
     .cmp-card{padding:32px 30px 30px}
     .rail figure{flex-basis:380px}
@@ -332,7 +335,7 @@
   <nav class="nav" id="nav" aria-label="페이지 메뉴">
     <a class="brand" href="../"><img src="../assets/logo.svg" alt=""><span>북끼끼</span></a>
     <div class="nav-links" id="navLinks">
-      <a href="#compare">차별점</a><a href="#how">기능</a><a href="#reviews">후기</a><a href="#benefit">혜택</a>
+      <a href="#benefit">혜택</a><a href="#compare">차별점</a><a href="#how">기능</a><a href="#reviews">후기</a>
     </div>
     <div class="nav-cta-wrap" id="navStores"><a class="nav-store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8" aria-label="App Store에서 북끼끼 받기"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span>App Store</span></a><a class="nav-store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app&amp;referrer=utm_source%3Dbookkiki_landing%26utm_campaign%3Ddownload_page" aria-label="Google Play에서 북끼끼 받기"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span>Google Play</span></a></div>
     <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -352,6 +355,19 @@
 </div>
 
 <main>
+<section class="buy" id="buy">
+  <div class="wrap">
+    <aside class="promo" id="benefit" aria-label="진행 중인 혜택">
+      <p class="promo-h"><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span><span class="until">10월 27일까지</span></p>
+      <ul>
+        <li><span class="t">동화책 최대 4권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span><span class="free">무료</span></li>
+        <li><span class="t">실물책 <s>37,000원</s> <strong>21,000원</strong><small>정가에서 할인 중이에요</small></span><span class="off">43% 할인</span></li>
+      </ul>
+    </aside>
+    <div class="stores" id="benefitStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></div>
+  </div>
+</section>
+
 <section id="compare">
   <div class="wrap">
     <div class="head">
@@ -453,17 +469,6 @@
   </div>
 </section>
 
-<section class="buy canvas" id="buy">
-  <div class="wrap">
-    <aside class="promo" id="benefit" aria-label="진행 중인 혜택">
-      <p class="promo-h"><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span><span class="until">10월 27일까지</span></p>
-      <ul>
-        <li><span class="t">동화책 최대 4권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span><span class="free">무료</span></li>
-        <li><span class="t">실물책 <s>37,000원</s> <strong>21,000원</strong><small>정가에서 할인 중이에요</small></span><span class="off">43% 할인</span></li>
-      </ul>
-    </aside>
-  </div>
-</section>
 
 <section class="final canvas" id="get">
   <div class="wrap">
@@ -610,7 +615,7 @@
       if (!a) return;
       var store = /play\.google\.com\/store/.test(a.href) ? 'android' : /apps\.apple\.com\//.test(a.href) ? 'ios' : '';
       if (!store) return;
-      var pos = a.closest('#endStores') ? 'bottom' : a.closest('#bar') ? 'bar' : a.closest('#nav') ? 'nav' : 'other';
+      var pos = a.closest('#benefitStores') ? 'books_benefit' : a.closest('#endStores') ? 'bottom' : a.closest('#bar') ? 'bar' : a.closest('#nav') ? 'nav' : 'other';
       S.track(store, S.medium, pos);
     }, true);
     // 후기 링크·메뉴 클릭
