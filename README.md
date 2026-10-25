@@ -33,6 +33,8 @@
 
 기존 version의 원문과 manifest 항목은 수정하거나 삭제할 수 없다. 개정 문서는 새 version으로 추가한다. 검증·장애 복구 절차는 [`docs/policy-document-recovery.md`](docs/policy-document-recovery.md)에 기록한다.
 
+AI 인터뷰의 OpenAI 전환 고지는 `2026-10-26` 판이다. `scripts/build-bk-796-openai-interview.py`가 직전 공개판에서 인터뷰 동의서 2종·개인정보처리방침·변경 안내를 만들고, 기존 Anthropic 원문과 동의 증빙용 해시는 보존한다. `/privacy.html`은 현재 개인정보처리방침으로 이동한다. 공개 원문 확인과 모바일 고지·서버 재동의 차단 검증을 마친 뒤 OpenAI 인터뷰 처리를 활성화한다.
+
 로컬 원문 무결성은 다음 명령으로 확인한다.
 
 ```bash
