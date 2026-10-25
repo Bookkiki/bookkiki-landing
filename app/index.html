@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>북끼끼 앱 받기</title>
+<title>북끼끼</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="우리 아이가 주인공인 영어 동화책, 북끼끼 앱을 받아 보세요. 아이폰은 App Store, 안드로이드는 Google Play에서 받을 수 있습니다.">
 <meta property="og:title" content="북끼끼 - 우리 아이가 주인공인 영어 동화책">
@@ -22,7 +22,8 @@
   //  - /app (variant=auto): 아이폰·아이패드는 App Store로, 안드로이드는 Google Play로 곧바로 보낸다.
   //    인스타·페이스북 등 앱 안 브라우저에서도 이동한다(/download는 인앱이면 이동하지 않고 페이지를 보여 줌).
   //    이동이 막히면 이 화면(스토어 카드)이 남는다. 데스크톱은 이동하지 않는다. ?stay=1이면 이동하지 않는다(확인용).
-  //  - /app?v=card (variant=card): 이동하지 않고 스토어 카드 화면에 머문다. 기기에 맞는 스토어 배지를 크게 보여 준다.
+  //  - /app?v=card (variant=card): 이동하지 않고 스토어 카드 화면에 머문다.
+  //  화면은 모든 경우 같다: 앱 아이콘·북끼끼·공식 App Store / Google Play 배지 두 개(안내 문구 없음). 데스크톱만 /download 작은 링크.
   //
   // 스토어 집계 값은 /download(landing_* / bookkiki_landing)와 겹치지 않게 따로 둔다.
   //  - App Store: ?pt=129374064&ct=<go|gocard>_<ctx>_<ad|direct>&mt=8  (App Store Connect → 분석 → 획득 → 캠페인)
@@ -134,56 +135,38 @@
   })();
 </script>
 <style>
-  :root{--canvas:#f6f5f4;--surface:#fff;--ink:rgba(0,0,0,.95);--ink2:#31302e;--muted:#615d59;--coral:#D9614F;--app:#FBF6EF}
+  :root{--canvas:#f6f5f4;--surface:#fff;--ink:rgba(0,0,0,.95);--ink2:#31302e;--muted:#615d59}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{margin:0;background:var(--canvas);color:var(--ink);font-family:Pretendard,Inter,-apple-system,system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all}
   a{color:inherit;text-decoration:none}
-  h1,p,figure{margin:0}
-  main{max-width:440px;margin:0 auto;padding:28px 16px 36px}
-  .card{background:var(--surface);border-radius:24px;padding:26px 20px 22px;text-align:center;box-shadow:rgba(0,0,0,.02) 0 .8px 2.9px,rgba(0,0,0,.04) 0 4px 18px}
+  h1{margin:0}
+  main{max-width:440px;min-height:100vh;min-height:100svh;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;justify-content:center}
+  .card{background:var(--surface);border-radius:24px;padding:32px 20px 30px;text-align:center;box-shadow:rgba(0,0,0,.02) 0 .8px 2.9px,rgba(0,0,0,.04) 0 4px 18px}
   .icon{display:block;width:88px;height:88px;margin:0 auto;border-radius:20px;box-shadow:0 6px 18px -8px rgba(60,40,30,.35)}
   h1{margin-top:14px;font-size:26px;font-weight:800;letter-spacing:-.04em;line-height:1.2}
-  .lead{margin-top:6px;font-size:16px;font-weight:600;color:var(--coral);letter-spacing:-.02em}
-  .status{margin-top:12px;font-size:14px;color:var(--muted)}
-  .status:empty{display:none}
-  /* 공식 스토어 배지(변형하지 않고 크기만 맞춤). Google Play PNG는 위아래 여백이 있어(보이는 높이 = 76.8%) 음수 여백으로 맞춘다. */
-  .badges{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 14px}
+  /* 공식 스토어 배지 두 개를 위아래로, 보이는 높이를 같게(변형하지 않고 크기만 맞춤).
+     Google Play PNG는 위아래 투명 여백이 있어(보이는 높이 = 76.8%) 음수 여백으로 맞춘다. */
+  .badges{margin-top:24px;display:flex;flex-direction:column;align-items:center;gap:12px}
   .badge{display:block;line-height:0;border-radius:10px;transition:transform .08s}
   .badge:active{transform:scale(.97)}
-  .badge img{display:block;height:auto}
-  .b-ios img{height:56px;width:auto}
-  .b-play img{height:73px;width:auto;margin:-8.5px 0}
-  .desk .b-ios img{height:44px}
-  .desk .b-play img{height:57px;margin:-6.6px 0}
-  .alt{display:inline-block;margin-top:14px;font-size:14px;color:var(--muted)}
-  .alt a{font-weight:600;color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
-  .shots{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .shots img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:14px;background:var(--app)}
-  .cap{margin-top:12px;text-align:center;font-size:13px;color:var(--muted)}
-  .more{display:block;margin-top:16px;text-align:center;font-size:14px;font-weight:600;color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
+  .badge img{display:block}
+  .b-ios img{height:60px;width:auto}
+  .b-play img{height:78px;width:auto;margin:-9px 0}
+  .more{display:block;margin-top:16px;text-align:center;font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
   [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
-  <section class="card" aria-label="북끼끼 앱 받기">
+  <section class="card" aria-label="북끼끼">
     <img class="icon" src="../assets/app-icon-192.webp" width="88" height="88" alt="북끼끼 앱 아이콘">
     <h1>북끼끼</h1>
-    <p class="lead">우리 아이가 주인공인 영어 동화책</p>
-    <p class="status" id="status" aria-live="polite"></p>
     <div class="badges" id="badges">
-      <a class="badge b-ios" id="iosBtn" data-store="ios" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=go_web_direct&amp;mt=8"><img src="../assets/badges/app-store-kr.svg" width="182" height="56" alt="App Store에서 다운로드하기"></a>
-      <a class="badge b-play" id="playBtn" data-store="android" href="https://play.google.com/store/apps/details?id=com.bookkiki.app&amp;referrer=utm_source%3Dbookkiki_go%26utm_medium%3Dweb%26utm_campaign%3Dgo_link%26utm_content%3Ddirect"><img src="../assets/badges/google-play-ko.png" width="189" height="73" alt="Google Play에서 다운로드"></a>
+      <a class="badge b-ios" id="iosBtn" data-store="ios" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=go_web_direct&amp;mt=8"><img src="../assets/badges/app-store-kr.svg" width="195" height="60" alt="App Store"></a>
+      <a class="badge b-play" id="playBtn" data-store="android" href="https://play.google.com/store/apps/details?id=com.bookkiki.app&amp;referrer=utm_source%3Dbookkiki_go%26utm_medium%3Dweb%26utm_campaign%3Dgo_link%26utm_content%3Ddirect"><img src="../assets/badges/google-play-ko.png" width="202" height="78" alt="Google Play"></a>
     </div>
-    <p class="alt" id="alt" hidden></p>
   </section>
-  <div class="shots">
-    <img src="../assets/download/slide-classic-1.webp" width="800" height="1000" decoding="async" alt="옛날 동화·고전 책장 화면: 전체 30권 중 오즈의 마법사(추천 나이 5-9세)">
-    <img src="../assets/download/slide-classic-2.webp" width="800" height="1000" decoding="async" alt="오즈의 마법사 등장인물 카드: 도로시, 허수아비, 양철 나무꾼, 겁쟁이 사자, 모두 우리 아이가 될 수 있어요">
-    <img src="../assets/download/slide-classic-page-v2.webp" width="800" height="1000" decoding="async" alt="완성된 오즈의 마법사 본문: 회오리바람에 날아오르는 집 창밖으로 토토를 안은 아이, 글상자 A big wind comes., 효과음 Whoosh!, 말풍선 Hold on, Toto!">
-  </div>
-  <p class="cap">고른 이야기 속 주인공이 우리 아이가 돼요</p>
   <a class="more" id="more" href="../download/" hidden>북끼끼 자세히 보기</a>
 </main>
 <script>
@@ -191,36 +174,12 @@
     var G = window.BK_GO;
     if (!G) return;
     var ios = document.getElementById('iosBtn'), play = document.getElementById('playBtn');
-    var badges = document.getElementById('badges'), alt = document.getElementById('alt');
     ios.href = G.ios; play.href = G.play;
     function onTap(e) { G.track(e.currentTarget.getAttribute('data-store')); }
     ios.addEventListener('click', onTap, true);
     play.addEventListener('click', onTap, true);
-
-    if (G.store) {
-      // 휴대폰: 이 기기의 스토어 배지 하나만 크게, 다른 스토어는 작은 글자 링크로.
-      var mine = G.store === 'ios' ? ios : play, other = G.store === 'ios' ? play : ios;
-      badges.removeChild(other);
-      var a = document.createElement('a');
-      a.href = other.href;
-      a.setAttribute('data-store', other.getAttribute('data-store'));
-      a.textContent = G.store === 'ios' ? 'Google Play에서 받기' : 'App Store에서 받기';
-      a.addEventListener('click', onTap, true);
-      alt.appendChild(document.createTextNode(G.store === 'ios' ? '안드로이드 휴대폰이라면 ' : '아이폰이라면 '));
-      alt.appendChild(a);
-      alt.hidden = false;
-      if (G.auto) {
-        var status = document.getElementById('status');
-        status.textContent = (G.store === 'ios' ? 'App Store' : 'Google Play') + '로 이동하고 있어요';
-        // 이동이 막혀 화면에 남아 있으면 버튼 안내로 바꾼다.
-        setTimeout(function () { status.textContent = '자동으로 열리지 않으면 아래 버튼을 눌러 주세요'; }, 2500);
-      }
-    } else {
-      // 데스크톱: 두 배지를 같은 크기로, 자세한 안내는 /download로.
-      badges.classList.add('desk');
-      document.getElementById('status').textContent = '휴대폰에서 북끼끼 앱을 받아 보세요';
-      document.getElementById('more').hidden = false;
-    }
+    // 데스크톱(휴대폰 스토어가 없는 기기)만 자세한 안내 링크를 작게 보여 준다.
+    if (!G.store) document.getElementById('more').hidden = false;
   })();
 </script>
 </body>
