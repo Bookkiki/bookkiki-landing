@@ -938,9 +938,53 @@
       "sha256": "84fe519207431f2cb990b4e19527ef1e7cc9398b7706fc198f4d86de76e1a21c",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-10-24/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-10-24",
+      "aliases": []
+    },
+    {
+      "termsCode": "overseas_openai_interview_consent",
+      "version": "2026-10-26",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-26",
+      "effectiveAt": "2026-10-26",
+      "sha256": "d4e6b13fa35decbd2b2044c33bd213d0fce02bd5165c2bd7144d66d78f5683fe",
+      "sourcePath": "ko-KR/consents/overseas-transfer/overseas_openai_interview_consent/2026-10-26/index.html",
+      "publicPath": "/ko-KR/consents/overseas-transfer/overseas_openai_interview_consent/2026-10-26",
+      "aliases": []
+    },
+    {
+      "termsCode": "optional_ai_interview_consent",
+      "version": "2026-10-26",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-26",
+      "effectiveAt": "2026-10-26",
+      "sha256": "ce3f638f0b56937a899bfe6d4ee77fcfe0eda9fc5e6c61dcd6ef7e62a8fe902b",
+      "sourcePath": "ko-KR/consents/personal-information-collection/optional_ai_interview_consent/2026-10-26/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/optional_ai_interview_consent/2026-10-26",
+      "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-10-26",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-26",
+      "effectiveAt": "2026-10-26",
+      "sha256": "8070f7a526421ebc3fc7f4f9508bad19e68b1077ca00323d49fa261808215a33",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-10-26/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-10-26",
       "aliases": [
         "/ko-KR/policies/privacy-policy"
       ]
+    },
+    {
+      "termsCode": "ai_interview_openai_revision_notice",
+      "version": "2026-10-26",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-26",
+      "effectiveAt": "2026-10-26",
+      "sha256": "834e3d87bcc07ca25178def9e7f9b1c978bef52a30eddd0a665f0e19a0ce4e42",
+      "sourcePath": "ko-KR/notices/ai-interview-openai/2026-10-26/index.html",
+      "publicPath": "/ko-KR/notices/ai-interview-openai/2026-10-26",
+      "aliases": []
     }
   ]
 }
