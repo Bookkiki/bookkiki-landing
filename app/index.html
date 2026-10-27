@@ -30,6 +30,10 @@
   //  - Google Play: referrer=utm_source=bookkiki_go&utm_medium=<ctx>&utm_campaign=<go_link|go_card>&utm_content=<ad|direct>
   //  - ctx: ig_inapp · fb_inapp · threads_inapp · kakao_inapp · naver_inapp · line_inapp · web
   //  - ad: 주소에 fbclid·gclid·utm_source가 있을 때(광고 클릭), 아니면 direct
+  //  광고 주소에 utm_campaign·utm_content가 있으면 스토어에서 광고·소재별로 설치를 나눠 볼 수 있게 그 값을 넘긴다.
+  //  - Google Play: utm_campaign=<광고 utm_campaign>, utm_content=<광고 utm_content> (없는 값은 위 기본값)
+  //  - App Store: ct=<go|gocard>_<광고 utm_content> (ct는 40자까지라 소재 이름만 넣는다. OS별 캠페인이 하나씩이라 캠페인은 OS로 구분)
+  //  - 영문·숫자·_·-·. 만 남기고 40자로 자른다.
   //
   // GA4(G-4N1YBK6QTL, /download와 같은 웹 속성). 페이지 경로 /app 으로 구분한다. gtag.js는 받지 않고 직접 보낸다.
   //  - page_view: ctx, src, variant
@@ -55,9 +59,17 @@
       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
     var stay = /[?&]stay=1/.test(q), gaDebug = /[?&]ga_debug=1/.test(q);
     var card = variant === 'card';
-    var iosUrl = APP_STORE + '?pt=' + APP_STORE_PT + '&ct=' + ((card ? 'gocard_' : 'go_') + ctx + '_' + src).slice(0, 40) + '&mt=8';
+    function utm(name) {
+      var m = q.match(new RegExp('[?&]' + name + '=([^&#]*)'));
+      if (!m) return '';
+      try { m = decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (e) { m = m[1]; }
+      return m.replace(/[^A-Za-z0-9_.-]/g, '').slice(0, 40);
+    }
+    var adCampaign = utm('utm_campaign'), adContent = utm('utm_content');
+    var iosUrl = APP_STORE + '?pt=' + APP_STORE_PT + '&ct=' +
+      ((card ? 'gocard_' : 'go_') + (adContent || ctx + '_' + src)).slice(0, 40) + '&mt=8';
     var playUrl = PLAY + '&referrer=' + encodeURIComponent('utm_source=bookkiki_go&utm_medium=' + ctx +
-      '&utm_campaign=' + (card ? 'go_card' : 'go_link') + '&utm_content=' + src);
+      '&utm_campaign=' + (adCampaign || (card ? 'go_card' : 'go_link')) + '&utm_content=' + (adContent || src));
 
     // 사용자 id(cid)·세션 id(sid): 이 사이트의 _ga 쿠키가 있으면 이어 쓰고, 없으면 페이지당 한 번 만든다(쿠키는 쓰지 않음).
     var ga = (function () {
