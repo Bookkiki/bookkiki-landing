@@ -114,3 +114,5 @@ python3 -m http.server 8765 --bind 127.0.0.1
 4. 인증서 발급까지 수십 분 걸린다. `https://bookkiki.com` 이 열리면 PortOne 신청서의 서비스 URL, 이니시스 사전심사 URL과 일치하는지 확인한다.
 
 S3 + CloudFront로 옮기려면 `bookkiki-infrastructure` 에 정적 사이트 모듈을 추가한다.
+
+동화 문맥 연출·자동 음성 준비 고지는 2026-10-28 판이다. `optional_story_narration_consent`와 `overseas_openai_elevenlabs_story_narration_consent`를 새로 등록하며 질문 TTS·기존 동의서 원문은 보존한다. 공개 원문과 앱 안내·서버의 새 동의 검사를 함께 배포한 뒤 처리한다.
