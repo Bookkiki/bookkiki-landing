@@ -1015,6 +1015,28 @@
       "sha256": "6266c2829a45160719c232008f309a09f8f53586f93e12181d0565b804b57dbd",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-10-27/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-10-27",
+      "aliases": []
+    },
+    {
+      "termsCode": "airbridge_analytics_consent",
+      "version": "2026-10-27",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-27",
+      "effectiveAt": "2026-10-27",
+      "sha256": "2756e8738c09a6210ee1e77e45599c36e386939ce2513f58721aa8b2c8534f55",
+      "sourcePath": "ko-KR/consents/personal-information-collection/airbridge_analytics_consent/2026-10-27/index.html",
+      "publicPath": "/ko-KR/consents/personal-information-collection/airbridge_analytics_consent/2026-10-27",
+      "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-10-27-1",
+      "locale": "ko-KR",
+      "announcedAt": "2026-10-27",
+      "effectiveAt": "2026-10-27",
+      "sha256": "e6fb8af01cc2aa1fe91bc05221781ed75f1ae05f1302f57a01503db0192b6970",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-10-27-1/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-10-27-1",
       "aliases": [
         "/ko-KR/policies/privacy-policy"
       ]
