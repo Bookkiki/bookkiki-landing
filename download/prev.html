@@ -645,13 +645,14 @@
     }
 
     // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
-    // 첫 화면(제목)을 지나면 나타나고, 맨 아래(get) 스토어 버튼이 보이는 동안은 숨김
-    var bar = document.getElementById('bar'), hero = document.querySelector('.hero'), end = document.getElementById('endStores');
+    // 첫 화면(제목)을 지나면 나타나고, 맨 아래(get) 스토어 버튼이나 책 사진 아래(혜택) 스토어 버튼이 조금이라도 보이는 동안은 숨김
+    var bar = document.getElementById('bar'), hero = document.querySelector('.hero'), end = document.getElementById('endStores'), mid = document.getElementById('benefitStores');
     if (!('IntersectionObserver' in window)) { bar.classList.add('on'); return; }
-    var past = false, endIn = false;
-    function upd(){ bar.classList.toggle('on', past && !endIn); }
+    var past = false, endIn = false, midIn = false;
+    function upd(){ bar.classList.toggle('on', past && !endIn && !midIn); }
     new IntersectionObserver(function(e){ past = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(hero);
     new IntersectionObserver(function(e){ endIn = e[0].isIntersecting; upd(); }).observe(end);
+    if (mid) new IntersectionObserver(function(e){ midIn = e[0].isIntersecting; upd(); }).observe(mid);
   })();
 </script>
 </body>
