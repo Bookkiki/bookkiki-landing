@@ -1084,6 +1084,28 @@
       "sourcePath": "ko-KR/notices/story-narration-direction/2026-10-28/index.html",
       "publicPath": "/ko-KR/notices/story-narration-direction/2026-10-28",
       "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy",
+      "version": "2026-11-02",
+      "locale": "ko-KR",
+      "announcedAt": "2026-11-02",
+      "effectiveAt": "2026-11-09",
+      "sha256": "09553088f10420e7e60872065fa9f6c347c87dab3941412c5eb8c71820fbda26",
+      "sourcePath": "ko-KR/policies/privacy-policy/2026-11-02/index.html",
+      "publicPath": "/ko-KR/policies/privacy-policy/2026-11-02",
+      "aliases": []
+    },
+    {
+      "termsCode": "privacy_policy_guest_browsing_notice",
+      "version": "2026-11-02",
+      "locale": "ko-KR",
+      "announcedAt": "2026-11-02",
+      "effectiveAt": "2026-11-02",
+      "sha256": "b914c1a93d88eb0db703d508405431b79b4ceee21cf9cf9286933946723d8378",
+      "sourcePath": "ko-KR/notices/privacy-policy-guest-browsing/2026-11-02/index.html",
+      "publicPath": "/ko-KR/notices/privacy-policy-guest-browsing/2026-11-02",
+      "aliases": []
     }
   ]
 }
