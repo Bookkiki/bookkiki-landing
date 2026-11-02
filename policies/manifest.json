@@ -1070,9 +1070,7 @@
       "sha256": "2711feca78bc06d91a43027d8a7e60d8bd7df87aecae2d2d4045a6f268a4cf7e",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-10-28/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-10-28",
-      "aliases": [
-        "/ko-KR/policies/privacy-policy"
-      ]
+      "aliases": []
     },
     {
       "termsCode": "story_narration_direction_notice",
@@ -1094,7 +1092,9 @@
       "sha256": "09553088f10420e7e60872065fa9f6c347c87dab3941412c5eb8c71820fbda26",
       "sourcePath": "ko-KR/policies/privacy-policy/2026-11-02/index.html",
       "publicPath": "/ko-KR/policies/privacy-policy/2026-11-02",
-      "aliases": []
+      "aliases": [
+        "/ko-KR/policies/privacy-policy"
+      ]
     },
     {
       "termsCode": "privacy_policy_guest_browsing_notice",
