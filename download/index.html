@@ -330,6 +330,7 @@
     .rail figure{flex-basis:380px}
     .rv-box{grid-template-columns:340px 1fr;gap:56px;align-items:center}
     .rv-grid{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-columns:auto;gap:40px;overflow:visible;padding:0}
+    .rv-grid.rv-many{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 28px}
     .rv-media{margin:0}
     .rv-side{width:auto;margin:0}
     .bar{display:none}
@@ -462,15 +463,15 @@
 <section id="reviews">
   <div class="wrap">
     <div class="head">
-      <p class="kicker">고객님·체험 후기</p>
+      <p class="kicker">제품 제공 체험 후기</p>
       <h2>받아 보신 분들의<br>실물책 후기</h2>
     </div>
     <div class="rv-box" id="rvBox">
-      <a class="rv-media" href="https://www.instagram.com/stories/highlights/18095776220444865/" target="_blank" rel="noopener"><img src="../assets/download/review-book.webp" width="732" height="825" loading="lazy" decoding="async" alt="고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책"></a>
+      <a class="rv-media" href="https://www.instagram.com/p/DfWoze5BtU4/" target="_blank" rel="noopener"><img src="../assets/download/review-yulamumm.webp" width="732" height="825" loading="lazy" decoding="async" alt="제품 제공 후기 영상 장면: 지은이에 아이 이름이 들어간 실물 하드커버 동화책 The Mullet Net 표지"></a>
       <div class="rv-side">
-        <div class="rv-who"><img src="../assets/download/kiki.webp" alt="" width="44" height="44" loading="lazy"><span><b>실제 고객님 후기 영상</b><small>인스타그램 스토리</small></span></div>
-        <p class="rv-quote">“실물 동화책 배송 · 재미난 이야기 세상”</p>
-        <a class="rv-link" href="https://www.instagram.com/stories/highlights/18095776220444865/" target="_blank" rel="noopener">인스타그램에서 고객님 후기 보기</a>
+        <div class="rv-who"><img src="../assets/download/kiki.webp" alt="" width="44" height="44" loading="lazy"><span><b>제품 제공 후기 영상</b><small>인스타그램 릴스 · 협찬</small></span></div>
+        <p class="rv-quote">“본인이 한 상상대로 책이 진행되니 요즘 제일 최애책이 되버렸어요”</p>
+        <a class="rv-link" href="https://www.instagram.com/p/DfWoze5BtU4/" target="_blank" rel="noopener">인스타그램에서 후기 보기</a>
       </div>
     </div>
     <div class="rv-thumbs" id="rvThumbs" hidden><p>다른 후기도 눌러서 보세요</p><ul></ul></div>
@@ -489,18 +490,53 @@
 <footer><a href="../">북끼끼 홈페이지</a><a href="https://www.instagram.com/bookkiki.official/">인스타그램</a></footer>
 <nav class="bar" id="bar" aria-label="앱 받기"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></nav>
 <script>
-  // 고객님 후기: 항목을 이 배열에 추가하면 2개부터 카드로 나란히 보여요(모바일은 옆으로 넘겨 보기).
+  // 고객님 후기: 항목을 이 배열에 추가하면 2개부터 카드로 나란히 보여요(모바일은 옆으로 넘겨 보기, 데스크톱은 3개부터 3열).
   // video(mp4 주소)가 있으면 화면 안에서 재생하고, 없으면 href(인스타그램)를 새 탭으로 열어요.
   // quote에는 고객님이 실제로 쓰신 문구만 넣어 주세요.
   var REVIEWS = [
     {
+      // 2026-11-06 추가(3건): 모두 원 게시물에 '#협찬'·'#광고' 표시가 있는 제품 제공 릴스라 '제품 제공'을 꼭 남긴다. 최신순.
+      // @yulamumm 2026-11-05 #협찬
+      poster: '../assets/download/review-yulamumm.webp',
+      alt: '제품 제공 후기 영상 장면: 지은이에 아이 이름이 들어간 실물 하드커버 동화책 The Mullet Net 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 협찬',
+      avatar: '../assets/download/kiki.webp',
+      quote: '본인이 한 상상대로 책이 진행되니 요즘 제일 최애책이 되버렸어요',
+      href: 'https://www.instagram.com/p/DfWoze5BtU4/',
+      video: ''
+    },
+    {
+      // @kkumpu_mom 2026-11-01 #협찬
+      poster: '../assets/download/review-kkumpu.webp',
+      alt: '제품 제공 후기 영상 장면: 태블릿 앞 테이블에 놓인 실물 하드커버 동화책 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 협찬',
+      avatar: '../assets/download/kiki.webp',
+      quote: '진짜 자기 책으로 만들어졌다는게 너무 신기했나봐요',
+      href: 'https://www.instagram.com/p/DfMmHe-TvRC/',
+      video: ''
+    },
+    {
+      // @hayul_story_ 2026-10-31 #광고
+      poster: '../assets/download/review-hayul.webp',
+      alt: '제품 제공 후기 영상 장면: 지은이에 아이 이름이 들어간 실물 동화책 Small Jumps 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 광고',
+      avatar: '../assets/download/kiki.webp',
+      quote: '실제 책으로 받아볼 수 있다는 게 제일 마음에 들었어요',
+      href: 'https://www.instagram.com/p/DfJCl-0yBSF/',
+      video: ''
+    },
+    {
+      // 2026-11-06 고침: 원 게시물(@emsmcy 릴스)에 '#광고' 표시가 있어 '제품 제공'으로 표시하고 원 게시물로 연결한다.
       poster: '../assets/download/review-book.webp',
-      alt: '고객님 후기 사진: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream',
-      label: '실제 고객님 후기 영상',
-      source: '인스타그램 스토리',
+      alt: '제품 제공 후기 영상 장면: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 광고',
       avatar: '../assets/download/kiki.webp',
       quote: '실물 동화책 배송 · 재미난 이야기 세상',
-      href: 'https://www.instagram.com/stories/highlights/18095776220444865/',
+      href: 'https://www.instagram.com/p/DewbN9vo8lH/',
       video: ''
     },
     {
@@ -551,7 +587,7 @@
     // 후기가 2개 이상이면 처음부터 모두 보이게 카드로 나란히 놓는다(모바일은 옆으로 넘겨 보기, 다음 카드가 살짝 보임).
     box.innerHTML = '';
     if (REVIEWS.length > 1) {
-      box.className = 'rv-grid';
+      box.className = REVIEWS.length > 2 ? 'rv-grid rv-many' : 'rv-grid'; // 3개부터 데스크톱 3열
       REVIEWS.forEach(function(r){
         var card = el('div', 'rv-card'), p = parts(r);
         card.appendChild(p[0]); card.appendChild(p[1]); box.appendChild(card);
