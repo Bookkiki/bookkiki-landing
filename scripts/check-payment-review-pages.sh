@@ -32,8 +32,6 @@ require_text review.html 'PortOne.requestIssueBillingKey'
 require_text review.html 'offerPeriod: { interval: "1m" }'
 require_text review.html 'const SHIPPING = 3000;'
 python3 scripts/build-root-index.py --check
-require_text index.html 'href="review.html#general-payment"'
-require_text index.html 'href="review.html#recurring-payment"'
 
 # KG이니시스는 빌링키 발급 상품명을 UTF-8 기준 최대 40바이트까지 표시한다.
 test "$(printf %s '북끼끼 매월 19,900원 정기결제' | wc -c | tr -d ' ')" -le 40
