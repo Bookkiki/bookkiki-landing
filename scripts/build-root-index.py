@@ -4,7 +4,7 @@
 홈은 /download/와 같은 화면을 보여 준다. 다른 점은 세 가지다.
 - 휴대폰에서도 스토어로 바로 보내지 않고 화면을 보여 준다(/download/?stay=1과 같음).
 - 경로를 루트 기준으로 바꾼다(../assets/ → assets/).
-- 맨 아래에 사업자 정보와 약관·결제 안내 링크를 둔다. 이용약관이 서비스 초기 화면에 게시한다고 정한 항목이다.
+- 맨 아래에 사업자 정보와 약관 링크를 둔다. 이용약관이 서비스 초기 화면에 게시한다고 정한 항목이다.
 
 /download/를 고친 뒤에는 이 스크립트를 다시 실행한다. --check는 index.html이 최신인지만 확인한다.
 """
@@ -25,7 +25,7 @@ FOOTER_CSS = """  footer .links{display:flex;flex-wrap:wrap;justify-content:cent
 
 FOOTER = """<footer>
   <div class="links">
-    <a href="terms.html">이용약관</a><a href="privacy.html"><strong>개인정보처리방침</strong></a><a href="refund.html">취소·환불·배송 정책</a><a href="review.html#general-payment">실물책 결제 안내</a><a href="review.html#recurring-payment">정기결제 안내</a><a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=5254301349" target="_blank" rel="noopener">사업자정보확인</a><a href="https://www.instagram.com/bookkiki.official/">인스타그램</a>
+    <a href="terms.html">이용약관</a><a href="privacy.html"><strong>개인정보처리방침</strong></a><a href="refund.html">취소·환불·배송 정책</a><a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=5254301349" target="_blank" rel="noopener">사업자정보확인</a><a href="https://www.instagram.com/bookkiki.official/">인스타그램</a>
   </div>
   <ul class="biz">
     <li><span>상호</span>북끼끼(BOOKKIKI)</li>
