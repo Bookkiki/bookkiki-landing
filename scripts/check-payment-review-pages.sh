@@ -31,6 +31,7 @@ require_text review.html 'PortOne.requestPayment'
 require_text review.html 'PortOne.requestIssueBillingKey'
 require_text review.html 'offerPeriod: { interval: "1m" }'
 require_text review.html 'const SHIPPING = 3000;'
+python3 scripts/build-root-index.py --check
 require_text index.html 'href="review.html#general-payment"'
 require_text index.html 'href="review.html#recurring-payment"'
 

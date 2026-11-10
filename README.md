@@ -6,7 +6,7 @@
 
 | 파일 | 내용 |
 |---|---|
-| `index.html` | 서비스 소개, 만드는 과정, 가격(실물책·구독 플랜), FAQ, 고객센터, 사업자 정보 푸터 |
+| `index.html` | 홈. `download/index.html`과 같은 화면에 사업자 정보·고객센터·약관 푸터를 붙인 것이다. 휴대폰에서도 스토어로 바로 보내지 않는다. `scripts/build-root-index.py`로 만들므로 `download/index.html`을 고친 뒤 다시 실행한다 |
 | `review.html` | 카드사 제출용 단일 심사 URL. 일반결제와 정기결제 상품·조건·동의·테스트 결제창을 한 페이지에서 제공한다 |
 | `order.html` | 심사용 실물책 주문 페이지. PortOne V2 SDK로 KG이니시스 테스트 결제창을 연다. 내비게이션에 노출하지 않고 URL로만 전달한다 |
 | `subscription.html` | 심사용 월 구독 카드 등록 페이지. 별도의 KG이니시스 정기결제 테스트 채널로 빌링키 발급창을 열며 실제 요금은 청구하지 않는다 |
@@ -85,14 +85,14 @@ GA4 도입 전 별도 개인정보 최소화·스토어 신고 게이트는
 | PG·카드사 심사가 보는 것 | 위치 |
 |---|---|
 | 상호·대표자·사업자등록번호·주소·연락처 | `index.html` 푸터 |
-| 판매 상품과 가격 | `index.html` #pricing |
+| 판매 상품과 가격 | `review.html` #general-payment, #recurring-payment |
 | 구매 시 이니시스 결제창 노출 | `review.html` #general-payment |
 | 정기결제 카드 등록창·가격·결제주기·필수 동의 | `review.html` #recurring-payment |
 | 이용약관 | `terms.html` |
 | 개인정보처리방침 | `privacy.html` (푸터에서 굵게 링크) |
 | 청약철회·환불·배송 조건 | `refund.html`, `terms.html` 제13~17조 |
-| 고객센터 연락처·운영시간 | `index.html` #contact |
-| 정기결제 안내·해지 방법 | `index.html` 플랜 카드, `refund.html` 3, `terms.html` 제17조 |
+| 고객센터 연락처·운영시간 | `index.html` 푸터 |
+| 정기결제 안내·해지 방법 | `review.html` #recurring-payment, `refund.html` 3, `terms.html` 제17조 |
 
 ## 로컬 미리보기
 
