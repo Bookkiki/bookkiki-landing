@@ -1,232 +1,735 @@
 <!doctype html>
+<!-- download/index.html에서 scripts/build-root-index.py로 만든 파일이다. 직접 고치지 말고 스크립트를 다시 실행한다. -->
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>북끼끼 · 우리 아이가 주인공인 영어 동화책</title>
-<meta name="description" content="아이가 키키와 나눈 이야기가 아이 수준에 맞는 영어 동화가 됩니다. 앱에서 읽고, 실물책으로 간직하세요.">
-<meta property="og:title" content="북끼끼 · 우리 아이가 주인공인 영어 동화책">
-<meta property="og:description" content="아이가 키키와 나눈 이야기가 아이 수준에 맞는 영어 동화가 됩니다. 앱에서 읽고, 실물책으로 간직하세요.">
+<title>북끼끼 앱 다운로드</title>
+<meta name="description" content="우리 아이가 주인공인 영어 동화책, 북끼끼 앱을 받아 보세요. 안드로이드는 Google Play, 아이폰은 App Store에서 받을 수 있습니다.">
+<meta property="og:title" content="북끼끼 - 우리 아이가 주인공인 영어 동화책">
+<meta property="og:description" content="아이 수준에 맞춘 영어, 아이가 원하는 이야기, 그림 속 주인공도 우리 아이 모습. 11월 11일까지 동화책 1권 무료, 실물책 할인 중. App Store · Google Play에서 받아 보세요.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bookkiki.com/">
+<meta property="og:site_name" content="북끼끼">
+<meta property="og:image" content="https://bookkiki.com/assets/og-download-v5.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="북끼끼 앱 - App Store, Google Play에서 받기">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<script>
+  // 기기에 맞는 스토어로 바로 보낸다. ?stay=1이면 이동하지 않고 안내 화면을 보여 준다.
+  // 스토어 링크에는 유입 구분 값을 붙인다(Play: referrer의 utm_*, App Store: pt·ct).
+  //  - pt: App Store Connect 제공자 토큰(앱 분석 → 획득 → 캠페인에서 확인). ct만 있고 pt가 없으면 캠페인으로 집계되지 않는다.
+  //  - utm_medium / ct 앞부분: redirect(자동 이동) · ig_inapp · fb_inapp · threads_inapp · kakao_inapp · naver_inapp · line_inapp · web(그 밖의 브라우저에서 버튼 클릭)
+  //  - utm_content / ct 끝: ad(광고 클릭으로 들어옴: fbclid·gclid·utm_source가 있을 때) · direct
+  (function () {
+    var PLAY = 'https://play.google.com/store/apps/details?id=com.bookkiki.app';
+    var APP_STORE = 'https://apps.apple.com/kr/app/id6810455009', APP_STORE_PT = '129374064';
+    var ua = navigator.userAgent || '', q = location.search;
+    var src = /[?&](fbclid|gclid|utm_source)=/.test(q) ? 'ad' : 'direct';
+    var inapp = /Threads|Barcelona/i.test(ua) ? 'threads_inapp' :
+      /Instagram/i.test(ua) ? 'ig_inapp' :
+      /FBAN|FBAV|FB_IAB|FBIOS/i.test(ua) ? 'fb_inapp' :
+      /KAKAOTALK/i.test(ua) ? 'kakao_inapp' :
+      /NAVER\(inapp/i.test(ua) ? 'naver_inapp' :
+      /Line\//i.test(ua) ? 'line_inapp' : '';
+    function play(medium) {
+      var ref = 'utm_source=bookkiki_landing&utm_medium=' + medium + '&utm_campaign=download_page&utm_content=' + src;
+      return PLAY + '&referrer=' + encodeURIComponent(ref);
+    }
+    function ios(medium) { return APP_STORE + '?pt=' + APP_STORE_PT + '&ct=' + ('landing_' + medium + '_' + src).slice(0, 40) + '&mt=8'; }
+
+    // Google Analytics 4 이벤트 (모두 src·ctx를 함께 보냄)
+    //  ctx: 들어온 곳(redirect|ig_inapp|fb_inapp|threads_inapp|kakao_inapp|naver_inapp|line_inapp|web)
+    //   ※ 이름을 medium·source·campaign 등으로 쓰면 GA가 캠페인 값으로 읽어 세션 소스/매체(utm)를 덮어쓰므로 쓰지 않는다.
+    //  page_view · store_click: store(ios|android) · position(books_benefit|bottom|bar|nav|auto)
+    //   books_benefit = 책 사진 바로 아래 혜택 카드 밑 버튼(10-25~). 옛 값: hero(~10-24 #89 전)·mid(#89~#90)
+    //  section_view: section(hero|books|benefit|compare|how|reviews|get, 페이지 순서) — 화면에 1초 이상 보인 섹션, 섹션마다 1회
+    //  tab_click: tab(classic|story|diary) / review_click: link / nav_click: target
+    //  보통은 gtag.js가 페이지 조회·세션을 맡고, 이벤트는 sendBeacon으로 같은 사용자(cid)·세션(sid)에 붙여 보낸다.
+    //  gtag.js가 늦거나 막히면(일부 인앱 브라우저) 이 스크립트가 페이지 조회부터 직접 보내고 gtag는 끈다.
+    //  사용자 id(cid)·세션 id(sid)는 페이지마다 한 번만 정하고, 새 세션·첫 방문 표시는 그 페이지의 첫 전송에만 붙인다.
+    //  광고 신호·구글 신호는 끈다(IP 익명화는 GA4 기본). ?ga_debug=1이면 GA4 DebugView에 보인다.
+    var GA_ID = 'G-4N1YBK6QTL', gaDebug = /[?&]ga_debug=1/.test(q), ctx0 = inapp || 'web';
+    var ga = (function () {
+      var now = Math.floor(Date.now() / 1000), ck = document.cookie || '', m, st = { sid: String(now), sct: 1, newSession: true };
+      // 이미 받은 _ga 쿠키가 있으면 그 사용자 id를 쓴다(gtag와 같은 사람으로 묶임).
+      m = ck.match(/(?:^|;\s*)_ga=GA\d\.\d\.(\d+\.\d+)/);
+      var cid = m ? m[1] : Math.floor(Math.random() * 2147483647) + '.' + now;
+      // 세션 쿠키(_ga_<ID>)가 30분 안이면 그 세션을 이어 쓴다. GS1·GS2 형식 모두 읽는다.
+      m = ck.match(new RegExp('(?:^|;\\s*)_ga_' + GA_ID.slice(2) + '=([^;]+)'));
+      if (m) {
+        var v = m[1], sid, sct, t;
+        if (/^GS2\./.test(v)) { sid = (v.match(/[.$]s(\d+)/) || [])[1]; sct = (v.match(/\$o(\d+)/) || [])[1]; t = (v.match(/\$t(\d+)/) || [])[1]; }
+        else { var f = v.split('.'); sid = f[2]; sct = f[3]; t = f[5]; }
+        if (sid && t && now - (+t) < 1800) st = { sid: sid, sct: +sct || 1, newSession: false };
+        else if (sct) st.sct = (+sct || 0) + 1;
+      }
+      return { cid: cid, sid: st.sid, sct: st.sct, newUser: !m && !/(?:^|;\s*)_ga=/.test(ck), newSession: st.newSession, seq: 0, mode: 'wait', queue: [], pv: false };
+    })();
+    function beacon(name, params) {
+      try {
+        var first = ga.seq === 0;
+        var p = {
+          v: '2', tid: GA_ID, cid: ga.cid, sid: ga.sid, sct: String(ga.sct), seg: first ? '0' : '1', _s: String(++ga.seq), npa: '1',
+          ul: (navigator.language || '').toLowerCase(), sr: screen.width + 'x' + screen.height,
+          dl: location.href, dt: document.title, en: name, 'ep.src': src, 'ep.ctx': ctx0
+        };
+        for (var n in params) p['ep.' + n] = params[n];
+        if (first && ga.newSession) { p._ss = '1'; p._nsi = '1'; if (ga.newUser) p._fv = '1'; }
+        if (document.referrer) p.dr = document.referrer;
+        if (gaDebug) p._dbg = '1';
+        var qs = [];
+        for (var k in p) qs.push(encodeURIComponent(k) + '=' + encodeURIComponent(p[k]));
+        var url = 'https://www.google-analytics.com/g/collect?' + qs.join('&');
+        if (!(navigator.sendBeacon && navigator.sendBeacon(url))) {
+          if (window.fetch) fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true });
+          else new Image().src = url;
+        }
+      } catch (e) {}
+    }
+    // gtag.js 없이 직접 보내는 방식으로 바꾼다: gtag는 끄고, 페이지 조회를 먼저 보낸 뒤 쌓인 이벤트를 보낸다.
+    function fallback() {
+      if (ga.mode !== 'wait') return;
+      ga.mode = 'direct';
+      window['ga-disable-' + GA_ID] = true;
+      if (!ga.pv) { ga.pv = true; beacon('page_view', {}); }
+      var qd = ga.queue; ga.queue = [];
+      for (var i = 0; i < qd.length; i++) beacon(qd[i][0], qd[i][1]);
+    }
+    // gtag가 준비되면 gtag의 세션 id를 쓰고(gtag가 페이지 조회·새 세션을 이미 보냄), 쌓인 이벤트를 보낸다.
+    function ready(sid) {
+      if (ga.mode !== 'wait') return;
+      ga.mode = 'gtag'; ga.pv = true; if (sid) ga.sid = String(sid);
+      ga.seq = Math.max(ga.seq, 1);
+      var qd = ga.queue; ga.queue = [];
+      for (var i = 0; i < qd.length; i++) beacon(qd[i][0], qd[i][1]);
+    }
+    function send(name, params, urgent) {
+      if (ga.mode === 'wait') {
+        // 스토어 이동처럼 지금 보내야 하는 이벤트는 기다리지 않는다.
+        if (urgent) fallback(); else { ga.queue.push([name, params || {}]); return; }
+      }
+      beacon(name, params || {});
+    }
+
+    // 페이지 버튼에서 쓰도록 남겨 둔다(버튼 클릭은 인앱이면 그 앱 이름, 아니면 web).
+    function track(store, ctx, position) { send('store_click', { store: store, ctx: ctx, position: position }, true); }
+    window.BK_STORE = { play: play, ios: ios, medium: ctx0, track: track, send: send };
+    var stay = true; // 홈은 휴대폰에서도 스토어로 바로 보내지 않는다.
+    // 인스타·페북·카톡 등 앱 안 브라우저에서는 스토어 주소로 넘기면 빈 흰 화면이 된다.
+    // 그래서 이동하지 않고 이 페이지(스토어 버튼)를 보여 주고, 버튼을 누르면 스토어 앱이 열린다.
+    var isAndroid = /Android/i.test(ua);
+    // iPadOS 13 이상은 데스크톱 Safari처럼 Mac으로 표시되므로 터치 지원으로 구분한다.
+    var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!stay && !inapp && (isAndroid || isIOS)) {
+      // 자동 이동: 페이지 조회·store_click을 beacon으로 맡기고 곧바로 이동한다(gtag.js를 기다리지 않음).
+      ga.mode = 'direct'; ga.pv = true;
+      beacon('page_view', { ctx: 'redirect' });
+      beacon('store_click', { store: isAndroid ? 'android' : 'ios', ctx: 'redirect', position: 'auto' });
+      location.replace(isAndroid ? play('redirect') : ios('redirect'));
+      return;
+    }
+
+    // 이 페이지를 보여 주는 경우에만 gtag.js를 받아 페이지 조회를 센다.
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    var cfg = { allow_google_signals: false, allow_ad_personalization_signals: false, client_id: ga.cid, src: src, ctx: ctx0 };
+    if (gaDebug) cfg.debug_mode = true;
+    gtag('config', GA_ID, cfg);
+    gtag('get', GA_ID, 'session_id', function (v) { ready(v); });
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    s.onerror = fallback;
+    document.head.appendChild(s);
+    // gtag.js가 6초 안에 준비되지 않거나, 그 전에 페이지를 떠나면 직접 보낸다.
+    setTimeout(fallback, 6000);
+    addEventListener('pagehide', function () { if (ga.mode === 'wait') fallback(); });
+    document.addEventListener('visibilitychange', function () { if (document.hidden && ga.mode === 'wait') fallback(); });
+  })();
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --canvas:#f6f5f4;--surface:#fff;--hairline:#e6e6e6;--app:#FBF6EF;
+    --ink:rgba(0,0,0,.95);--ink2:#31302e;--muted:#615d59;--faint:#a39e98;--coral:#D9614F;--coral-soft:#FDF0ED;
+    --r:16px;
+    --shadow:rgba(0,0,0,.01) 0 .175px 1.041px,rgba(0,0,0,.02) 0 .8px 2.925px,rgba(0,0,0,.027) 0 2.025px 7.847px,rgba(0,0,0,.04) 0 4px 18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0;background:var(--surface);color:var(--ink);font-family:Pretendard,Inter,-apple-system,system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+  img{max-width:100%;height:auto;display:block}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,p,ul,figure{margin:0}
+  ul{padding:0;list-style:none}
+  .wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+  section{padding-block:72px}
+  .canvas{background:var(--canvas)}
+  .center{text-align:center}
+
+  /* type */
+  .kicker{font-size:14px;font-weight:700;color:var(--coral);letter-spacing:.2px}
+  h1{font-size:clamp(36px,9.6vw,58px);font-weight:800;line-height:1.16;letter-spacing:-.045em}
+  h1 em{font-style:normal;color:var(--coral)}
+  h2{font-size:clamp(28px,7.4vw,42px);font-weight:700;line-height:1.24;letter-spacing:-.04em;margin-top:10px}
+  .lead{font-size:16px;color:var(--muted);margin-top:14px;line-height:1.6}
+  .head{margin-bottom:36px;text-align:center}
+
+  /* store buttons: compact pills */
+  .stores{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+  .store{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 18px 0 15px;border-radius:9999px;background:#1d1b19;color:#fff;font-size:15px;font-weight:600;letter-spacing:-.01em;transition:transform .08s,background .15s}
+  .store:hover{background:#000}
+  .store:active{transform:scale(.97)}
+  .store svg{width:19px;height:19px;flex:none}
+
+  /* nav */
+  .nav-wrap{position:relative;z-index:40;padding:10px 12px 0}
+  .nav{position:relative;max-width:820px;margin:0 auto;height:54px;padding:0 7px 0 14px;display:flex;align-items:center;gap:8px;border-radius:9999px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);box-shadow:0 6px 24px -12px rgba(60,40,70,.25)}
+  .brand{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700;letter-spacing:-.2px;margin-right:auto}
+  .brand img{width:28px;height:28px}
+  .nav-links{display:none}
+  .nav-links a{display:block;padding:8px 14px;border-radius:9999px;font-size:15px;font-weight:600;color:var(--ink2)}
+  .nav-links a:hover{background:rgba(0,0,0,.05)}
+  .nav-cta-wrap{display:flex;gap:6px;flex:none}
+  .nav-store{display:inline-flex;align-items:center;gap:5px;height:38px;padding:0 11px 0 9px;border-radius:9999px;background:#1d1b19;color:#fff;font-size:13px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;transition:background .15s}
+  .nav-store:hover{background:#000}
+  .nav-store svg{width:16px;height:16px;flex:none}
+  @media (max-width:419px){.brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+  @media (max-width:339px){.nav-store{padding:0 10px}.nav-store span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:9999px;background:transparent;cursor:pointer;color:var(--ink2)}
+  .menu-btn svg{width:22px;height:22px}
+  .nav.open .nav-links{display:block;position:absolute;left:0;right:0;top:62px;padding:8px;border-radius:20px;background:#fff;border:1px solid var(--hairline);box-shadow:0 18px 40px -20px rgba(60,40,70,.35)}
+  .nav.open .nav-links a{padding:12px 14px;font-size:16px}
+  .top{margin-top:-64px;padding-top:64px}
+  #how,#compare,#reviews,#benefit,#get{scroll-margin-top:20px}
+
+  /* hero */
+  .top{position:relative;background:
+    radial-gradient(60% 55% at 18% 8%,rgba(255,206,222,.75),rgba(255,206,222,0) 70%),
+    radial-gradient(55% 50% at 86% 14%,rgba(222,212,255,.8),rgba(222,212,255,0) 70%),
+    radial-gradient(70% 60% at 50% 62%,rgba(255,226,204,.65),rgba(255,226,204,0) 72%),
+    linear-gradient(#fffafc,#fff 92%)}
+  .hero{padding-top:28px;padding-bottom:48px;text-align:center}
+  .hero .sub{margin:16px auto 0;font-size:16px;color:var(--muted);line-height:1.6}
+  .buy{text-align:center;padding-top:8px;padding-bottom:8px}
+  .buy .promo{margin-top:0}
+  .buy .stores{margin-top:16px}
+  .promo{margin:22px auto 0;max-width:360px;text-align:left;border-radius:var(--r);background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow);padding:14px 16px 4px}
+  .promo-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 8px;font-size:15px;font-weight:700;letter-spacing:-.2px}
+  .promo-h em{font-style:normal;color:var(--coral)}
+  .promo-h .until{flex:none;font-size:12px;font-weight:700;color:#fff;background:var(--coral);border-radius:9999px;padding:3px 9px;letter-spacing:0}
+  .promo li{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid rgba(0,0,0,.06)}
+  .promo li:first-child{margin-top:10px}
+  .promo .t{flex:1;min-width:0;font-size:15px;font-weight:600;line-height:1.4}
+  .promo .t small{display:block;font-size:13px;font-weight:400;color:var(--muted)}
+  .promo s{color:var(--faint);font-weight:400;font-size:14px}
+  .promo strong{color:var(--coral);font-weight:700}
+  .promo .off{flex:none;font-size:13px;font-weight:700;color:var(--coral);background:var(--coral-soft);border-radius:9999px;padding:3px 9px}
+  .promo .free{flex:none;font-size:13px;font-weight:700;color:var(--ink2);background:var(--canvas);border-radius:9999px;padding:3px 9px}
+
+  .pile{padding-bottom:16px}
+  .pile .ph{max-width:720px;margin:0 auto;border-radius:20px;overflow:hidden;background:var(--canvas);box-shadow:0 24px 48px -28px rgba(60,35,20,.45)}
+  .pile figcaption{margin-top:14px;font-size:15px;color:var(--muted);text-align:center}
+  .pile figcaption b{color:var(--ink);font-weight:700}
+
+  /* 차별점 */
+  .cmp{display:grid;gap:14px;max-width:880px;margin:0 auto}
+  .cmp-card{border-radius:20px;padding:24px 22px 22px}
+  .cmp-card h3{font-size:18px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+  .cmp-card h3 img{width:26px;height:26px}
+  .cmp-card ul{margin-top:16px;display:grid;gap:12px}
+  .cmp-card li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5}
+  .cmp-card li i{flex:none;width:20px;height:20px;margin-top:1px;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:700}
+  .cmp-old{background:var(--canvas);color:var(--muted)}
+  .cmp-old h3{color:var(--ink2)}
+  .cmp-old li i{background:#e4e1dd;color:#8d8781}
+  .cmp-new{background:var(--surface);border:1.5px solid rgba(217,97,79,.45);box-shadow:0 18px 40px -26px rgba(217,97,79,.55)}
+  .cmp-new li{color:var(--ink2)}
+  .cmp-new li i{background:var(--coral);color:#fff}
+
+  /* 앱 화면 캐러셀 (event/classic 과 같은 모양) */
+  .tabs{display:flex;gap:4px;padding:4px;border-radius:9999px;background:var(--surface);border:1px solid var(--hairline);max-width:400px;margin:0 auto}
+  .tabs button{flex:1;min-height:42px;border:0;border-radius:9999px;background:transparent;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;padding:0 4px;white-space:nowrap}
+  .tabs button[aria-selected="true"]{background:#1d1b19;color:#fff}
+  .flow-panel{margin-top:24px}
+  .flow-panel[hidden]{display:none}
+  .rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(8%,calc((100% - 460px)/2)) 12px;scrollbar-width:none;max-width:980px;margin:0 auto}
+  .rail::-webkit-scrollbar{display:none}
+  .rail figure{flex:0 0 84%;max-width:460px;margin:0;scroll-snap-align:center;background:var(--surface);border:1px solid var(--hairline);border-radius:12px;overflow:hidden}
+  .rail .pic{aspect-ratio:4/5;background:var(--app);overflow:hidden}
+  .rail .pic img{width:100%;height:100%;object-fit:cover}
+  .rail figcaption{padding:12px 16px 14px;font-size:15px;font-weight:600;color:var(--ink)}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
+  .dots i{width:6px;height:6px;border-radius:9999px;background:#d6d3cf;transition:width .25s,background .25s}
+  .dots i.on{width:18px;background:var(--ink2)}
+
+  /* 고객님 후기 (clipspray #how 형태) */
+  .rv-box{display:grid;gap:24px;max-width:880px;margin:0 auto}
+  .rv-media{position:relative;display:block;width:min(100%,340px);margin:0 auto;aspect-ratio:732/825;border-radius:24px;overflow:hidden;background:#222;box-shadow:0 30px 60px -30px rgba(30,20,10,.55)}
+  .rv-media img,.rv-media video{width:100%;height:100%;object-fit:cover;display:block}
+  .rv-media::after{content:"";position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.35));pointer-events:none}
+  .rv-media .play{position:absolute;left:50%;top:50%;z-index:1;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:9999px;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.45)}
+  .rv-media .play svg{width:26px;height:26px;margin-left:4px}
+  .rv-side{width:min(100%,340px);margin:0 auto}
+  .rv-who{display:flex;align-items:center;gap:12px}
+  .rv-who img{width:44px;height:44px;border-radius:9999px;background:var(--app);border:1px solid var(--hairline);object-fit:cover}
+  .rv-who b{display:block;font-size:15px;font-weight:700}
+  .rv-who small{display:block;font-size:13px;color:var(--muted)}
+  .rv-quote{margin-top:18px;font-size:22px;font-weight:600;line-height:1.5;letter-spacing:-.02em;color:var(--ink2)}
+  .rv-link{display:inline-flex;align-items:center;gap:8px;margin-top:22px;min-height:46px;padding:0 18px;border-radius:9999px;border:1px solid var(--hairline);background:var(--surface);box-shadow:var(--shadow);font-size:15px;font-weight:600}
+  .rv-link svg{width:18px;height:18px}
+  .rv-grid{display:grid;grid-auto-flow:column;grid-auto-columns:min(78%,320px);gap:16px;max-width:880px;margin:0 auto;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 28px;scrollbar-width:none}
+  .rv-grid::-webkit-scrollbar{display:none}
+  .rv-card{scroll-snap-align:start;display:flex;flex-direction:column;gap:18px}
+  .rv-card .rv-media{width:100%;margin:0}
+  .rv-card .rv-side{width:auto;margin:0}
+  .rv-card .rv-quote{margin-top:12px;font-size:18px}
+  .rv-card .rv-link{margin-top:14px}
+  .rv-thumbs{max-width:880px;margin:36px auto 0}
+  .rv-thumbs p{font-size:14px;color:var(--muted)}
+  .rv-thumbs ul{display:flex;gap:10px;overflow-x:auto;margin-top:10px;padding-bottom:4px;scrollbar-width:none}
+  .rv-thumbs button{flex:none;width:76px;aspect-ratio:732/825;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:none;cursor:pointer;opacity:.7}
+  .rv-thumbs button[aria-current="true"]{border-color:var(--coral);opacity:1}
+  .rv-thumbs img{width:100%;height:100%;object-fit:cover}
+
+  /* final */
+  .final{text-align:center}
+  .final img.kiki{width:88px;margin:0 auto 4px}
+  .final .stores{margin-top:26px}
+  footer{padding:24px 20px 96px;text-align:center;font-size:14px;color:var(--muted);border-top:1px solid var(--hairline)}
+  footer a{margin:0 8px;text-decoration:underline;text-underline-offset:3px}
+
+  footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 0}
+  footer .biz{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 14px;margin:14px auto 0;max-width:760px;font-size:12px;line-height:1.6;color:var(--faint)}
+  footer .biz span{margin-right:5px;color:var(--muted)}
+  footer .copy{margin-top:10px;font-size:12px;color:var(--faint)}
+
+  /* sticky store bar */
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--hairline);transform:translateY(110%);transition:transform .25s ease}
+  .bar.on{transform:none}
+  .bar .store{height:40px;font-size:14px;padding:0 16px 0 13px}
+  .bar .store svg{width:17px;height:17px}
+
+  @media (min-width:900px){
+    .nav-wrap{position:sticky;top:0;padding-top:14px}
+    .nav{height:58px;padding-left:18px}
+    .brand{margin-right:0;flex:1}
+    .nav-links{display:flex;gap:2px;flex:none}
+    .nav-cta-wrap{flex:1;justify-content:flex-end;gap:8px}
+    .nav-store{height:40px;padding:0 15px 0 12px;font-size:14px;gap:7px}
+    .nav-store svg{width:17px;height:17px}
+    .menu-btn{display:none}
+    .top{margin-top:-72px;padding-top:72px}
+    #how,#compare,#reviews,#benefit,#get{scroll-margin-top:90px}
+    section{padding-block:104px}
+    .hero{padding-top:56px;padding-bottom:64px}
+    .hero .sub{font-size:18px}
+    .hero .sub br{display:none}
+    .pile{padding-bottom:24px}
+    .buy{padding-top:16px;padding-bottom:16px}
+    .cmp{grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+    .cmp-card{padding:32px 30px 30px}
+    .rail figure{flex-basis:380px}
+    .rv-box{grid-template-columns:340px 1fr;gap:56px;align-items:center}
+    .rv-grid{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-columns:auto;gap:40px;overflow:visible;padding:0}
+    .rv-grid.rv-many{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 28px}
+    .rv-media{margin:0}
+    .rv-side{width:auto;margin:0}
+    .bar{display:none}
+    footer{padding-bottom:32px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar,.dots i{transition:none}}
+</style>
 </head>
 <body>
-
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="./">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2C3E6B"/><path d="M13 22c6.5-3.5 13-3.5 19 1v24c-6-4.5-12.5-4.5-19-1z" fill="#E8DCF4"/><path d="M51 22c-6.5-3.5-13-3.5-19 1v24c6-4.5 12.5-4.5 19-1z" fill="#C4A8E0"/><path d="M32 23v24" stroke="#2C3E6B" stroke-width="2.5" stroke-linecap="round"/><path d="M45 8l2 4.6 4.6 2-4.6 2L45 21.2l-2-4.6-4.6-2 4.6-2z" fill="#F5D76E"/></svg>
-      북끼끼
-    </a>
-    <nav class="nav" aria-label="주요 메뉴">
-      <a href="#how">서비스 소개</a>
-      <a href="#pricing">가격</a>
-      <a href="#faq">자주 묻는 질문</a>
-      <a href="#contact">고객센터</a>
-    </nav>
-    <a class="btn btn-primary btn-sm" href="mailto:contact@bookkiki.com?subject=%EB%B6%81%EB%81%BC%EB%81%BC%20%EC%B6%9C%EC%8B%9C%20%EC%95%8C%EB%A6%BC%20%EC%8B%A0%EC%B2%AD">출시 알림 받기</a>
-  </div>
+<header class="nav-wrap">
+  <nav class="nav" id="nav" aria-label="페이지 메뉴">
+    <a class="brand" href="./"><img src="assets/logo.svg" alt=""><span>북끼끼</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#benefit">혜택</a><a href="#compare">차별점</a><a href="#how">기능</a><a href="#reviews">후기</a>
+    </div>
+    <div class="nav-cta-wrap" id="navStores"><a class="nav-store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8" aria-label="App Store에서 북끼끼 받기"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg><span>App Store</span></a><a class="nav-store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app&amp;referrer=utm_source%3Dbookkiki_landing%26utm_campaign%3Ddownload_page" aria-label="Google Play에서 북끼끼 받기"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg><span>Google Play</span></a></div>
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </nav>
 </header>
-
-<main>
+<div class="top">
   <section class="hero">
     <div class="wrap">
-      <div>
-        <span class="badge">앱 출시 준비 중</span>
-        <h1>우리 아이가 주인공인<br>영어 동화책</h1>
-        <p class="lead">아이가 AI 인터뷰어 키키와 나눈 오늘의 이야기가 아이의 읽기 수준에 맞는 영어 동화가 됩니다. 앱에서 읽고 들려주고, 마음에 드는 동화는 실물책으로 간직하세요.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="mailto:contact@bookkiki.com?subject=%EB%B6%81%EB%81%BC%EB%81%BC%20%EC%B6%9C%EC%8B%9C%20%EC%95%8C%EB%A6%BC%20%EC%8B%A0%EC%B2%AD">출시 알림 받기</a>
-          <a class="btn btn-secondary" href="#pricing">가격 보기</a>
-        </div>
-        <div class="stores" aria-label="앱 스토어 안내">
-          <span class="store">App Store · 출시 예정</span>
-          <span class="store">Google Play · 출시 예정</span>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 440 360" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF3CC"/></linearGradient>
-          </defs>
-          <circle cx="220" cy="190" r="150" fill="#E8DCF4" opacity=".55"/>
-          <circle cx="330" cy="80" r="16" fill="#F5D76E"/>
-          <circle cx="90" cy="70" r="8" fill="#B8E6D4"/>
-          <circle cx="360" cy="290" r="10" fill="#F4C2C2"/>
-          <path d="M60 250c50-25 100-25 160 5V125c-60-30-110-30-160-5z" fill="url(#pg)" stroke="#2C3E6B" stroke-width="4" stroke-linejoin="round"/>
-          <path d="M380 250c-50-25-100-25-160 5V125c60-30 110-30 160-5z" fill="url(#pg)" stroke="#2C3E6B" stroke-width="4" stroke-linejoin="round"/>
-          <path d="M220 130v125" stroke="#2C3E6B" stroke-width="4" stroke-linecap="round"/>
-          <g stroke="#C4A8E0" stroke-width="4" stroke-linecap="round">
-            <path d="M92 160h90M92 182h80M92 204h86M92 226h60"/>
-            <path d="M258 160h90M258 182h80M258 204h86M258 226h60"/>
-          </g>
-          <g transform="translate(150 40)">
-            <rect x="0" y="0" width="140" height="56" rx="20" fill="#2C3E6B"/>
-            <path d="M28 56l-6 16 22-16z" fill="#2C3E6B"/>
-            <text x="70" y="36" text-anchor="middle" font-family="Gaegu, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">Hi, I'm Kiki!</text>
-          </g>
-          <g transform="translate(300 250)">
-            <circle cx="40" cy="40" r="38" fill="#FFFFFF" stroke="#2C3E6B" stroke-width="4"/>
-            <circle cx="28" cy="36" r="4" fill="#2C3E6B"/>
-            <circle cx="52" cy="36" r="4" fill="#2C3E6B"/>
-            <path d="M26 52c8 8 20 8 28 0" stroke="#E8919A" stroke-width="4" stroke-linecap="round" fill="none"/>
-            <circle cx="18" cy="48" r="5" fill="#F4C2C2"/>
-            <circle cx="62" cy="48" r="5" fill="#F4C2C2"/>
-          </g>
-          <path d="M60 300l6 12 12 6-12 6-6 12-6-12-12-6 12-6z" fill="#F5D76E"/>
-        </svg>
-      </div>
+      <h1><em>우리 아이가<br>주인공</em>인<br>영어 동화책</h1>
+      <p class="sub">아이 수준에 맞춘 영어로, <br>아이가 주인공인 동화책을 만들어요</p>
     </div>
   </section>
+  <figure class="pile wrap">
+    <div class="ph"><img src="assets/download/books-shelf-v6.webp" srcset="assets/download/books-shelf-v6-720.webp 720w, assets/download/books-shelf-v6.webp 1200w" sizes="(min-width:900px) 720px, calc(100vw - 40px)" width="1200" height="800" decoding="async" alt="창가 테이블 위에 놓인 북끼끼 옛날 동화 하드커버 책들(오즈의 마법사, 흥부와 놀부, 해님 달님, 비밀의 화원)과 펼쳐진 실제 동화책 두 권: 참기름 바른 나무에서 미끄러진 호랑이가 나오는 해님 달님(Tiger used oil. Slip! He fell.)과 꽃길에서 늑대를 만나는 빨간 모자(Look, pretty flowers!)"></div>
+    <figcaption><b>옛날 동화 30권</b> · 고른 이야기 속 주인공이 우리 아이가 돼요</figcaption>
+  </figure>
+</div>
 
-  <section class="section" id="how">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>이렇게 만들어져요</h2>
-        <p class="muted">아이의 하루가 영어 동화 한 권이 되기까지, 네 단계면 충분합니다.</p>
-      </div>
-      <div class="steps">
-        <article class="step">
-          <div class="num">1</div>
-          <h3>자녀 프로필과 캐릭터</h3>
-          <p>이름, 나이, 관심사를 등록하고 사진 한 장으로 아이 캐릭터를 만듭니다. 원본 사진은 캐릭터 생성 직후 삭제됩니다.</p>
-        </article>
-        <article class="step">
-          <div class="num">2</div>
-          <h3>키키와 인터뷰</h3>
-          <p>AI 인터뷰어 키키가 아이에게 오늘 있었던 일을 물어봅니다. 아이는 음성으로 편하게 대답하면 됩니다.</p>
-        </article>
-        <article class="step">
-          <div class="num">3</div>
-          <h3>영어 동화 생성</h3>
-          <p>인터뷰 내용과 캐릭터, 아이의 읽기 레벨을 바탕으로 삽화와 낭독이 있는 영어 동화를 만듭니다.</p>
-        </article>
-        <article class="step">
-          <div class="num">4</div>
-          <h3>읽고, 책으로</h3>
-          <p>앱 책장에서 읽고 완독을 기록합니다. 마음에 드는 동화는 하드커버·소프트커버 실물책으로 주문할 수 있습니다.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>가격 안내</h2>
-        <p class="muted">표시 가격은 부가세가 포함된 최종 금액입니다. 주문 시 결제 전에 총액을 다시 확인할 수 있습니다.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="card">
-          <h3>실물책 주문</h3>
-          <table class="price">
-            <thead><tr><th>상품</th><th>규격</th><th style="text-align:right">가격 (24쪽 기준)</th></tr></thead>
-            <tbody>
-              <tr><td>스퀘어북 소프트커버</td><td>정사각 판형, 24~130쪽</td><td class="amount">16,000원</td></tr>
-              <tr><td>스퀘어북 하드커버</td><td>정사각 판형, 24~130쪽</td><td class="amount">18,000원</td></tr>
-              <tr><td>배송비</td><td>국내 택배, 박스당</td><td class="amount">3,000원</td></tr>
-            </tbody>
-          </table>
-          <ul class="note-list">
-            <li>24쪽을 넘는 경우 2쪽당 500원이 추가됩니다. 페이지 수는 2쪽 단위로 정해집니다.</li>
-            <li>동화의 길이에 따라 페이지 수가 달라지며, 주문 화면에서 최종 페이지 수와 금액을 확인한 뒤 결제합니다.</li>
-            <li>실물책은 주문 후 개별 제작되는 맞춤 상품입니다. 취소·환불 조건은 <a href="refund.html">취소·환불·배송 정책</a>을 확인해 주세요.</li>
-          </ul>
-          <a class="btn btn-primary" href="review.html#general-payment" style="margin-top:18px">실물책 주문하기</a>
-        </div>
-        <div class="card">
-          <h3>구독 플랜</h3>
-          <p class="muted" style="font-size:.93rem">가입과 앱 이용은 무료이며, 플랜은 필요할 때 선택합니다. 월 단위 자동결제이고 앱에서 언제든 해지할 수 있습니다.</p>
-          <div class="plans">
-            <div class="plan">
-              <h4>Basic</h4><span class="price">월 9,900원</span>
-              <p>매달 동화 4권 생성, 낭독과 책장 포함</p>
-            </div>
-            <div class="plan">
-              <h4>Premium</h4><span class="price">월 19,900원</span>
-              <p>매달 동화 12권 생성, 낭독과 책장 포함, 새 기능 우선 제공</p>
-            </div>
-          </div>
-          <div class="pay-note">
-            결제는 KG이니시스 전자결제 시스템을 통해 처리되며 신용카드와 간편결제를 지원합니다. 카드 정보는 북끼끼 서버에 저장되지 않습니다.
-          </div>
-          <a class="btn btn-primary" href="review.html#recurring-payment" style="margin-top:18px">구독 플랜 카드 등록</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="faq">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>자주 묻는 질문</h2>
-      </div>
-      <div class="faq">
-        <details>
-          <summary>아이가 영어를 잘 못 읽어도 괜찮나요?</summary>
-          <p>네. 자녀의 읽기 레벨에 맞춰 문장 길이와 단어 난이도를 조절해 동화를 만듭니다. 모든 동화에 원어민 발음의 낭독이 함께 제공되어 듣기만으로도 즐길 수 있습니다.</p>
-        </details>
-        <details>
-          <summary>아이 사진과 목소리는 어떻게 처리되나요?</summary>
-          <p>사진은 캐릭터를 만드는 데만 사용하고 생성 직후 삭제합니다. 인터뷰 음성은 동화 생성을 위해서만 처리합니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>에서 확인할 수 있습니다.</p>
-        </details>
-        <details>
-          <summary>실물책은 주문 후 얼마나 걸리나요?</summary>
-          <p>결제 완료 후 제작에 영업일 기준 5일, 배송에 1~3일이 걸립니다. 제작이 시작되면 앱에서 진행 상태를 확인할 수 있습니다.</p>
-        </details>
-        <details>
-          <summary>주문을 취소하거나 환불받을 수 있나요?</summary>
-          <p>제작이 시작되기 전에는 전액 환불됩니다. 실물책은 주문마다 개별 제작되는 상품이라 제작이 시작된 뒤에는 단순 변심에 의한 취소가 제한됩니다. 인쇄 불량이나 파손, 오배송은 수령 후 3개월 이내 또는 그 사실을 안 날부터 30일 이내에 연락 주시면 재제작 또는 전액 환불해 드립니다. 자세한 내용은 <a href="refund.html">취소·환불·배송 정책</a>을 확인해 주세요.</p>
-        </details>
-        <details>
-          <summary>구독 플랜은 어떻게 해지하나요?</summary>
-          <p>앱의 설정 &gt; 플랜 관리에서 언제든 해지할 수 있습니다. 해지하면 다음 결제일부터 청구가 중단되고, 이미 결제한 기간까지는 그대로 이용할 수 있습니다.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="contact">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>고객센터</h2>
-        <p class="muted">주문, 결제, 환불 문의는 아래로 연락해 주세요.</p>
-      </div>
-      <div class="contact">
-        <div class="card"><div class="label">이메일</div><div class="value">contact@bookkiki.com</div></div>
-        <div class="card"><div class="label">전화</div><div class="value">010-2497-1267</div></div>
-        <div class="card"><div class="label">운영시간</div><div class="value">평일 10:00~18:00</div><div class="muted" style="font-size:.85rem">주말·공휴일 휴무</div></div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
+<main>
+<section class="buy" id="buy">
   <div class="wrap">
-    <div class="links">
-      <a href="terms.html">이용약관</a>
-      <a href="privacy.html"><strong>개인정보처리방침</strong></a>
-      <a href="refund.html">취소·환불·배송 정책</a>
-      <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=5254301349" target="_blank" rel="noopener">사업자정보확인</a>
-    </div>
-    <ul class="biz">
-      <li><span>상호</span>북끼끼(BOOKKIKI)</li>
-      <li><span>대표자</span>황채원</li>
-      <li><span>사업자등록번호</span>525-43-01349</li>
-      <li><span>통신판매업신고번호</span>신고 진행 중</li>
-      <li><span>주소</span>경기도 안산시 단원구 원선1로 10, 101동 1004호 (원곡동, 초지역메이저타운푸르지오에코단지아파트)</li>
-      <li><span>전화</span>010-2497-1267</li>
-      <li><span>이메일</span>contact@bookkiki.com</li>
-      <li><span>개인정보보호책임자</span>황채원</li>
-    </ul>
-    <div class="copy">© 2026 북끼끼. All rights reserved.</div>
+    <aside class="promo" id="benefit" aria-label="진행 중인 혜택">
+      <p class="promo-h"><span>지금 <em>약 2만 원 상당</em> 혜택 진행 중</span><span class="until">11월 11일까지</span></p>
+      <ul>
+        <li><span class="t">동화책 1권 무료<small>아무 조건 없이 바로 만들 수 있어요</small></span><span class="free">무료</span></li>
+        <li><span class="t">실물책 <s>37,000원</s> <strong>21,000원</strong><small>정가에서 할인 중이에요</small></span><span class="off">43% 할인</span></li>
+      </ul>
+    </aside>
+    <div class="stores" id="benefitStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></div>
   </div>
-</footer>
+</section>
 
+<section id="compare">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">차별점</p>
+      <h2>왜 기존 영어 동화책을<br>아이가 싫어할까요</h2>
+      <p class="lead">수준이 안 맞고 남의 이야기라면 좋은 책도 금방 책장에 꽂혀요.<br>북끼끼는 처음부터 우리 아이에게 맞춰 만들어요.</p>
+    </div>
+    <div class="cmp">
+      <div class="cmp-card cmp-old">
+        <h3>기존 영어 동화책</h3>
+        <ul>
+          <li><i aria-hidden="true">✕</i>아이 수준과 안 맞는 문장</li>
+          <li><i aria-hidden="true">✕</i>남의 이야기라 흥미가 금방 떨어져요</li>
+          <li><i aria-hidden="true">✕</i>주인공이 우리 아이가 아니에요</li>
+          <li><i aria-hidden="true">✕</i>한 번 읽고 책장에 꽂혀요</li>
+        </ul>
+      </div>
+      <div class="cmp-card cmp-new">
+        <h3><img src="assets/logo.svg" alt="" width="26" height="26">북끼끼</h3>
+        <ul>
+          <li><i aria-hidden="true">✓</i>아이 나이·수준에 맞춘 영어 문장</li>
+          <li><i aria-hidden="true">✓</i>아이가 들려준 이야기, 아이가 고른 동화로 만든 책</li>
+          <li><i aria-hidden="true">✓</i>그림 속 주인공도 우리 아이 모습, 장면마다 같은 모습으로</li>
+          <li><i aria-hidden="true">✓</i>영어로 읽어 주고, 한국어 번역도 볼 수 있어요</li>
+          <li><i aria-hidden="true">✓</i>내 이야기라서 영어를 즐겁게 여겨요</li>
+          <li><i aria-hidden="true">✓</i>실물 하드커버 책으로 받아 아이 있는 집 선물로도 좋아요</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="canvas" id="how">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">만드는 방법 3가지</p>
+      <h2>어떤 방법이든<br>아이가 주인공이 돼요</h2>
+    </div>
+    <div class="tabs" role="tablist" aria-label="만드는 방법">
+      <button type="button" role="tab" id="t-classic" aria-controls="p-classic" aria-selected="true">옛날 동화·고전</button>
+      <button type="button" role="tab" id="t-story" aria-controls="p-story" aria-selected="false" tabindex="-1">아이 이야기</button>
+      <button type="button" role="tab" id="t-diary" aria-controls="p-diary" aria-selected="false" tabindex="-1">아이의 일기·글</button>
+    </div>
+  </div>
+  <div class="flow-panel" role="tabpanel" id="p-classic" aria-labelledby="t-classic">
+    <div class="rail" aria-label="옛날 동화·고전 순서">
+      <figure><div class="pic"><img src="assets/download/k1-classic-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="옛날 동화·고전 책장 화면: 전체 30권, 빨간 모자도 오즈의 마법사도 주인공은 우리 아이 배너와 서윤이 나이에 맞는 동화"></div><figcaption>옛날 동화·고전 30권 중에 고르고</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="오즈의 마법사 등장인물 카드: 도로시, 허수아비, 양철 나무꾼, 겁쟁이 사자, 모두 우리 아이가 될 수 있어요"></div><figcaption>도로시도, 사자도… 주인공도 조연도 아이가 골라요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="바꿔서 만들기 화면: 우리 아이는 누가 될까요? 역할 고르기와 어떻게 바꿀까요? 칸(1,400자)"></div><figcaption>‘바꿔서 만들기’로 내용·결말도 원하는 대로</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="새 동화 만들기 화면: 오즈의 마법사, 우리 아이 도로시, 어떤 그림체로 그릴까요? 그림체 고르기"></div><figcaption>그림체도 마음에 드는 걸로 골라요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 해님 달님 동화책 앞표지 화면: 지은이 서윤, 24쪽"></div><figcaption>우리 아이가 주인공인 해님 달님 완성</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-page.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 해님 달님 본문: 호랑이가 나타나 말풍선으로 Ramen, or else! 외치는 장면, 글상자 A tiger comes!"></div><figcaption>말풍선 대사까지 들어간 우리 아이 책</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="해님 달님 읽기 화면: Mother says, “Lock the door!” 동화 읽기 버튼"></div><figcaption>‘동화 읽기’를 누르면 영어로 읽어 줘요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-classic-7.webp" width="800" height="1000" loading="lazy" decoding="async" alt="해님 달님 한국어 번역 화면: 호랑이가 와요! “라면을 주면 안 잡아먹지!” 한/A 버튼"></div><figcaption>한/A 버튼 하나로 한국어 번역도 바로 봐요</figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"></div>
+  </div>
+  <div class="flow-panel" role="tabpanel" id="p-story" aria-labelledby="t-story" hidden>
+    <div class="rail" aria-label="아이 이야기 순서">
+      <figure><div class="pic"><img src="assets/download/k1-story-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="동화책 만들기 화면: 아이 이야기, 전래 동화, 아이의 일기·글 중 아이 이야기 고르기"></div><figcaption>아이가 지은 이야기로 동화책을 만들어요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="키키와 이야기 화면: 키키가 묻고 아이가 말하면 키키가 듣고 있어요"></div><figcaption>키키가 묻고, 아이가 말로 답해요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="키키와 이야기 화면: 지금까지 나눈 이야기와 글로 쓰기·눌러서 말하기 버튼"></div><figcaption>말로 하기 어려우면 글로 써도 돼요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="새 동화 만들기 화면: 이런 영어로 쓰여요 7단계 미리보기와 더 쉽게·더 어렵게 버튼"></div><figcaption>아이 수준 영어로, 더 쉽게·어렵게도</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-page.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 Seoyun and the Five Crowns 3쪽: 서윤이 Wake up! 말풍선으로 친구들을 깨우는 장면"></div><figcaption>아이 이야기가 말풍선 대사가 있는 책으로</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: Seoyun touched her crown. “Wake up!” Could it work? 동화 읽기 버튼"></div><figcaption>‘동화 읽기’를 누르면 영어로 읽어 줘요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="한국어 번역 화면: 서윤은 왕관을 만졌어요. “일어나!” 마법이 통할까요? 한/A 버튼"></div><figcaption>한/A 버튼 하나로 한국어 번역도 바로 봐요</figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"></div>
+  </div>
+  <div class="flow-panel" role="tabpanel" id="p-diary" aria-labelledby="t-diary" hidden>
+    <div class="rail" aria-label="아이의 일기·글 순서">
+      <figure><div class="pic"><img src="assets/download/k1-diary-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="아이의 일기·글 화면: 사진으로 가져오기와 직접 입력하기"></div><figcaption>일기를 사진으로 가져오거나 직접 입력하고</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-diary-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="사진으로 가져오기 카드: 손글씨 일기를 찍거나 앨범에서 골라요"></div><figcaption>손글씨 일기를 바로 찍어도 돼요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-diary-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="아이의 글 칸: 할머니 댁에 다녀온 하루를 적은 글을 고치거나 덧붙이는 칸"></div><figcaption>읽어 들인 글을 고치고, 더하고 싶은 내용도</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-diary-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="내 책장 화면: 완성된 영어 동화책 목록(The Sun and the Moon, Little Red Riding Hood, Seoyun and the Five Crowns)"></div><figcaption>아이 수준 영어로 동화책 완성</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-diary-page.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 일기 동화책 본문: 놀이터에서 미나가 밀어 주는 그네를 타는 서윤, 글상자 Seoyun swings with Mina., 말풍선 Higher!, 효과음 Whee!"></div><figcaption>일기 속 하루가 말풍선·효과음까지</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="완성된 동화책 읽기 화면: 동화 읽기 버튼"></div><figcaption>‘동화 읽기’를 누르면 영어로 읽어 줘요</figcaption></figure>
+      <figure><div class="pic"><img src="assets/download/k1-story-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="한국어 번역 화면: 한/A 버튼"></div><figcaption>한/A 버튼 하나로 한국어 번역도 바로 봐요</figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="head">
+      <p class="kicker">제품 제공 체험 후기</p>
+      <h2>받아 보신 분들의<br>실물책 후기</h2>
+    </div>
+    <div class="rv-box" id="rvBox">
+      <a class="rv-media" href="https://www.instagram.com/p/DfWoze5BtU4/" target="_blank" rel="noopener"><img src="assets/download/review-yulamumm.webp" width="732" height="825" loading="lazy" decoding="async" alt="제품 제공 후기 영상 장면: 지은이에 아이 이름이 들어간 실물 하드커버 동화책 The Mullet Net 표지"></a>
+      <div class="rv-side">
+        <div class="rv-who"><img src="assets/download/kiki.webp" alt="" width="44" height="44" loading="lazy"><span><b>제품 제공 후기 영상</b><small>인스타그램 릴스 · 협찬</small></span></div>
+        <p class="rv-quote">“본인이 한 상상대로 책이 진행되니 요즘 제일 최애책이 되버렸어요”</p>
+        <a class="rv-link" href="https://www.instagram.com/p/DfWoze5BtU4/" target="_blank" rel="noopener">인스타그램에서 후기 보기</a>
+      </div>
+    </div>
+    <div class="rv-thumbs" id="rvThumbs" hidden><p>다른 후기도 눌러서 보세요</p><ul></ul></div>
+  </div>
+</section>
+
+
+<section class="final canvas" id="get">
+  <div class="wrap">
+    <img class="kiki" src="assets/download/kiki.webp" width="360" height="360" alt="" loading="lazy">
+    <h2>우리 아이가 주인공인<br>첫 영어 동화책</h2>
+    <div class="stores" id="endStores"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="links">
+    <a href="terms.html">이용약관</a><a href="privacy.html"><strong>개인정보처리방침</strong></a><a href="refund.html">취소·환불·배송 정책</a><a href="review.html#general-payment">실물책 결제 안내</a><a href="review.html#recurring-payment">정기결제 안내</a><a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=5254301349" target="_blank" rel="noopener">사업자정보확인</a><a href="https://www.instagram.com/bookkiki.official/">인스타그램</a>
+  </div>
+  <ul class="biz">
+    <li><span>상호</span>북끼끼(BOOKKIKI)</li>
+    <li><span>대표자</span>황채원</li>
+    <li><span>사업자등록번호</span>525-43-01349</li>
+    <li><span>통신판매업신고번호</span>신고 진행 중</li>
+    <li><span>주소</span>경기도 안산시 단원구 원선1로 10, 101동 1004호 (원곡동, 초지역메이저타운푸르지오에코단지아파트)</li>
+    <li><span>전화</span>010-2497-1267</li>
+    <li><span>이메일</span>contact@bookkiki.com</li>
+    <li><span>고객센터</span>평일 10:00~18:00 (주말·공휴일 휴무)</li>
+    <li><span>개인정보보호책임자</span>황채원</li>
+  </ul>
+  <div class="copy">© 2026 북끼끼. All rights reserved.</div>
+</footer>
+<nav class="bar" id="bar" aria-label="앱 받기"><a class="store" href="https://apps.apple.com/kr/app/id6810455009?pt=129374064&amp;ct=landing&amp;mt=8"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.4-1-2.4-3.9zM14 5.5c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.bookkiki.app"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.4-3.4-3.4 3.4-3.4 3.9 2.2c1.1.6 1.1 1.8 0 2.4z"/><path fill="#4285F4" d="M16.8 15.4 13.4 12l-9.8 9.8c.4.2.9.2 1.4-.1z"/><path fill="#EA4335" d="M16.8 8.6 5 2.3c-.5-.3-1-.3-1.4-.1L13.4 12z"/></svg>Google Play</a></nav>
+<script>
+  // 고객님 후기: 항목을 이 배열에 추가하면 2개부터 카드로 나란히 보여요(모바일은 옆으로 넘겨 보기, 데스크톱은 3개부터 3열).
+  // video(mp4 주소)가 있으면 화면 안에서 재생하고, 없으면 href(인스타그램)를 새 탭으로 열어요.
+  // quote에는 고객님이 실제로 쓰신 문구만 넣어 주세요.
+  var REVIEWS = [
+    {
+      // 2026-11-06 추가(3건): 모두 원 게시물에 '#협찬'·'#광고' 표시가 있는 제품 제공 릴스라 '제품 제공'을 꼭 남긴다. 최신순.
+      // @yulamumm 2026-11-05 #협찬
+      poster: 'assets/download/review-yulamumm.webp',
+      alt: '제품 제공 후기 영상 장면: 지은이에 아이 이름이 들어간 실물 하드커버 동화책 The Mullet Net 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 협찬',
+      avatar: 'assets/download/kiki.webp',
+      quote: '본인이 한 상상대로 책이 진행되니 요즘 제일 최애책이 되버렸어요',
+      href: 'https://www.instagram.com/p/DfWoze5BtU4/',
+      video: ''
+    },
+    {
+      // @kkumpu_mom 2026-11-01 #협찬
+      poster: 'assets/download/review-kkumpu.webp',
+      alt: '제품 제공 후기 영상 장면: 태블릿 앞 테이블에 놓인 실물 하드커버 동화책 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 협찬',
+      avatar: 'assets/download/kiki.webp',
+      quote: '진짜 자기 책으로 만들어졌다는게 너무 신기했나봐요',
+      href: 'https://www.instagram.com/p/DfMmHe-TvRC/',
+      video: ''
+    },
+    {
+      // @hayul_story_ 2026-10-31 #광고
+      poster: 'assets/download/review-hayul.webp',
+      alt: '제품 제공 후기 영상 장면: 지은이에 아이 이름이 들어간 실물 동화책 Small Jumps 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 광고',
+      avatar: 'assets/download/kiki.webp',
+      quote: '실제 책으로 받아볼 수 있다는 게 제일 마음에 들었어요',
+      href: 'https://www.instagram.com/p/DfJCl-0yBSF/',
+      video: ''
+    },
+    {
+      // 2026-11-06 고침: 원 게시물(@emsmcy 릴스)에 '#광고' 표시가 있어 '제품 제공'으로 표시하고 원 게시물로 연결한다.
+      poster: 'assets/download/review-book.webp',
+      alt: '제품 제공 후기 영상 장면: 테이블 위에 놓인 실물 하드커버 동화책 The Game Across the Stream',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 광고',
+      avatar: 'assets/download/kiki.webp',
+      quote: '실물 동화책 배송 · 재미난 이야기 세상',
+      href: 'https://www.instagram.com/p/DewbN9vo8lH/',
+      video: ''
+    },
+    {
+      // 2026-10-29 추가: 제품을 제공받아 올린 협찬 릴스라 표시 문구에 '제품 제공'을 꼭 남긴다.
+      poster: 'assets/download/review-sea5tiger.webp',
+      alt: '제품 제공 후기 영상 장면: 아이 이름이 제목에 들어간 실물 하드커버 동화책 표지',
+      label: '제품 제공 후기 영상',
+      source: '인스타그램 릴스 · 협찬',
+      avatar: 'assets/download/kiki.webp',
+      quote: '커버재질이 너무 고급스러워서 깜짝 놀랐어요',
+      href: 'https://www.instagram.com/p/De54Ff3Re_d/',
+      video: ''
+    }
+  ];
+
+  (function(){
+    var IG_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+    var PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="#1d1b19"/></svg>';
+    function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+
+    // 고객님 후기
+    var box = document.getElementById('rvBox'), thumbs = document.getElementById('rvThumbs');
+    function parts(r){
+      var media;
+      if (r.video) {
+        media = el('div', 'rv-media');
+        var v = document.createElement('video');
+        v.src = r.video; v.poster = r.poster; v.controls = true; v.playsInline = true; v.preload = 'none';
+        v.setAttribute('playsinline', ''); v.setAttribute('aria-label', r.label);
+        media.appendChild(v);
+      } else {
+        media = el('a', 'rv-media');
+        media.href = r.href; media.target = '_blank'; media.rel = 'noopener';
+        media.setAttribute('aria-label', r.label + ', 인스타그램에서 보기 (새 탭)');
+        var img = document.createElement('img');
+        img.src = r.poster; img.alt = r.alt; img.width = 732; img.height = 825; img.loading = 'lazy'; img.decoding = 'async';
+        media.appendChild(img);
+        var pb = el('span', 'play'); pb.innerHTML = PLAY_ICON; media.appendChild(pb);
+      }
+      var side = el('div', 'rv-side'), who = el('div', 'rv-who');
+      var av = document.createElement('img'); av.src = r.avatar; av.alt = ''; av.width = 44; av.height = 44; av.loading = 'lazy';
+      var t = el('span'); t.appendChild(el('b', '', r.label)); t.appendChild(el('small', '', r.source));
+      who.appendChild(av); who.appendChild(t); side.appendChild(who);
+      if (r.quote) side.appendChild(el('p', 'rv-quote', '“' + r.quote + '”'));
+      if (r.href) { var a = el('a', 'rv-link'); a.href = r.href; a.target = '_blank'; a.rel = 'noopener'; a.innerHTML = IG_ICON; a.appendChild(document.createTextNode('인스타그램에서 후기 보기')); side.appendChild(a); }
+      return [media, side];
+    }
+    // 후기가 2개 이상이면 처음부터 모두 보이게 카드로 나란히 놓는다(모바일은 옆으로 넘겨 보기, 다음 카드가 살짝 보임).
+    box.innerHTML = '';
+    if (REVIEWS.length > 1) {
+      box.className = REVIEWS.length > 2 ? 'rv-grid rv-many' : 'rv-grid'; // 3개부터 데스크톱 3열
+      REVIEWS.forEach(function(r){
+        var card = el('div', 'rv-card'), p = parts(r);
+        card.appendChild(p[0]); card.appendChild(p[1]); box.appendChild(card);
+      });
+    } else if (REVIEWS.length) {
+      var p = parts(REVIEWS[0]);
+      box.appendChild(p[0]); box.appendChild(p[1]);
+    }
+
+    // 만드는 방법: 탭마다 화면 캐러셀 (event/classic 과 같은 방식 — 3초마다 넘김, 손대면 4초 쉼)
+    function carousel(rail, dots){
+      var figs = rail.querySelectorAll('figure'), cur = 0, pauseUntil = 0, animating = false, visible = false;
+      figs.forEach(function(){ dots.appendChild(document.createElement('i')); });
+      function target(i){ var f = figs[i]; return f.offsetLeft - (rail.clientWidth - f.clientWidth) / 2; }
+      function mark(){ [].forEach.call(dots.children, function(d, k){ d.classList.toggle('on', k === cur); }); }
+      function nearest(){
+        var mid = rail.scrollLeft + rail.clientWidth / 2, best = 0, bd = 1e9;
+        figs.forEach(function(f, k){ var d = Math.abs(f.offsetLeft + f.clientWidth / 2 - mid); if (d < bd) { bd = d; best = k; } });
+        return best;
+      }
+      function go(i){
+        cur = (i + figs.length) % figs.length;
+        var from = rail.scrollLeft, to = Math.max(0, Math.min(target(cur), rail.scrollWidth - rail.clientWidth));
+        var dur = cur === 0 ? 520 : 340, t0 = performance.now();
+        animating = true; rail.style.scrollSnapType = 'none';
+        (function step(now){
+          var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+          rail.scrollLeft = from + (to - from) * e;
+          if (p < 1) requestAnimationFrame(step); else { rail.style.scrollSnapType = ''; animating = false; }
+        })(t0);
+        mark();
+      }
+      var stop = function(){ pauseUntil = Date.now() + 4000; };
+      ['pointerdown', 'touchstart', 'wheel'].forEach(function(e){ rail.addEventListener(e, stop, {passive: true}); });
+      rail.addEventListener('scroll', function(){ if (!animating) { cur = nearest(); mark(); } }, {passive: true});
+      mark();
+      if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }).observe(rail);
+      else visible = true;
+      if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) setInterval(function(){
+        if (!visible || document.hidden || animating || Date.now() < pauseUntil) return;
+        go(cur + 1);
+      }, 3000);
+      return { reset: function(){ cur = 0; rail.scrollLeft = 0; pauseUntil = Date.now() + 1200; mark(); } };
+    }
+    var flows = {};
+    [].forEach.call(document.querySelectorAll('.flow-panel'), function(p){ flows[p.id] = carousel(p.querySelector('.rail'), p.querySelector('.dots')); });
+    var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+    function select(tab){
+      tabs.forEach(function(t){
+        var on = t === tab, id = t.getAttribute('aria-controls');
+        t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+        document.getElementById(id).hidden = !on;
+        if (on) flows[id].reset();
+      });
+    }
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){
+        if (t.getAttribute('aria-selected') !== 'true' && S && S.send) S.send('tab_click', { tab: t.id.replace(/^t-/, '') });
+        select(t);
+      });
+      t.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus(); }
+      });
+    });
+
+    // 상단 메뉴: 모바일은 메뉴 버튼으로 열고 닫음, '앱 받기'는 기기에 맞는 스토어로
+    var nav = document.getElementById('nav'), menuBtn = document.getElementById('menuBtn');
+    menuBtn.addEventListener('click', function(){ var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+    [].forEach.call(document.querySelectorAll('#navLinks a'), function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
+    var S = window.BK_STORE;
+    // 모든 스토어 버튼에 유입 구분 값을 붙인다(머리 스크립트의 BK_STORE).
+    if (S) [].forEach.call(document.querySelectorAll('a[href*="play.google.com/store/apps/details"]'), function(a){ a.href = S.play(S.medium); });
+    if (S) [].forEach.call(document.querySelectorAll('a[href*="apps.apple.com/kr/app/id6810455009"]'), function(a){ a.href = S.ios(S.medium); });
+    // 스토어 버튼 클릭을 GA4 store_click으로 센다. 링크 이동은 막지 않는다(beacon은 이동 중에도 전송됨).
+    document.addEventListener('click', function(e){
+      if (!S || !S.track) return;
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var store = /play\.google\.com\/store/.test(a.href) ? 'android' : /apps\.apple\.com\//.test(a.href) ? 'ios' : '';
+      if (!store) return;
+      var pos = a.closest('#benefitStores') ? 'books_benefit' : a.closest('#endStores') ? 'bottom' : a.closest('#bar') ? 'bar' : a.closest('#nav') ? 'nav' : 'other';
+      S.track(store, S.medium, pos);
+    }, true);
+    // 후기 링크·메뉴 클릭
+    document.addEventListener('click', function(e){
+      if (!S || !S.send) return;
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || /play\.google\.com\/store|apps\.apple\.com\//.test(a.href)) return;
+      if (a.closest('#reviews')) S.send('review_click', { link: a.classList.contains('rv-link') ? 'text' : 'media' });
+      else if (a.closest('#nav')) S.send('nav_click', { target: (a.getAttribute('href') || '').replace(/^#/, '') === './' ? 'home' : (a.getAttribute('href') || '').replace(/^#/, '') });
+    }, true);
+    // 섹션 노출: 섹션의 50% 이상(섹션이 화면보다 크면 화면의 50% 이상)이 1초 이상 보이면 1회
+    var SECTIONS = { hero: document.querySelector('.hero'), benefit: document.getElementById('benefit'), books: document.querySelector('.pile'),
+      compare: document.getElementById('compare'), how: document.getElementById('how'), reviews: document.getElementById('reviews'), get: document.getElementById('get') };
+    if (S && S.send && 'IntersectionObserver' in window) {
+      var timers = {}, seen = {};
+      var so = new IntersectionObserver(function(es){
+        es.forEach(function(en){
+          var id = en.target.getAttribute('data-sec'), vh = window.innerHeight || 1;
+          var on = en.isIntersecting && (en.intersectionRatio >= 0.5 || en.intersectionRect.height >= vh * 0.5);
+          if (on && !timers[id] && !seen[id]) timers[id] = setTimeout(function(){
+            seen[id] = true; so.unobserve(en.target); S.send('section_view', { section: id });
+          }, 1000);
+          if (!on && timers[id]) { clearTimeout(timers[id]); timers[id] = 0; }
+        });
+      }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+      Object.keys(SECTIONS).forEach(function(k){ var el = SECTIONS[k]; if (el) { el.setAttribute('data-sec', k); so.observe(el); } });
+    }
+
+    // 하단 스토어 바: 위쪽 스토어 버튼을 지나면 나타나고, 마지막 버튼이 보이면 숨김
+    // 첫 화면(제목)을 지나면 나타나고, 맨 아래(get) 스토어 버튼이나 책 사진 아래(혜택) 스토어 버튼이 조금이라도 보이는 동안은 숨김
+    var bar = document.getElementById('bar'), hero = document.querySelector('.hero'), end = document.getElementById('endStores'), mid = document.getElementById('benefitStores');
+    if (!('IntersectionObserver' in window)) { bar.classList.add('on'); return; }
+    var past = false, endIn = false, midIn = false;
+    function upd(){ bar.classList.toggle('on', past && !endIn && !midIn); }
+    new IntersectionObserver(function(e){ past = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(hero);
+    new IntersectionObserver(function(e){ endIn = e[0].isIntersecting; upd(); }).observe(end);
+    if (mid) new IntersectionObserver(function(e){ midIn = e[0].isIntersecting; upd(); }).observe(mid);
+  })();
+</script>
 </body>
 </html>
